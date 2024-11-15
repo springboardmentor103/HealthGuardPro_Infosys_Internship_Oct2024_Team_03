@@ -17,7 +17,7 @@ const Login = () => {
       <h2>   Login</h2>
       <form onSubmit={handleSubmit}>
         <div className="input-field">
-          <label><b>Email</b></label>
+          <label>Email</label>
           <input
             type="email"
             placeholder="Enter your Email"
@@ -27,7 +27,7 @@ const Login = () => {
           />
         </div>
         <div className="input-field">
-          <label><b>Password</b></label>
+          <label>Password</label>
           <input
             type="password"
             placeholder="********"

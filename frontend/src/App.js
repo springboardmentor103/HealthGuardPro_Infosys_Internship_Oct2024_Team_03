@@ -1,11 +1,12 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import Login from './pages/login';
 
 function App() {
-  return (
-     
-    <div>login/</div>
-  );
+    return (
+        <div>
+            <Login />
+        </div>
+    );
 }
 
 export default App;
