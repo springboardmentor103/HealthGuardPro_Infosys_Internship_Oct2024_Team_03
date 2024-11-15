@@ -1,6 +1,6 @@
 import React from "react";
-import SetPassword from "./SetPassword";
-import "./App.css"; 
+import SetPassword from "./pages/SetPassword"; 
+import "./App.css";
 
 const App = () => {
   return (
