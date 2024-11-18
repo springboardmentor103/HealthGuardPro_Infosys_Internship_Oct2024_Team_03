@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
-import './forgotpassword.css';
- 
+ import React, { useState } from 'react';
+import './forgotpassword.css'; 
+
 function ForgotPassword() {
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
- 
+  const [email, setEmail] = useState(''); 
+  const [message, setMessage] = useState(''); 
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Email submitted:', email);
-   
+    console.log('Email submitted:', email); 
+    
     setMessage('If an account with that email exists, you will receive a password reset link.');
   };
- 
+
   return (
-    <div className="forgot-password-page">
+    <div className ="forgot-password-page">
     <div className="container">
       <h2>Forgot your password?</h2>
       <p>Don't worry, it happens to everyone. Enter your email below to recover your password.</p>
@@ -25,7 +25,7 @@ function ForgotPassword() {
           name="email"
           placeholder="Enter your Email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)} 
           required
         />
         <button type="submit">Submit</button>
@@ -36,4 +36,5 @@ function ForgotPassword() {
     </div>
   );
 }
+
 export default ForgotPassword;
