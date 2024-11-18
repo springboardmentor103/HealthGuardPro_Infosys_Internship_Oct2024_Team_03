@@ -9,6 +9,7 @@ function App() {
     
     </div>
   );
-}
+};
+>>>>>>> 271cdcd5571d715491820fb39f49f780115cad41
 
 export default App;
