@@ -1,11 +1,12 @@
-import React from "react";
-import SetPassword from "./pages/SetPassword"; 
-import "./App.css";
+import logo from './logo.svg';
+import SignupPage from './pages/signup';
 
-const App = () => {
+
+function App() {
   return (
-    <div className="app-container">
-      <SetPassword />
+    <div className="App">
+     <SignupPage />
+    
     </div>
   );
 };
