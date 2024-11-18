@@ -13,6 +13,7 @@ function ForgotPassword() {
   };
 
   return (
+    <div className ="forgot-password-page">
     <div className="container">
       <h2>Forgot your password?</h2>
       <p>Don't worry, it happens to everyone. Enter your email below to recover your password.</p>
@@ -31,6 +32,7 @@ function ForgotPassword() {
       </form>
       {message && <p className="message">{message}</p>} {/* Display success message */}
       <a href="/login" className="back-link">Back to login</a>
+    </div>
     </div>
   );
 }
