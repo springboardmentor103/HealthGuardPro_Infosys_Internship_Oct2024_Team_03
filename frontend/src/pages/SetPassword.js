@@ -15,7 +15,8 @@ const SetPassword = () => {
   };
 
   return (
-    <div className="container">
+     <div className="setpass-page">
+    <div className="setpass-container">
       <h1>Set a Password</h1>
       <p>Your previous password has been reset.
          Please set a new password for your account.</p>
@@ -48,6 +49,7 @@ const SetPassword = () => {
           Set Password
         </button>
       </form>
+    </div>
     </div>
   );
 };

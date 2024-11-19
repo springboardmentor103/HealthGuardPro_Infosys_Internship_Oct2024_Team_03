@@ -1,0 +1,26 @@
+ /* VerifyCode.css */
+
+/* Full page layout */
+.verify-code-page {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* Container box styling */
+.container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  max-width: 400px;
+ 
+}
+.back-link{
+  text-align:center;
+}

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './forgotpassword.css'; 
+import { Link } from 'react-router-dom';  
 
 function ForgotPassword() {
   const [email, setEmail] = useState(''); 
@@ -28,10 +29,15 @@ function ForgotPassword() {
           onChange={(e) => setEmail(e.target.value)} 
           required
         />
-        <button type="submit">Submit</button>
+         <Link to="/verify" className="submit-link">
+  <button type="button">Submit</button>
+</Link>
+
+         
       </form>
       {message && <p className="message">{message}</p>} {/* Display success message */}
       <a href="/login" className="back-link">Back to login</a>
+   
     </div>
     </div>
   );

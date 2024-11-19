@@ -76,16 +76,19 @@ button:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
  
 .remember-me {
+
   display: flex;
-  align-items: center;
+  align-items:center;
+  
 }
  
 .remember-me input[type="checkbox"] {
-  margin-right: 15px; /* Space between checkbox and "Remember me" */
+   margin: 0; 
+   
 }
  
 .forgot-password-container {

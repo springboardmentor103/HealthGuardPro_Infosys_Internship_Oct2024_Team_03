@@ -44,7 +44,7 @@ import './login.css'; // Ensure this file path is correct
             />
           </div>
           <div className="options">
-            {/* Checkbox and "Remember me" on the same line */}
+             
             <div className="remember-me">
               <input
                 type="checkbox"
@@ -52,7 +52,7 @@ import './login.css'; // Ensure this file path is correct
                 checked={rememberMe}
                 onChange={handleRememberMeChange}
               />
-              <label htmlFor="rememberMe"> Remember me</label>
+              <label htmlFor="rememberMe">Remember me</label>
             </div>
 
             {/* "Forgot Password" aligned on the same line */}
@@ -65,7 +65,10 @@ import './login.css'; // Ensure this file path is correct
           <button type="submit" className="login-button">Login</button>
           <p className="sign-up">
             Don’t have an account?{' '}
-            <a href="#signup" className="sign-up-link">Sign up</a>
+            
+            <Link to="/signup" className="sign-up-link">
+            Sign up
+              </Link>
           </p>
         </form>
       </div>
