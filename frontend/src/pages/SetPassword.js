@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./SetPassword.css";
-
+import { Link } from 'react-router-dom';  
 const SetPassword = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -41,13 +41,12 @@ const SetPassword = () => {
           onChange={(e) => setConfirmPassword(e.target.value)} 
         />
 
-        <button
-          type="submit"
-          onClick={handleClick}
-          className="set-password-btn"
-        >
-          Set Password
-        </button>
+         
+
+        <Link to="/login" className="set-password-btn">
+  <button type="button">Set Password</button>
+</Link>
+
       </form>
     </div>
     </div>
