@@ -3,7 +3,6 @@ import "./signup.css";
 
 function SignupPage() {
     return (
-        <div className="signup-page">
         <div className="signup container">
             <div className="signup-box">
                 <h1>Signup</h1>
@@ -48,7 +47,6 @@ function SignupPage() {
                     Already have an account? <a href="/login">Login</a>
                 </p>
             </div>
-        </div>
         </div>
     );
 }
