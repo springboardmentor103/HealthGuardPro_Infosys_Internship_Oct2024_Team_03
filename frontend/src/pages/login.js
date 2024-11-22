@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';  
 import './login.css'; // Ensure this file path is correct
- 
+
  const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
- 
+
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
   const handleRememberMeChange = () => setRememberMe(!rememberMe);
@@ -14,7 +14,7 @@ import './login.css'; // Ensure this file path is correct
     e.preventDefault();
     // Handle form submission here
   };
- 
+
   return (
     <div className="login-page">
       <div className="login-container">
@@ -26,7 +26,7 @@ import './login.css'; // Ensure this file path is correct
               type="email"
               id="email"
               placeholder="Enter your Email      "
-             
+              
               value={email}
               onChange={handleEmailChange}
               required
@@ -54,7 +54,7 @@ import './login.css'; // Ensure this file path is correct
               />
               <label htmlFor="rememberMe">Remember me</label>
             </div>
- 
+
             {/* "Forgot Password" aligned on the same line */}
             <div className="forgot-password-container">
               <Link to="/forgotpassword" className="forgot-password">
@@ -65,7 +65,7 @@ import './login.css'; // Ensure this file path is correct
           <button type="submit" className="login-button">Login</button>
           <p className="sign-up">
             Don’t have an account?{' '}
-           
+            
             <Link to="/signup" className="sign-up-link">
             Sign up
               </Link>
@@ -75,11 +75,5 @@ import './login.css'; // Ensure this file path is correct
     </div>
   );
 };
- 
-export default Login;
- 
- 
- 
 
- 
- 
+export default Login;

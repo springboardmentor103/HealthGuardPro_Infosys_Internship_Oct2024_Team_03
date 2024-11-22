@@ -1,5 +1,3 @@
- 
- 
 .login-page {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
@@ -82,14 +80,14 @@
   }
    
   .remember-me {
-   
+  
     display: flex;
     align-items:center;
-   
+    
   }
    
   .remember-me input[type="checkbox"] {
-     margin: 0;
+     margin: 0; 
      
   }
    
@@ -120,3 +118,5 @@
   .sign-up-link:hover {
     text-decoration: underline;
   }
+   
+  
