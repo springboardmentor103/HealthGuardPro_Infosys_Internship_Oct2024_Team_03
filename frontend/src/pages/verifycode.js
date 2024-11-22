@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Verifycode.css';
+import './verifycode.css';
  
 const Verifycode = () => {
     const navigate = useNavigate();
