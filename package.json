@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "react-router-dom": "^7.0.1"
+  },
+  "dependencies": {
+    "react-scripts": "^5.0.1",
+    "webpack": "^5.96.1"
+  }
+}

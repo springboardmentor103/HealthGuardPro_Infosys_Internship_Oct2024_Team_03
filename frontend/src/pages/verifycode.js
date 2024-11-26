@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './verifycode.css';
- 
+import { Link } from 'react-router-dom'; 
 const Verifycode = () => {
     const navigate = useNavigate();
     const [code, setCode] = useState('');
@@ -47,7 +47,9 @@ const Verifycode = () => {
                             Didn’t receive a code?{' '}
                             <span onClick={handleResend} className="verifycode-unique-resend-link">Resend</span>
                         </p>
-                        <button type="submit" className="verifycode-unique-btn">Verify</button>
+                        <Link to="/Setpassword" className="setpassword-link">
+  <button type="button">Verify</button>
+</Link>
                     </form>
                 </div>
             </div>

@@ -23,7 +23,7 @@
     h2 {
      
       margin-top: -10px; /* Moves the heading upwards */
-      margin-bottom: 50px; /* Adjust spacing below the heading */
+      margin-bottom: 10px; /* Adjust spacing below the heading */
       text-align: left;
     }
    
@@ -32,35 +32,20 @@
   .input-field {
     margin-bottom: 2px; /* Decreased the space between email and password */
     text-align: left;
-    width: 95%;
+    width: 100%;
+    
   }
    
   label {
     display: block;
     margin-bottom: 5px;
   }
+  
    
-  input[type="email"] {
-    width: 99%; /* Adjust width for email */
-    padding: 10px;
-    margin-bottom: 15px; /* Decrease space between email and password */
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-   
-  /* Set the password field width to 99% */
-  input[type="password"] {
-    width: 99%;  /* Adjust the width to your desired value */
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-   
-  button {
+  .login-button {
     background-color: #007bff;
     color: white;
-    padding: 20px 20px;
+    padding: 15px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -78,17 +63,18 @@
     align-items: center;
     margin-bottom: 20px;
   }
-   
   .remember-me {
-  
     display: flex;
-    align-items:center;
-    
+    align-items: center;
+    white-space: nowrap;
   }
+  
+   
    
   .remember-me input[type="checkbox"] {
-     margin: 0; 
      
+    margin-right: 5px;
+    margin-top: 10px;
   }
    
   .forgot-password-container {
@@ -100,6 +86,7 @@
   .forgot-password {
     color: #FF8682;
     text-decoration: none;
+    margin-right: 10;
   }
    
   .forgot-password:hover {

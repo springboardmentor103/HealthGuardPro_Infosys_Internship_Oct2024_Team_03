@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./setpassword.css";
-
-
+import { Link } from 'react-router-dom'; 
+ 
 const SetPassword = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -48,9 +48,10 @@ const SetPassword = () => {
 
           {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-          <button className="set-password-btn" onClick={handleClick}>
-            Set password
-          </button>
+                  
+        <Link to="/login" className="set-password-btn">
+  <button type="button">Set Password</button>
+</Link>
         </form>
       </div>
     </div>

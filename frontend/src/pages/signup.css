@@ -1,12 +1,12 @@
 /* signup.css */
 
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+.setpass-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     background-color: #f9f9f9;
-}
-
+  }
 .signup.container {
     display: flex;
     justify-content: center;

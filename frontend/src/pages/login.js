@@ -18,7 +18,7 @@ import './login.css'; // Ensure this file path is correct
   return (
     <div className="login-page">
       <div className="login-container">
-        <h2>Login</h2>
+        < h2>Login</h2>
         <form onSubmit={handleSubmit}>
           <div className="input-field">
             <label htmlFor="email">Email</label>
