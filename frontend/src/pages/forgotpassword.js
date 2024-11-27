@@ -29,7 +29,7 @@ function ForgotPassword() {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
-         <Link to="/verify" className="submit-link">
+         <Link to="/verifycode" className="submit-link">
   <button type="button">Submit</button>
 </Link>
  
