@@ -1,15 +1,28 @@
-import React from 'react';
-import './dashboard.css'; // Ensure this file is linked correctly
+import React, { useState } from 'react';
+import './dashboard.css';
 import DashboardIcon from '../assets/icons/dashboard.svg';
 import LeaderboardIcon from '../assets/icons/leaderboard.svg';
 import ProfileIcon from '../assets/icons/profile.svg';
 import LogoutIcon from '../assets/icons/logout.svg';
 
 function Dashboard() {
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!isSidebarOpen);
+  };
+
   return (
     <div className="dashboard-container">
+      {/* Hamburger Menu */}
+      <div className="hamburger-menu" onClick={toggleSidebar}>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+
       {/* Sidebar */}
-      <aside className="sidebar">
+      <aside className={`sidebar ${isSidebarOpen ? 'active' : ''}`}>
         <ul>
           <li>
             <img src={DashboardIcon} alt="Dashboard" className="sidebar-icon" /> Dashboard
@@ -28,32 +41,28 @@ function Dashboard() {
 
       {/* Main Content */}
       <main className="main-content">
-        {/* Header */}
         <header className="header">
           <h1 className="greeting">Hello, user</h1>
           <h2 className="title">HealthGuard Pro</h2>
         </header>
 
         <section className="cards-section">
-  {[
-    { title: "Physical fitness", score: "95%" },
-    { title: "Nutrition", score: "95%" },
-    { title: "Lifestyle", score: "90%" },
-    { title: "Mental well-being", score: "90%" },
-    { title: "Bio-markers", score: "85%" },
-    { title: "Overall score", score: "80%" },
-  ].map((card, index) => (
-    <div className="card" key={index}>
-      <h3>{card.title}</h3>
-      {/* Conditionally render the button */}
-      {card.title !== "Overall score" && <button>Take test</button>}
-      <p>Your previous score was {card.score}</p>
-    </div>
-  ))}
-</section>
+          {[
+            { title: 'Physical fitness', score: '95%' },
+            { title: 'Nutrition', score: '95%' },
+            { title: 'Lifestyle', score: '90%' },
+            { title: 'Mental well-being', score: '90%' },
+            { title: 'Bio-markers', score: '85%' },
+            { title: 'Overall score', score: '80%' },
+          ].map((card, index) => (
+            <div className="card" key={index}>
+              <h3>{card.title}</h3>
+              {card.title !== 'Overall score' && <button>Take test</button>}
+              <p>Your previous score was {card.score}</p>
+            </div>
+          ))}
+        </section>
 
-
-        {/* Scoreboard */}
         <section className="scoreboard">
           <h3>Scoreboard</h3>
           <table>
