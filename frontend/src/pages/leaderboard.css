@@ -1,0 +1,262 @@
+/* General styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4; /* Light grey background */
+}
+
+/* Container */
+.leaderboard-container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background-color: #1f698d;
+  color: #ffffff;
+  padding-top: 50px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.sidebar-icon {
+  width: 35px;
+  height: 35px;
+  margin-right: 15px;
+}
+
+.sidebar li:hover {
+  background-color: #0a2d46;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 30px;
+  background-color: #f4f4f4;
+  overflow-y: auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.greeting {
+  font-size: 24px;
+  font-family: "Abril Fatface";
+  font-weight: lighter;
+}
+
+.title {
+  font-size: 32px;
+  font-family: "Abril Fatface";
+  color: #1f4f73;
+  text-align: right;
+}
+
+.right-align {
+  margin-left: auto; /* Pushes the text to the right */
+}
+
+/* User Info Section */
+.user-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.profile img {
+  border-radius: 50%;
+  width: 150px; /* Default size */
+  height: 150px; /* Default size */
+  margin-right: 20px;
+  max-width: 100%; /* Responsive for smaller screens */
+}
+
+.profile h2 {
+  font-size: 24px;
+  font-family: "Abril Fatface";
+}
+
+.profile p {
+  font-size: 18px;
+  margin-top: 5px;
+}
+
+.points {
+  font-size: 18px;
+  text-align: right;
+  margin-right: 30px;
+}
+
+
+/* Leaderboard Table */
+.leaderboard-section {
+  padding: 20px;
+}
+
+.leaderboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff; /* White background for table */
+  text-align: center;
+  border: 1px solid #ddd; /* Adds border to table */
+  table-layout: fixed; /* Ensures equal column widths */
+}
+
+.leaderboard-title {
+  font-family: "Abril Fatface";
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  padding: 15px 0;
+}
+
+.leaderboard-table th,
+.leaderboard-table td {
+  padding: 12px 20px;
+  border: 1px solid #ddd; /* Adds visible cell borders */
+  text-align: center; /* Center-align content */
+  word-wrap: break-word; /* Prevents overflow of text */
+}
+
+.leaderboard-table th {
+  background-color: #1f698d; /* Blue header background */
+  color: white; /* White header text */
+}
+
+.leaderboard-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 200px; /* Adjust sidebar width for tablets */
+  }
+
+  .main-content {
+    padding: 20px; /* Reduce padding on smaller screens */
+  }
+
+  .header {
+    flex-direction: column; /* Stack header elements */
+    text-align: center;
+  }
+
+  .title {
+    font-size: 28px; /* Reduce font size */
+    text-align: center; /* Center title */
+  }
+
+  .user-info {
+    flex-direction: column; /* Stack user info section */
+    align-items: center;
+  }
+
+  .profile {
+    flex-direction: column; /* Stack profile image and text */
+    align-items: center;
+    text-align: center;
+  }
+
+  .profile img {
+    width: 120px; /* Smaller profile image */
+    height: 120px;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .points {
+    text-align: center;
+    margin-left: 0; /* Remove left margin */
+    margin-top: 10px;
+  }
+
+  .leaderboard-title {
+    font-size: 20px; /* Adjust title font size */
+  }
+
+  .leaderboard-table th,
+  .leaderboard-table td {
+    font-size: 14px; /* Reduce table font size */
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    width: 100%; /* Full width on small screens */
+    position: static;
+  }
+
+  .sidebar ul {
+    display: flex;
+    justify-content: space-around; /* Inline navigation */
+    padding: 10px 0;
+  }
+
+  .main-content {
+    padding: 15px; /* Minimal padding */
+  }
+
+  .header {
+    text-align: center;
+  }
+
+  .user-info {
+    text-align: center;
+  }
+
+  .profile img {
+    width: 100px; /* Further reduce image size */
+    height: 100px;
+  }
+
+  .points {
+    font-size: 18px; /* Reduce font size for points */
+  }
+
+  .leaderboard-title {
+    font-size: 18px; /* Smaller title */
+  }
+
+  .leaderboard-table {
+    font-size: 12px; /* Adjust font size for smaller screens */
+  }
+
+  .leaderboard-table th,
+  .leaderboard-table td {
+    padding: 8px; /* Reduce padding in table cells */
+  }
+}
