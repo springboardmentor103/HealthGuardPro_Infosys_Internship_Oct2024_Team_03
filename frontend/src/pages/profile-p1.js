@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./profile-p1.css";
 import DashboardIcon from "../assets/icons/dashboard.svg";
 import LeaderboardIcon from "../assets/icons/leaderboard.svg";
@@ -7,10 +7,16 @@ import LogoutIcon from "../assets/icons/logout.svg";
 import ProfileIconi from "../assets/icons/profile i.svg";
 
 function Profile() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   return (
     <div className="main-container">
       {/* Sidebar */}
-      <aside className="sidebar">
+      <aside className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
         <ul>
           <li>
             <img src={DashboardIcon} alt="Dashboard" className="sidebar-icon" /> Dashboard
@@ -27,8 +33,13 @@ function Profile() {
         </ul>
       </aside>
 
+      {/* Hamburger Button */}
+      <button className="hamburger" onClick={toggleSidebar}>
+        ☰
+      </button>
+
       {/* Main Content */}
-      <div className="content">
+      <div className={`content ${isSidebarOpen ? "content-overlay" : ""}`}>
         {/* Header */}
         <div className="header">
           <span className="greeting">Hello, user</span>

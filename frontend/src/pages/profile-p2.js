@@ -8,11 +8,16 @@ import ProfileIconi from "../assets/icons/profile i.svg";
 
 function Profile2() {
   const [username, setUsername] = useState("");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
 
   return (
     <div className="main-container">
       {/* Sidebar */}
-      <aside className="sidebar">
+      <aside className={`sidebar ${sidebarOpen ? "open" : ""}`}>
         <ul>
           <li>
             <img src={DashboardIcon} alt="Dashboard" className="sidebar-icon" /> Dashboard
@@ -29,6 +34,10 @@ function Profile2() {
         </ul>
       </aside>
 
+      {/* Hamburger Button */}
+      <button className="hamburger" onClick={toggleSidebar}>
+        &#9776;
+      </button>
 
       {/* Main Content */}
       <div className="content">
@@ -42,7 +51,6 @@ function Profile2() {
         <div className="edit-profile-container">
           <div className="edit-profile-card">
             {/* Profile Image */}
-           
             <div className="profile-image-container">
               <img src={ProfileIconi} alt="Profile Icon" className="profile-icon" />
             </div>

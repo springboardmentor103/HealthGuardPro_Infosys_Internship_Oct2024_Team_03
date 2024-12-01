@@ -3,7 +3,21 @@
   display: flex;
   height: 100vh;
 }
-
+.hamburger {
+  display: none;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  background-color: #1F698D;
+  color: white;
+  border: none;
+  font-size: 24px;
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 1000;
+  cursor: pointer;
+}
+ 
 /* Sidebar styles */
 .sidebar {
   width: 250px;
@@ -76,7 +90,7 @@
   border-radius: 10px;
   width: 400px;
   padding: 30px;
-   display: flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
   margin-left: 30px;
@@ -194,4 +208,117 @@
 .save-button:hover,
 .cancel-button:hover {
   background-color: #0a2d46;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  /* Sidebar behavior */
+  .sidebar {
+    position: fixed;
+    left: -250px; /* Initially hide sidebar */
+    top: 0;
+    height: 100%;
+    z-index: 100;
+    transition: left 0.3s ease-in-out;
+    
+  }
+
+  .sidebar.open {
+    left: 0; /* Show sidebar when open */
+    width: 100vw;
+  }
+  .sidebar li:hover {
+    background-color: #1f698d;
+  }
+  /* Hamburger button styles */
+  .hamburger {
+    display: block; /* Show hamburger on mobile */
+    position: fixed;
+    top: 20px;
+    left: 15px;
+    background-color: white;
+    border: none;
+    color:#1f698d;
+    font-size: 30px;
+    cursor: pointer;
+    z-index: 1000;
+  }
+
+  .hamburger:hover {
+    background-color:#1f698d;;
+    color:white;
+  }
+
+  /* Content area adjustments for mobile */
+  .content {
+    margin-left: 0; /* Remove sidebar space */
+  }
+
+  /* Centering profile card on mobile */
+  .edit-profile-container {
+    height: calc(100vh - 120px); /* Adjust for header height */
+    padding: 10px; /* Add padding for small screens */
+  }
+
+  .edit-profile-card {
+    width: 90%; /* Adjust profile card width */
+    margin: 0; /* Remove left margin */
+  }
+
+  /* Adjust header title and greeting for mobile */
+  .header {
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .greeting {
+    font-size: 20px; /* Reduce font size for mobile */
+    text-align: center;
+  }
+
+  .title {
+    font-size: 24px; /* Adjust title size for mobile */
+    text-align: center;
+    color: #1f4f73;
+  }
+
+  /* Adjust label, input fields, and profile details */
+  .edit-profile-details {
+    align-items: center;
+  }
+
+  .input-field {
+    padding: 10px;
+    width: 80%; /* Slightly smaller input fields for mobile */
+  }
+
+  .profile-image-container {
+    width: 120px;
+    height: 120px;
+  }
+
+  .profile-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  /* Adjust spacing and button layout */
+  .edit-profile-buttons {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+  }
+
+  .cancel-button,
+  .save-button {
+    width: 100%;
+    margin: 5px 0;
+  }
+
+  /* Position Edit button further down */
+  .edit-button {
+    position: relative;
+    bottom: 40px;
+  }
 }
