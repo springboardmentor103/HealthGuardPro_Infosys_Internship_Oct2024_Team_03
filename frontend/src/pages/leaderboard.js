@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./leaderboard.css"; // Ensure the CSS file is imported correctly
 import DashboardIcon from "../assets/icons/dashboard.svg";
 import LeaderboardIcon from "../assets/icons/leaderboard.svg";
@@ -7,6 +7,8 @@ import LogoutIcon from "../assets/icons/logout.svg";
 import ProfileImage from "../assets/images/profile.png"; // Import the profile image
 
 const Leaderboard = () => {
+  const [isSidebarOpen, setSidebarOpen] = useState(false); // State for mobile sidebar toggle
+
   const leaderboardData = [
     { user: "Priya (you)", ranking: 90, points: 635 },
     { user: "Abhi", ranking: 1, points: 3000 },
@@ -14,10 +16,14 @@ const Leaderboard = () => {
     { user: "Roshan", ranking: 3, points: 2597 },
   ];
 
+  const toggleSidebar = () => {
+    setSidebarOpen(!isSidebarOpen); // Toggle sidebar visibility on mobile
+  };
+
   return (
     <div className="leaderboard-container">
       {/* Sidebar */}
-      <aside className="sidebar">
+      <aside className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
         <ul>
           <li>
             <img src={DashboardIcon} alt="Dashboard" className="sidebar-icon" /> Dashboard
@@ -34,15 +40,20 @@ const Leaderboard = () => {
         </ul>
       </aside>
 
+      {/* Hamburger Icon for Mobile */}
+      <div className="hamburger" onClick={toggleSidebar}>
+        &#9776; {/* Hamburger icon */}
+      </div>
+
       {/* Main Content */}
       <main className="main-content">
         {/* Header */}
         <header className="header">
           <h1 className="greeting">Hello, user</h1>
-          <h2 className="title right-align">HealthGuard Pro</h2>
+          <h2 className="title">HealthGuard Pro</h2>
         </header>
 
-        {/* User Info Section */}
+        {/* User Info Section (Centered on Mobile) */}
         <section className="user-info">
           <div className="profile">
             <img
@@ -56,7 +67,7 @@ const Leaderboard = () => {
             </div>
           </div>
           <div className="points">
-            <h2 className="right-align">Points: 635</h2>
+            <h2>Points: 635</h2>
           </div>
         </section>
 

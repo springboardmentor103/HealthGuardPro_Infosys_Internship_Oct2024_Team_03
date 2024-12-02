@@ -7,7 +7,7 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f4f4; /* Light grey background */
+  background-color: #ffffff; /* White background */
 }
 
 /* Container */
@@ -15,6 +15,7 @@ body {
   display: flex;
   flex-direction: row;
   height: 100vh;
+  transition: margin-left 0.3s ease;
 }
 
 /* Sidebar */
@@ -23,6 +24,11 @@ body {
   background-color: #1f698d;
   color: #ffffff;
   padding-top: 50px;
+  position: fixed;
+  top: 0;
+  left: 0; /* Sidebar should always be open in desktop view */
+  height: 100vh;
+  transition: left 0.3s ease;
 }
 
 .sidebar ul {
@@ -51,8 +57,9 @@ body {
 .main-content {
   flex: 1;
   padding: 30px;
-  background-color: #f4f4f4;
+  background-color: #ffffff;
   overflow-y: auto;
+  margin-left: 250px; /* Space for the sidebar */
 }
 
 .header {
@@ -77,7 +84,7 @@ body {
 }
 
 .right-align {
-  margin-left: auto; /* Pushes the text to the right */
+  margin-left: auto;
 }
 
 /* User Info Section */
@@ -97,10 +104,11 @@ body {
 
 .profile img {
   border-radius: 50%;
-  width: 150px; /* Default size */
-  height: 150px; /* Default size */
+  width: 150px;
+  height: 150px;
   margin-right: 20px;
-  max-width: 100%; /* Responsive for smaller screens */
+  max-width: 100%;
+  background-color: #bebebe;
 }
 
 .profile h2 {
@@ -119,7 +127,6 @@ body {
   margin-right: 30px;
 }
 
-
 /* Leaderboard Table */
 .leaderboard-section {
   padding: 20px;
@@ -128,10 +135,10 @@ body {
 .leaderboard-table {
   width: 100%;
   border-collapse: collapse;
-  background-color: #ffffff; /* White background for table */
+  background-color: #ffffff;
   text-align: center;
-  border: 1px solid #ddd; /* Adds border to table */
-  table-layout: fixed; /* Ensures equal column widths */
+  border: 2px solid #ddd;
+  table-layout: fixed;
 }
 
 .leaderboard-title {
@@ -145,118 +152,137 @@ body {
 .leaderboard-table th,
 .leaderboard-table td {
   padding: 12px 20px;
-  border: 1px solid #ddd; /* Adds visible cell borders */
-  text-align: center; /* Center-align content */
-  word-wrap: break-word; /* Prevents overflow of text */
+  border: 1px solid #ddd;
+  text-align: center;
+  word-wrap: break-word;
 }
 
 .leaderboard-table th {
-  background-color: #1f698d; /* Blue header background */
-  color: white; /* White header text */
+  background-color: #1f698d;
+  color: white;
 }
 
 .leaderboard-table tr:hover {
   background-color: #f1f1f1;
 }
 
-/* Responsive Styles */
-@media (max-width: 768px) {
+/* Mobile Responsiveness */
+@media screen and (max-width: 768px) {
+  /* Adjust Sidebar */
   .sidebar {
-    width: 200px; /* Adjust sidebar width for tablets */
+    width: 400px;
+    position: fixed;
+    top: 0;
+    left: -400px; /* Initially hidden */
+    height: 100vh;
+  }
+
+  .sidebar.open {
+    left: 0; /* Show sidebar when 'open' class is added */
   }
 
   .main-content {
-    padding: 20px; /* Reduce padding on smaller screens */
+    margin-left: 0; /* No margin for mobile */
   }
 
+  /* Header on Mobile */
   .header {
-    flex-direction: column; /* Stack header elements */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
+    margin-top: 30px;
+    gap: 10px; /* Adds space between greeting and title */
+  }
+
+  .greeting {
+    font-size: 18px;
   }
 
   .title {
-    font-size: 28px; /* Reduce font size */
-    text-align: center; /* Center title */
+    font-size: 24px;
   }
 
+  /* User Info Section Centered */
   .user-info {
-    flex-direction: column; /* Stack user info section */
-    align-items: center;
-  }
-
-  .profile {
-    flex-direction: column; /* Stack profile image and text */
-    align-items: center;
-    text-align: center;
-  }
-
-  .profile img {
-    width: 120px; /* Smaller profile image */
-    height: 120px;
-    margin-right: 0;
-    margin-bottom: 10px;
-  }
-
-  .points {
-    text-align: center;
-    margin-left: 0; /* Remove left margin */
-    margin-top: 10px;
-  }
-
-  .leaderboard-title {
-    font-size: 20px; /* Adjust title font size */
-  }
-
-  .leaderboard-table th,
-  .leaderboard-table td {
-    font-size: 14px; /* Reduce table font size */
-    padding: 10px;
-  }
-}
-
-@media (max-width: 480px) {
-  .sidebar {
-    width: 100%; /* Full width on small screens */
-    position: static;
-  }
-
-  .sidebar ul {
     display: flex;
-    justify-content: space-around; /* Inline navigation */
-    padding: 10px 0;
-  }
-
-  .main-content {
-    padding: 15px; /* Minimal padding */
-  }
-
-  .header {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-  }
-
-  .user-info {
-    text-align: center;
+    margin-bottom: 30px;
+    gap: 15px; /* Adds space between profile image, name, and score */
   }
 
   .profile img {
-    width: 100px; /* Further reduce image size */
-    height: 100px;
+    width: 120px;
+    height: 120px;
+    margin-bottom: 0; /* Remove extra space below image */
+  }
+
+  .profile h2 {
+    font-size: 20px;
+    margin-bottom: 0px;
+  }
+
+  .profile p {
+    font-size: 16px;
+    margin-bottom: 0px;
   }
 
   .points {
-    font-size: 18px; /* Reduce font size for points */
+    font-size: 13px;
+    margin-top: 5px;
   }
 
-  .leaderboard-title {
-    font-size: 18px; /* Smaller title */
+  /* Hamburger Icon */
+  .hamburger {
+    display: block; /* Show hamburger on mobile */
+    font-size: 25px;
+    cursor: pointer;
+    z-index: 1000;
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    color: #000000;
   }
 
+  /* Table Adjustments for Mobile */
   .leaderboard-table {
-    font-size: 12px; /* Adjust font size for smaller screens */
+    width: 100%; /* Increase table width for better spacing */
+    margin: 0 auto; /* Center the table */
   }
 
   .leaderboard-table th,
   .leaderboard-table td {
-    padding: 8px; /* Reduce padding in table cells */
+    padding: 10px 10px; /* Increase padding for better readability */
+    font-size: 14px; /* Adjust text size */
+  }
+
+  .leaderboard-title {
+    font-size: 25px; /* Adjust title size */
+  }
+
+  .leaderboard-table th {
+    padding: 10px 10px; /* Ensure padding on headers matches */
+    font-size: 15px;
+    font-weight: lighter;
+  }
+
+  .leaderboard-table tr:hover {
+    background-color: #f1f1f1;
+  }
+
+  /* Hide Sidebar and Hamburger on Desktop */
+  .hamburger {
+    display: block; /* Hide hamburger icon on desktop */
+  }
+
+  .sidebar {
+    position: fixed;
+    left: -400px; /* Initially hidden on mobile */
+    top: 0;
+    height: 100%;
   }
 }
