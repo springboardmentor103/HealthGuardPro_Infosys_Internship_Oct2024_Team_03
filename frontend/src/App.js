@@ -5,8 +5,12 @@ import ForgotPassword from './pages/forgotpassword'; // Correct import for Forgo
 import Signup from './pages/signup';
 import  Verify from './pages/verifycode';
 import  Setpassword from './pages/Setpassword';
+import { EmailProvider } from './pages/EmailContext';
+
+
 function App() {
   return (
+    <EmailProvider>
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
@@ -17,6 +21,7 @@ function App() {
         <Route path="/Setpassword" element={<Setpassword/>} />
       </Routes>
     </Router>
+    </EmailProvider>
   );
 }
  
