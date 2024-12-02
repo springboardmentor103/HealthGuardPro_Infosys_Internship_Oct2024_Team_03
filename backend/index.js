@@ -21,7 +21,6 @@ mongoose.connect('mongodb://localhost:27017/userAuth', {
 // User schema
 const userSchema = new mongoose.Schema({
     firstName: String,
-    lastName: String,
     email: { type: String, unique: true },
     phoneNumber: String,
     password: String,
@@ -33,12 +32,11 @@ const User = mongoose.model('User', userSchema);
 app.post('/api/signup', async (req, res) => {
     // console.log("hi")
     try {
-        const { firstName, lastName, email, phoneNumber, password } = req.body;
+        const { firstName, email, phoneNumber, password } = req.body;
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const newUser = new User({
             firstName,
-            lastName,
             email,
             phoneNumber,
             password: hashedPassword,
