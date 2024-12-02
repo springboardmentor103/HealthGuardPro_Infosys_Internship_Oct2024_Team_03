@@ -42,7 +42,7 @@
   position: fixed;
   top: 15px;
   left: 15px;
-  background-color: #1F698D;
+   
   color: white;
   border: none;
   font-size: 24px;
@@ -52,9 +52,7 @@
   cursor: pointer;
 }
  
-.hamburger:hover {
-  background-color: #124159;
-}
+ 
  
 /* Content */
 .content {
@@ -213,21 +211,15 @@
   /* Hamburger */
 
   .hamburger {
-    display: block; /* Show hamburger on mobile */
-    position: fixed;
-    top: 20px;
-    left: 15px;
-    background-color: white;
-    border: none;
-    color:#1f698d;
-    font-size: 30px;
-    cursor: pointer;
-    z-index: 1000;
+    background-color: transparent; /* No background color */
+    border: none; /* Remove button border */
+    color: black; /* Set text color to black */
+    font-size: 24px; /* Adjust font size as needed */
+    cursor: pointer; /* Show pointer cursor on hover */
   }
-
   
-  .hamburger {
-    display: block; /* Show hamburger on mobile */
+  .hamburger:focus {
+    outline: none; /* Remove outline when focused */
   }
  
   .content-overlay {
