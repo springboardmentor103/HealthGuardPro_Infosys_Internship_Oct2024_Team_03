@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./profile-p1.css";
+import { Link } from 'react-router-dom';
 import DashboardIcon from "../assets/icons/dashboard.svg";
 import LeaderboardIcon from "../assets/icons/leaderboard.svg";
 import ProfileIcon from "../assets/icons/profile.svg";
@@ -71,7 +72,10 @@ function Profile() {
                 <span className="value">635</span>
               </div>
             </div>
-            <button className="edit-button">Edit</button>
+            <Link to="/profile-p2" className="edit-button">
+              <button type="button">Edit</button>
+            </Link>
+
           </div>
         </div>
       </div>

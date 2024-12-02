@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./profile-p2.css";
+import { Link } from 'react-router-dom';
 import DashboardIcon from "../assets/icons/dashboard.svg";
 import LeaderboardIcon from "../assets/icons/leaderboard.svg";
 import ProfileIcon from "../assets/icons/profile.svg";
@@ -59,7 +60,7 @@ function Profile2() {
             </div>
             <div className="edit-profile-details">
               <div className="edit-profile-row">
-                <label className="label">Username</label>
+                <label className="edit-label">Username</label>
                 <input
                   type="text"
                   value={username}
@@ -70,9 +71,14 @@ function Profile2() {
               </div>
             </div>
             <div className="edit-profile-buttons">
-              <button className="cancel-button">Cancel</button>
-              <button className="save-button">Save</button>
-            </div>
+            <Link to="/profile-p1" className="cancel-button">
+              <button type="button">Cancel</button>
+            </Link>
+            
+            <Link to="/profile-p1" className="save-button">
+              <button type="button">Save</button>
+            </Link>
+ </div>
           </div>
         </div>
       </div>

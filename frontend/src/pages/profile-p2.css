@@ -3,20 +3,7 @@
   display: flex;
   height: 100vh;
 }
-.hamburger {
-  display: none;
-  position: fixed;
-  top: 15px;
-  left: 15px;
-  background-color: #1F698D;
-  color: white;
-  border: none;
-  font-size: 24px;
-  padding: 10px;
-  border-radius: 5px;
-  z-index: 1000;
-  cursor: pointer;
-}
+ 
  
 /* Sidebar styles */
 .sidebar {
@@ -131,7 +118,7 @@
 }
 
 /* Label styling */
-.label {
+.edit-label {
   font-weight: bold;
   color: #555;
   margin-bottom: 5px;
@@ -173,15 +160,36 @@
 /* Cancel and Save button styling */
 .cancel-button,
 .save-button {
-  background-color: #1F698D;
-  color: white;
-  border: none;
-  padding: 12px 25px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  width: 48%;
+  background-color: #1F698D; /* Blue background for the button */
+  color: white; /* White text for contrast */
+  border: none; /* No border */
+  padding: 12px 25px; /* Padding for button size */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  font-size: 16px; /* Font size */
+  width: 18%; /* Button width */
+  text-align: center; /* Center-align text */
+  display: inline-block; /* Ensure button renders properly */
 }
+
+.cancel-button:hover,
+.save-button:hover {
+  background-color: #16557A; /* Slightly darker blue on hover */
+}
+
+.cancel-button:focus,
+.save-button:focus {
+  outline: none; /* Removes focus outline */
+}
+
+.cancel-button *,
+.save-button * {
+  background-color: transparent; /* Remove background from inner elements */
+  box-shadow: none; /* Remove shadow from inner elements */
+  color : white;
+  border: none; /* Ensure no borders on child elements */
+}
+
 
 .profile-image-container {
   width: 150px; /* Circle size */
@@ -201,15 +209,7 @@
   filter: grayscale(20%);
 }
 
-.cancel-button {
-  background-color: #1F698D;
-}
-
-.save-button:hover,
-.cancel-button:hover {
-  background-color: #0a2d46;
-}
-
+ 
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
   /* Sidebar behavior */
@@ -225,7 +225,7 @@
 
   .sidebar.open {
     left: 0; /* Show sidebar when open */
-    width: 100vw;
+    width: 200vw;
   }
   .sidebar li:hover {
     background-color: #1f698d;
@@ -236,18 +236,15 @@
     position: fixed;
     top: 20px;
     left: 15px;
-    background-color: white;
+   
     border: none;
-    color:#1f698d;
+     
     font-size: 30px;
     cursor: pointer;
     z-index: 1000;
   }
 
-  .hamburger:hover {
-    background-color:#1f698d;;
-    color:white;
-  }
+  
 
   /* Content area adjustments for mobile */
   .content {
@@ -316,9 +313,4 @@
     margin: 5px 0;
   }
 
-  /* Position Edit button further down */
-  .edit-button {
-    position: relative;
-    bottom: 40px;
-  }
 }
