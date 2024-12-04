@@ -37,6 +37,7 @@ const Login = () => {
   };
 
   return (
+    <div className = "body-login">
     <div className="login"> {/* Added a wrapper with class "login" */}
       <div className="login-container">
         <h2>Login</h2>
@@ -73,13 +74,14 @@ const Login = () => {
             <Link to="/forgotpassword" className="forgot-password">Forgot Password?</Link>
           </div>
 
-          <button type="submit" className="login-button">Login</button>
+          <Link to="/dashboard" className="login-button">Login</Link>
           <p className="signup-text">
             Don’t have an account?{' '}
             <Link to="/signup" className="signup-link">Sign up</Link>
           </p>
         </form>
       </div>
+    </div>
     </div>
   );
 }

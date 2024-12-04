@@ -7,7 +7,7 @@ function SignupPage() {
         firstName: '',
       //  lastName: '',
         email: '',
-        phoneNumber: '',
+         
         password: '',
         confirmPassword: '',
         agreeTerms: false
@@ -99,17 +99,7 @@ function SignupPage() {
                         />
                         <label htmlFor="confirmPassword">Confirm Password</label>
                     </div>
-                    <div className="input-container">
-                        <input
-                            type="text"
-                            name="phoneNumber"
-                            id="phoneNumber"
-                            value={formData.phoneNumber}
-                            onChange={handleChange}
-                            required
-                        />
-                        <label htmlFor="phoneNumber">Phone Number</label>
-                    </div>
+                    
                     
                     <button type="submit" className="create-account-button">Create account</button>
                 </form>

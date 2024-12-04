@@ -5,7 +5,7 @@ import LeaderboardIcon from "../assets/icons/leaderboard.svg";
 import ProfileIcon from "../assets/icons/profile.svg";
 import LogoutIcon from "../assets/icons/logout.svg";
 import ProfileImage from "../assets/images/profile.png"; // Import the profile image
-
+import { Link } from 'react-router-dom';
 const Leaderboard = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false); // State for mobile sidebar toggle
 
@@ -21,24 +21,39 @@ const Leaderboard = () => {
   };
 
   return (
+    <div classNames = "body-leaderboard">
     <div className="leaderboard-container">
       {/* Sidebar */}
-      <aside className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
-        <ul>
-          <li>
-            <img src={DashboardIcon} alt="Dashboard" className="sidebar-icon" /> Dashboard
-          </li>
-          <li className="active">
-            <img src={LeaderboardIcon} alt="Leaderboard" className="sidebar-icon" /> Leaderboard
-          </li>
-          <li>
-            <img src={ProfileIcon} alt="Profile" className="sidebar-icon" /> Profile
-          </li>
-          <li>
-            <img src={LogoutIcon} alt="Logout" className="sidebar-icon" /> Logout
-          </li>
-        </ul>
-      </aside>
+      <aside className={`sidebar ${isSidebarOpen ? 'active' : ''}`}>
+  <ul>
+    <li>
+      <Link to="/dashboard" className="sidebar-item">
+        <img src={DashboardIcon} alt="Dashboard" className="dashboard-icon" />
+        <span className="dashboard-label">Dashboard</span>
+      </Link>
+    </li>
+    <li>
+      <Link to="/leaderboard" className="sidebar-item">
+        <img src={LeaderboardIcon} alt="Leaderboard" className="leaderboard-icon" />
+        <span className="leaderboard-label">Leaderboard</span>
+      </Link>
+    </li>
+    <li>
+      <Link to="/profile-p1" className="sidebar-item">
+        <img src={ProfileIcon} alt="Profile" className="profile-icon" />
+        <span className="profile-label">Profile</span>
+      </Link>
+    </li>
+    <li>
+      <Link to="/login" className="sidebar-item">
+        <img src={LogoutIcon} alt="Logout" className="logout-icon" />
+        <span className="logout-label">Logout</span>
+      </Link>
+    </li>
+  </ul>
+</aside>
+
+
 
       {/* Hamburger Icon for Mobile */}
       <div className="hamburger" onClick={toggleSidebar}>
@@ -96,6 +111,7 @@ const Leaderboard = () => {
           </table>
         </section>
       </main>
+    </div>
     </div>
   );
 };
