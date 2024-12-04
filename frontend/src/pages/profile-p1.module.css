@@ -1,4 +1,6 @@
-  /* Main container */
+
+
+/* Main container */
 .main-container {
   display: flex;
   height: 100vh;
@@ -8,18 +10,47 @@
 .sidebar {
   width: 250px;
   background-color: #1F698D;
-  color: white;
+  
   padding-top: 50px;
   position: relative;
   transition: left 0.3s ease-in-out;
 }
  
 .sidebar ul {
+  color : white ;
   list-style: none;
   padding: 0;
 }
- 
+ /* Sidebar Icons */
+.slidebar-icon {
+  width: 35px;
+  height: 35px;
+  margin-right: 10px;
+}
+
+/* Sidebar Labels */
+.icon-label {
+  font-size: 18px; /* Adjust font size */
+  font-weight: 500;
+  color: white;
+}
+
+/* Sidebar Item */
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: white;
+}
+
+.sidebar-item:hover {
+  background-color: #0a2d46; /* Highlight on hover */
+  border-radius: 5px; /* Rounded edges for hover effect */
+}
+
 .sidebar li {
+  color : white ;
   padding: 15px 20px;
   display: flex;
   align-items: center;
@@ -43,9 +74,9 @@
   top: 15px;
   left: 15px;
    
-  color: white;
+  
   border: none;
-  font-size: 24px;
+  font-size: 26px;
   padding: 10px;
   border-radius: 5px;
   z-index: 1000;
@@ -211,10 +242,11 @@
   /* Hamburger */
 
   .hamburger {
+    display: flex;
     background-color: transparent; /* No background color */
     border: none; /* Remove button border */
     color: black; /* Set text color to black */
-    font-size: 24px; /* Adjust font size as needed */
+     /* Adjust font size as needed */
     cursor: pointer; /* Show pointer cursor on hover */
   }
   
@@ -226,6 +258,12 @@
     margin-left: 0; /* Remove space from sidebar when open */
   }
 
+  .hamburger-menu div {
+    width: 25px;
+    height: 3px;
+    background-color: #0a2d46;
+    margin: 5px 0;
+  }
   
  
   /* Header in mobile */
@@ -270,9 +308,9 @@
     padding: 12px 25px;
     border-radius: 5px;
     cursor: pointer;
-    position: absolute;
-    bottom: 0px;
-    right: 30px;
+    position: center;
+    bottom: 6px;
+    right: 15px;
     font-size: 16px;
   }
   .label {

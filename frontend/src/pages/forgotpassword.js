@@ -42,6 +42,7 @@ function ForgotPassword() {
   };
 
   return (
+    <div className="body-forgotpass">
     <div className="forgotpassword-container">
         <div className="forgot-password-box">
             <h2 className="forgotpassword-heading">Forgot your password?</h2>
@@ -64,6 +65,7 @@ function ForgotPassword() {
             </form>
             <Link to="/login" className="forgotpassword-login-alternative">← Back to login</Link>
         </div>
+    </div>
     </div>
 );
 }

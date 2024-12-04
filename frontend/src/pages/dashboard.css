@@ -1,12 +1,54 @@
-/* General Dashboard Styles */
+ /* General Dashboard Styles */
 .dashboard-container {
   display: flex;
   height: 100vh;
+  overflow: hidden;
+}
+.sidebar {
+  width: 250px;
+  background-color: #1F698D;
+  padding-top: 50px;
+  position: relative;
+  transition: left 0.3s ease-in-out;
 }
 
+/* Sidebar item styling */
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: white;
+}
+
+.sidebar-item:hover {
+  background-color: #0a2d46; /* Highlight on hover */
+  border-radius: 5px; /* Rounded edges for hover effect */
+}
+
+/* Individual icon styling */
+.dashboard-icon, .leaderboard-icon, .profile-icon, .logout-icon {
+  width: 35px;
+  height: 35px;
+  margin-right: 10px;
+}
+
+/* Icon label styling */
+.dashboard-label, .leaderboard-label, .profile-label, .logout-label {
+  font-size: 18px;
+  font-weight: 500;
+  color: white;
+}
+
+/* Active sidebar styling */
+.sidebar.active {
+  left: 0;
+  width: 250px;
+}
 /* Sidebar */
 .sidebar {
   width: 250px;
+  overflow-y: hidden;
   background-color: #1F698D;
   color: #ffffff;
   padding-top: 50px;
@@ -35,10 +77,15 @@
   background-color: #0a2d46;
 }
 
+
+
+
+
 /* Main Content */
 .main-content {
   flex: 1;
-  padding: 30px;
+  overflow: hidden;
+  padding: 10px;
   background-color: #f4f4f4;
 }
 
@@ -46,10 +93,13 @@
   display: flex;
   justify-content: space-between; /* Align header items left and right */
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 0px;
+  margin-top: 0%;
 }
 
 .greeting {
+  margin-bottom: 0%;
+  margin-top: 0%;
   font-size: 24px;
   font-family: 'Abril Fatface'; /* Custom font */
   font-weight: lighter;
@@ -73,7 +123,7 @@
   background-color: #E0E8EF;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+  padding: 0px;
   text-align: center;
 }
 
@@ -107,9 +157,9 @@
 
 /* Scoreboard */
 .scoreboard {
-  margin-top: 30px;
+  margin-top: 10px;
   background-color: #ffffff;
-  padding: 10px;
+  padding: 0px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -175,24 +225,26 @@
 
   .sidebar.active {
     left: 0;
+    width : 300vw;
   }
 
   .main-content {
-    padding: 20px;
+    padding: 10px;
     margin-left: 0; /* Ensure main content takes full width */
   }
 
   .hamburger-menu {
     position: absolute;
-    top: 10px;
-    left: 10px;
+    font-size: 26px;
+    top: 15px;
+    left: 20px;
     cursor: pointer;
     z-index: 11;
   }
 
   .hamburger-menu div {
-    width: 25px;
-    height: 3px;
+    
+    font-size: 26px;
     background-color: #0a2d46;
     margin: 5px 0;
   }
@@ -206,4 +258,3 @@
     flex-direction: column; /* Align header items vertically */
   }
 }
-

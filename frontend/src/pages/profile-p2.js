@@ -19,21 +19,34 @@ function Profile2() {
     <div className="main-container">
       {/* Sidebar */}
       <aside className={`sidebar ${sidebarOpen ? "open" : ""}`}>
-        <ul>
-          <li>
-            <img src={DashboardIcon} alt="Dashboard" className="sidebar-icon" /> Dashboard
-          </li>
-          <li>
-            <img src={LeaderboardIcon} alt="Leaderboard" className="sidebar-icon" /> Leaderboard
-          </li>
-          <li>
-            <img src={ProfileIcon} alt="Profile" className="sidebar-icon" /> Profile
-          </li>
-          <li>
-            <img src={LogoutIcon} alt="Logout" className="sidebar-icon" /> Logout
-          </li>
-        </ul>
-      </aside>
+       
+  <ul>
+    <li>
+      <Link to="/dashboard" className="sidebar-item">
+        <img src={DashboardIcon} alt="Dashboard" className="dashboard-icon" />
+        <span className="dashboard-label">Dashboard</span>
+      </Link>
+    </li>
+    <li>
+      <Link to="/leaderboard" className="sidebar-item">
+        <img src={LeaderboardIcon} alt="Leaderboard" className="leaderboard-icon" />
+        <span className="leaderboard-label">Leaderboard</span>
+      </Link>
+    </li>
+    <li>
+      <Link to="/profile-p1" className="sidebar-item">
+        <img src={ProfileIcon} alt="Profile" className="profile-icon" />
+        <span className="profile-label">Profile</span>
+      </Link>
+    </li>
+    <li>
+      <Link to="/login" className="sidebar-item">
+        <img src={LogoutIcon} alt="Logout" className="logout-icon" />
+        <span className="logout-label">Logout</span>
+      </Link>
+    </li>
+  </ul>
+</aside>
 
       {/* Hamburger Button */}
       <button className="hamburger" onClick={toggleSidebar}>
