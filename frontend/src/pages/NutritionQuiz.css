@@ -1,0 +1,183 @@
+/* General Styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background-color: #f7f9fc;
+  display: flex;
+  overflow: hidden; /* Prevent scrolling */
+}
+
+/* Quiz Page Layout */
+.quiz-page-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+.mandatory {
+  color: red;
+  font-size: 24px;
+  margin-left: 5px;
+}
+
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background-color: #1F698D;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 20px;
+  padding-left: 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  transition: left 0.3s ease;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.sidebar li {
+  width: 100%;
+  padding: 20px 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 20px;
+  margin-top:20px;
+}
+
+.sidebar-icon {
+  width: 32px;
+  height: 32px;
+  margin-right: 15px;
+}
+
+.sidebar li:hover {
+  background-color: #0a2d46;
+}
+
+.sidebar.active {
+  left: 0; /* Show sidebar in mobile view */
+}
+
+/* Hamburger Icon */
+.hamburger {
+  display: none; /* Hidden by default */
+  font-size: 30px;
+  cursor: pointer;
+  padding: 10px;
+  color: rgb(2, 0, 0);
+  border: none;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1000; /* Ensure it appears above other content */
+}
+
+/* Quiz Content */
+.quiz-content {
+  flex-grow: 1;
+  margin-left: 500px; /* Adjusted space between the sidebar and the quiz container */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  transition: margin-left 0.3s ease; /* Smooth transition */
+}
+
+.quiz-content.sidebar-visible {
+  margin-left: 0; /* Remove margin when sidebar is visible */
+}
+
+/* Background Box for Quiz Part */
+.quiz-background {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 50px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  width: 70%;
+  max-width: 900px;
+}
+
+/* Progress Bar */
+.progress-bar {
+  background: #ddd;
+  height: 10px;
+  border-radius: 5px;
+  margin: 20px 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+.progress {
+  background: #3498db;
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+/* Navigation Buttons */
+.navigation-buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.previous-btn,
+.next-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+  background-color: #3498db;
+  color: #fff;
+  transition: background-color 0.3s;
+}
+
+.previous-btn:hover,
+.next-btn:hover {
+  background-color: #2980b9;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 400px;
+    left: -500px; /* Initially hidden */
+}
+  .quiz-content {
+    margin-left: 0; /* Remove margin for mobile */
+  }
+
+  .hamburger {
+    display: block; /* Show hamburger icon on mobile */
+  }
+
+  /* Body overflow management */
+  body.overflow-hidden {
+    overflow: hidden; /* Prevent background scroll when sidebar is open */
+  }
+  .sidebar-icon {
+    width: 32px;
+    height: 32px;
+    margin-right: 15px;
+    margin-top:30px;
+  }
+  .sidebar li {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 24px;
+    margin-top:35px;
+  }
+}
