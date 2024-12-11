@@ -1,4 +1,161 @@
-.login-page {
+
+
+.body-login {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f7f7f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Login Container */
+.login-container {
+  width: 400px;
+  padding: 40px;
+  background-color: #fff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  text-align: center;
+}
+
+h2 {
+  text-align: left;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+p {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 24px;
+  
+}
+
+/* Form Group */
+.form-group {
+  position: relative;
+  margin-bottom: 24px;
+  width: 100%;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #333;
+  background-color: #f9f9f9;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #4a5adf;
+  background-color: #fff;
+}
+
+.form-group label {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-size: 14px;
+  color: #999;
+  transition: all 0.2s ease;
+  pointer-events: none;
+  background: #fff;
+  padding: 0 4px;
+}
+
+/* Move label above input when focused or filled */
+.form-group input:focus+label,
+.form-group input:not(:placeholder-shown)+label {
+  top: -8px;
+  left: 8px;
+  font-size: 12px;
+  color:black;
+}
+
+/* Options Section */
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.options label {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+}
+
+.options input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+.options .forgot-password {
+  font-size: 14px;
+  color: #e64c3c;
+  text-decoration: none;
+}
+
+.options .forgot-password:hover {
+  text-decoration: underline;
+}
+
+/* Login Button */
+.login-button {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.login-button:hover {
+  background-color: #3c4ec3;
+}
+
+/* Signup Section */
+.signup-text {
+  font-size: 14px;
+  color: #888;
+  margin-top: 16px;
+}
+
+.signup-link {
+  color: #e64c3c;
+  text-decoration: none;
+}
+
+.signup-link:hover {
+  text-decoration: underline;
+}
+
+
+/* .login-page {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     display: flex;
@@ -14,53 +171,38 @@
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
-    max-width: 400px;
-    width: 100%;
+     max-width: 700px; 
+    width: 400px;
   }
    
-    /* Increased space between login heading and email */
+    // Increased space between login heading and email 
      
     h2 {
      
-      margin-top: -10px; /* Moves the heading upwards */
-      margin-bottom: 50px; /* Adjust spacing below the heading */
+      margin-top: -10px; // Moves the heading upwards 
+      margin-bottom: 10px; // Adjust spacing below the heading 
       text-align: left;
     }
    
    
    
   .input-field {
-    margin-bottom: 2px; /* Decreased the space between email and password */
+    margin-bottom: 2px; // Decreased the space between email and password 
     text-align: left;
-    width: 95%;
+    width: 100%;
+    
   }
    
   label {
     display: block;
     margin-bottom: 5px;
   }
+  
    
-  input[type="email"] {
-    width: 99%; /* Adjust width for email */
-    padding: 10px;
-    margin-bottom: 15px; /* Decrease space between email and password */
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-   
-  /* Set the password field width to 99% */
-  input[type="password"] {
-    width: 99%;  /* Adjust the width to your desired value */
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-   
-  button {
+  .login-button {
     background-color: #007bff;
     color: white;
-    padding: 20px 20px;
+    padding: 15px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -71,35 +213,37 @@
     background-color: #0056b3;
   }
    
-  /* Flexbox for the options (checkbox, "Remember me", "Forgot Password") */
+  // Flexbox for the options (checkbox, "Remember me", "Forgot Password") 
   .options {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
   }
-   
   .remember-me {
-  
     display: flex;
-    align-items:center;
-    
+    align-items: center;
+    white-space: nowrap;
   }
+  
+   
    
   .remember-me input[type="checkbox"] {
-     margin: 0; 
      
+    margin-right: 5px;
+    margin-top: 10px;
   }
    
   .forgot-password-container {
     display: flex;
     justify-content: flex-end;
-    flex-grow: 1; /* Ensures the link is pushed to the right */
+    flex-grow: 1; // Ensures the link is pushed to the right 
   }
    
   .forgot-password {
     color: #FF8682;
     text-decoration: none;
+    margin-right: 10;
   }
    
   .forgot-password:hover {
@@ -119,4 +263,4 @@
     text-decoration: underline;
   }
    
-  
+  */

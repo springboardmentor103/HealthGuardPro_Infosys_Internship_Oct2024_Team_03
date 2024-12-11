@@ -1,0 +1,339 @@
+ /* Main container to position the sidebar and content */
+.main-container {
+  display: flex;
+  height: 100vh;
+}
+.slidebar-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 15px;
+}
+
+/* Label */
+.slidebar-label {
+  font-size: 16px;
+  color : white;
+  font-weight: 500;
+}
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background-color: #1f698d;
+  color: #ffffff;
+  padding-top: 50px;
+  position: fixed;
+  top: 0;
+  left: 0; /* Sidebar should always be open in desktop view */
+  height: 100vh;
+  transition: left 0.3s ease;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+   
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.sidebar-icon {
+  width: 35px;
+  height: 35px;
+  margin-right: 15px;
+}
+
+.sidebar li:hover {
+  background-color: #0a2d46;
+}
+
+
+
+ 
+
+ 
+ 
+ 
+/* Content area */
+.content {
+  flex: 1;
+  padding: 20px;
+}
+
+/* Header styles */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.greeting {
+  font-size: 24px;
+  font-family: "Abril Fatface";
+  font-weight: lighter;
+}
+
+.title {
+  font-size: 32px;
+  font-family: "Abril Fatface";
+  color: #1f4f73;
+}
+
+/* Center the edit profile card on the page */
+.edit-profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 120px); /* Adjust for header height */
+  background-color: #f9f9f9;
+}
+
+/* Style the edit profile card */
+.edit-profile-card {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  width: 400px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 30px;
+}
+
+/* Profile image styling */
+.profile-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+/* Title styling */
+.edit-profile-title h2 {
+  font-size: 24px;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+/* Profile details container */
+.edit-profile-details {
+  width: 100%;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Row styles for inputs */
+.edit-profile-row {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+  width: 100%;
+}
+
+/* Label styling */
+.edit-label {
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+/* Input field styling */
+.input-field {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #e0e8ef;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+}
+
+/* Placeholder text styling */
+.input-field::placeholder {
+  color: #aaa;
+  font-style: italic;
+}
+
+/* Input field focus effect */
+.input-field:focus {
+  background-color: #f0f8ff;
+  border-color: #007b80;
+  outline: none;
+}
+
+/* Button container */
+.edit-profile-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* Cancel and Save button styling */
+.cancel-button,
+.save-button {
+  background-color: #1F698D; /* Blue background for the button */
+  color: white; /* White text for contrast */
+  border: none; /* No border */
+  padding: 12px 25px; /* Padding for button size */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  font-size: 16px; /* Font size */
+  width: 18%; /* Button width */
+  text-align: center; /* Center-align text */
+  display: inline-block; /* Ensure button renders properly */
+}
+
+.cancel-button:hover,
+.save-button:hover {
+  background-color: #16557A; /* Slightly darker blue on hover */
+}
+
+.cancel-button:focus,
+.save-button:focus {
+  outline: none; /* Removes focus outline */
+}
+
+.cancel-button *,
+.save-button * {
+  background-color: transparent; /* Remove background from inner elements */
+  box-shadow: none; /* Remove shadow from inner elements */
+  color : white;
+  border: none; /* Ensure no borders on child elements */
+}
+
+
+.profile-image-container {
+  width: 150px; /* Circle size */
+  height: 150px;
+  border-radius: 50%;
+  background-color: #f0f0f0; /* Light background for the icon */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px; /* Add spacing below the profile */
+}
+
+/* Profile icon styling */
+.profile-icon {
+  width: 80px; /* Icon size */
+  height: 80px;
+  filter: grayscale(20%);
+}
+
+ 
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  /* Sidebar behavior */
+  .sidebar {
+    position: fixed;
+    left: -250px; /* Initially hide sidebar */
+    top: 0;
+    height: 100%;
+    z-index: 100;
+    transition: left 0.3s ease-in-out;
+    
+  }
+
+  .sidebar.open {
+    left: 0; /* Show sidebar when open */
+    width: 200vw;
+  }
+  .sidebar li:hover {
+    background-color: #1f698d;
+  }
+  /* Hamburger button styles */
+  .hamburger {
+    display: block; /* Show hamburger on mobile */
+    position: fixed;
+    top: 20px;
+    left: 15px;
+   
+    border: none;
+     
+    font-size: 30px;
+    cursor: pointer;
+    z-index: 1000;
+  }
+
+  
+
+  /* Content area adjustments for mobile */
+  .content {
+    margin-left: 0; /* Remove sidebar space */
+  }
+
+  /* Centering profile card on mobile */
+  .edit-profile-container {
+    height: calc(100vh - 120px); /* Adjust for header height */
+    padding: 10px; /* Add padding for small screens */
+  }
+
+  .edit-profile-card {
+    width: 90%; /* Adjust profile card width */
+    margin: 0; /* Remove left margin */
+  }
+
+  /* Adjust header title and greeting for mobile */
+  .header {
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .greeting {
+    font-size: 20px; /* Reduce font size for mobile */
+    text-align: center;
+  }
+
+  .title {
+    font-size: 24px; /* Adjust title size for mobile */
+    text-align: center;
+    color: #1f4f73;
+  }
+
+  /* Adjust label, input fields, and profile details */
+  .edit-profile-details {
+    align-items: center;
+  }
+
+  .input-field {
+    padding: 10px;
+    width: 80%; /* Slightly smaller input fields for mobile */
+  }
+
+  .profile-image-container {
+    width: 120px;
+    height: 120px;
+  }
+
+  .profile-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  /* Adjust spacing and button layout */
+  .edit-profile-buttons {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+  }
+
+  .cancel-button,
+  .save-button {
+    width: 100%;
+    margin: 5px 0;
+  }
+
+}

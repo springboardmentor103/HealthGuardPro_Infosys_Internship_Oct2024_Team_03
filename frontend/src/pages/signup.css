@@ -1,20 +1,151 @@
-/* signup.css */
-
-body {
+/* Main container for the entire page */
+.signup {
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f9f9f9;
-}
-
-.signup.container {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    padding: 20px;
-    background-color: #f0f0f0;
+    height: 100vh;
+    margin: 0;
+    background-color: #edeff4;
+    /* Dark blue background */
 }
+
+/* Signup container box */
+.signup-container {
+    width: 100%;
+    max-width: 500px;
+    background: white;
+    padding: 2.5rem 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    /* Stronger shadow for depth */
+    text-align: center;
+}
+
+/* Heading style */
+.signup-container h2 {
+    font-size: 28px;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Description under heading */
+.signup-container p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 24px;
+}
+
+/* Input fields container */
+.input-container {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+/* Input field styles */
+.input-container input {
+    width: 90%;
+    padding: 14px 14px 14px 14px;
+    /* Ensure label doesn't overlap */
+    border: 1px solid #fffefe;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: #f7f7f7;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+/* Label styles - floating effect */
+.input-container label {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    font-size: 14px;
+    color: #888;
+    pointer-events: none;
+    transition: 0.2s ease all;
+    background-color: white;
+    padding: 0 4px;
+}
+
+/* Floating label effect on focus or text entry */
+.input-container input:focus,
+.input-container input:not(:placeholder-shown) {
+    background-color: white;
+    border-color: #7c7979;;
+}
+
+.input-container input:focus+label,
+.input-container input:not(:placeholder-shown)+label {
+    top: -10px;
+    left: 12px;
+    font-size: 12px;
+    color:black;
+}
+
+/* Checkbox and terms */
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #555;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+/* Link colors for terms and forgot password */
+
+.login-link{
+    text-align: center;
+}
+.checkbox-group a,
+.login-link a {
+    color: #ff6b6b;
+    text-decoration: none;
+}
+
+.checkbox-group a:hover,
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+/* Create account button */
+.create-account-button {
+    width: 100%;
+    padding: 14px;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.create-account-button:hover {
+    background-color: #3b4cb5;
+}
+
+/* Already have an account link */
+.login-link {
+    font-size: 14px;
+    color: #666;
+    margin-top: 20px;
+}
+
+
+/* signup.css
+
+.setpass-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f9f9f9;
+  }
+. 
 
 .signup-box {
     background-color: #ffffff;
@@ -94,4 +225,4 @@ button:hover {
 
 .login-text a:hover {
     text-decoration: underline;
-}
+} */
