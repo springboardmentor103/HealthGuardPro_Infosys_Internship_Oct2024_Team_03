@@ -25,6 +25,10 @@ const Login = () => {
 
       const data = await response.json();
       if (response.ok) {
+
+      // Save the token to localStorage
+      localStorage.setItem('authToken', data.token);
+
         alert('Login successful!');
         //window.location.href = '/dashboard'; // Redirect to a dashboard page
         navigate('/dashboard');
@@ -33,6 +37,7 @@ const Login = () => {
       }
     } catch (error) {
       console.error('Error during login:', error);
+      alert('An unexpected error occurred. Please try again.');
     }
   };
 
@@ -74,7 +79,11 @@ const Login = () => {
             <Link to="/forgotpassword" className="forgot-password">Forgot Password?</Link>
           </div>
 
+<<<<<<< HEAD
           <button type ="submit" className="login-button">Login</button>
+=======
+          <button type='submit' className="login-button">Login</button>
+>>>>>>> 9dab751620052f923bfb685a7a1d8b5174b37712
           <p className="signup-text">
             Don’t have an account?{' '}
             <Link to="/signup" className="signup-link">Sign up</Link>

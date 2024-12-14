@@ -1,4 +1,10 @@
-
+.input {
+  width: 300px; /* Full width of the parent container */
+  height: 30px;
+  border: 1px solid black;
+  border-radius: 4px;
+  /* max-width: 400px; Limit the maximum width */
+}
 
 /* Main container */
 .main-container {
