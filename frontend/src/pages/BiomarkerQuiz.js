@@ -4,6 +4,7 @@ import DashboardIcon from "../assets/dashboard.svg";
 import LeaderboardIcon from "../assets/leaderboard.svg";
 import ProfileIcon from "../assets/profile.svg";
 import LogoutIcon from "../assets/logout.svg";
+import { Link } from 'react-router-dom';
 
 const BiomarkerQuiz = () => {
   const questions = [
@@ -25,7 +26,7 @@ const BiomarkerQuiz = () => {
   const [error, setError] = useState("");
 
   const toggleSidebar = () => {
-    setSidebarVisible(prev => !prev);
+    setSidebarVisible((prev) => !prev);
   };
 
   const handleChange = (value) => {
@@ -42,8 +43,6 @@ const BiomarkerQuiz = () => {
     }
     if (currentPage < questions.length - 1) {
       setCurrentPage(currentPage + 1);
-    } else {
-      alert("Quiz completed!"); // You can handle completion here
     }
   };
 
@@ -57,22 +56,35 @@ const BiomarkerQuiz = () => {
 
   return (
     <div className="quiz-page-container">
-      <aside className={`sidebar ${sidebarVisible ? "active" : ""}`}>
+      <aside className={`sidebar ${sidebarVisible ? 'active' : ''}`}>
         <ul>
           <li>
-            <img src={DashboardIcon} alt="Dashboard" className="sidebar-icon" /> Dashboard
+            <Link to="/dashboard" className="sidebar-item">
+              <img src={DashboardIcon} alt="Dashboard" className="dashboard-icon" />
+              <span className="dashboard-label">Dashboard</span>
+            </Link>
           </li>
           <li>
-            <img src={LeaderboardIcon} alt="Leaderboard" className="sidebar-icon" /> Leaderboard
+            <Link to="/leaderboard" className="sidebar-item">
+              <img src={LeaderboardIcon} alt="Leaderboard" className="leaderboard-icon" />
+              <span className="leaderboard-label">Leaderboard</span>
+            </Link>
           </li>
           <li>
-            <img src={ProfileIcon} alt="Profile" className="sidebar-icon" /> Profile
+            <Link to="/profile-p1" className="sidebar-item">
+              <img src={ProfileIcon} alt="Profile" className="profile-icon" />
+              <span className="profile-label">Profile</span>
+            </Link>
           </li>
           <li>
-            <img src={LogoutIcon} alt="Logout" className="sidebar-icon" /> Logout
+            <Link to="/login" className="sidebar-item">
+              <img src={LogoutIcon} alt="Logout" className="logout-icon" />
+              <span className="logout-label">Logout</span>
+            </Link>
           </li>
         </ul>
       </aside>
+
       <div className="hamburger" onClick={toggleSidebar}>
         &#9776;
       </div>
