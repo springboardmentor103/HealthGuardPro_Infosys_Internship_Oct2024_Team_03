@@ -14,9 +14,9 @@ import Leaderboard from './pages/leaderboard';
 import PhysicalFitnessQuiz from './pages/PhysicalFitnessQuiz';
 import NutritionQuiz from './pages/NutritionQuiz';
 import LifestyleQuiz from './pages/LifestyleQuiz';
-import MentalWellbeingQuiz from './pages/MentalWellBeingQuiz';
+import MentalWellBeingQuiz from './pages/MentalWellBeingQuiz';
 import BiomarkerQuiz from './pages/BiomarkerQuiz';
-
+import ViewScore from './pages/ViewScore';
 function App() {
   return (
     <EmailProvider>
@@ -31,13 +31,12 @@ function App() {
         <Route path="/profile-p2" element={<Profile2/>} />
         <Route path="/profile-p1" element={<Profile/>} />
         <Route path="/dashboard" element={<Dashboard/>} />
-        
         <Route path="/PhysicalFitnessQuiz" element={<PhysicalFitnessQuiz />} />
         <Route path="/NutritionQuiz" element={<NutritionQuiz />} />
         <Route path="/LifestyleQuiz" element={<LifestyleQuiz />} />
-        <Route path="/MentalWellbeingQuiz" element={<MentalWellbeingQuiz />} />
+        <Route path="/MentalWellBeingQuiz" element={<MentalWellBeingQuiz/>} />
         <Route path="/BiomarkerQuiz" element={<BiomarkerQuiz />} />
-
+        <Route path="/ViewScore" element={<ViewScore/>} />
          {/* Route for Dashboard */}
          <Route path="/" element={<Dashboard />} />
         

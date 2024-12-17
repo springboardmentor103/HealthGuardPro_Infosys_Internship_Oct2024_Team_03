@@ -1,19 +1,17 @@
 /* General Styles */
-body, html {
+ 
+/* Parent Container */
+.mentalwellbeing-quiz-container{
+  display: flex; /* Flex layout for sidebar and quiz container */
+  height: 100vh; /* Full viewport height */
+  width: 100vw; 
+  margin-top: 50px;
   margin: 0;
   padding: 0;
   height: 100%;
   font-family: 'Arial', sans-serif;
   background-color: #f7f9fc; /* Light background for contrast */
   overflow: hidden; /* Prevent vertical scrolling */
-}
-
-/* Parent Container */
-.quiz-page-container {
-  display: flex; /* Flex layout for sidebar and quiz container */
-  height: 100vh; /* Full viewport height */
-  width: 100vw; 
-  margin-top: 50px;
 }
 /* Option Wrapper */
 .option-wrapper {

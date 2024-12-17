@@ -1,17 +1,16 @@
 /* General Styles */
-body, html {
+ 
+
+/* Quiz Page Layout */
+.lifestyle-quiz-container {
+  display: flex;
+  height: 100vh; /* Full viewport height */
   margin: 0;
   padding: 0;
   height: 100%;
   font-family: 'Arial', sans-serif;
   background-color: #f7f9fc; /* Light background for contrast */
   overflow: hidden; /* Prevent vertical scrolling */
-}
-
-/* Quiz Page Layout */
-.quiz-page-container {
-  display: flex;
-  height: 100vh; /* Full viewport height */
 }
 /* Option Wrapper */
 .option-wrapper {
@@ -90,7 +89,7 @@ body, html {
 }
 
 /* Quiz Content */
-.quiz-container {
+.life-quiz-container {
   flex-grow: 1;
   margin-left: 400px; /* Space for sidebar */
   padding: 30px; /* Consistent padding */
@@ -105,16 +104,19 @@ body, html {
   width: 100%; /* Allow responsiveness */
   margin-top: 90px; /* Adjust for spacing */
 }
-
-/* Quiz Background Box */
-.quiz-background {
-  width: 70%; /* Flexible width */
-  max-width: 900px; /* Maximum width for larger screens */
-  background-color: #fff;
-  border-radius: 12px;
-  padding: 50px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+.question-page {
+  width: 80%;
+  max-width: 500px;
+  background: white;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content horizontally */
 }
+/* Quiz Background Box */
+
 .mandatory {
   color: red;
   font-size: 24px;

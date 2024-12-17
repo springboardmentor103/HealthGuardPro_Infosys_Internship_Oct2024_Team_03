@@ -90,7 +90,9 @@ function Dashboard() {
                 <th>S.no</th>
                 <th>Time</th>
                 <th>Score</th>
-                <th>View</th>
+                <th> <Link to="/ViewScore">
+              <button>View</button>
+            </Link></th>
               </tr>
             </thead>
             <tbody>
@@ -98,7 +100,9 @@ function Dashboard() {
                 <td>1</td>
                 <td>date / time</td>
                 <td>95%</td>
-                <td><button>View</button></td>
+                <td> <Link to="/viewscore">
+                    <button>View</button>
+                  </Link></td>
               </tr>
               <tr>
                 <td>2</td>

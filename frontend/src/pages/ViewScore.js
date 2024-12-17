@@ -4,7 +4,7 @@ import DashboardIcon from '../assets/icons/dashboard.svg';
 import LeaderboardIcon from '../assets/icons/leaderboard.svg';
 import ProfileIcon from '../assets/icons/profile.svg';
 import LogoutIcon from '../assets/icons/logout.svg';
-
+import { Link } from 'react-router-dom';
 function ViewScore() {
   const [isSidebarActive, setIsSidebarActive] = useState(false);
 
@@ -16,28 +16,36 @@ function ViewScore() {
     <div className="view-score-container">
       {/* Sidebar */}
       <aside className={`sidebar ${isSidebarActive ? 'active' : ''}`}>
-        <ul>
-          <li className="sidebar-item">
-            <img src={DashboardIcon} alt="Dashboard" className="dashboard-icon" />
-            <span className="dashboard-label">Dashboard</span>
-          </li>
-          <li className="sidebar-item">
-            <img src={LeaderboardIcon} alt="Leaderboard" className="leaderboard-icon" />
-            <span className="leaderboard-label">Leaderboard</span>
-          </li>
-          <li className="sidebar-item">
-            <img src={ProfileIcon} alt="Profile" className="profile-icon" />
-            <span className="profile-label">Profile</span>
-          </li>
-          <li className="sidebar-item">
-            <img src={LogoutIcon} alt="Logout" className="logout-icon" />
-            <span className="logout-label">Logout</span>
-          </li>
-        </ul>
-      </aside>
+  <ul>
+    <li>
+      <Link to="/dashboard" className="sidebar-item">
+        <img src={DashboardIcon} alt="Dashboard" className="dashboard-icon" />
+        <span className="dashboard-label">Dashboard</span>
+      </Link>
+    </li>
+    <li>
+      <Link to="/leaderboard" className="sidebar-item">
+        <img src={LeaderboardIcon} alt="Leaderboard" className="leaderboard-icon" />
+        <span className="leaderboard-label">Leaderboard</span>
+      </Link>
+    </li>
+    <li>
+      <Link to="/profile-p1" className="sidebar-item">
+        <img src={ProfileIcon} alt="Profile" className="profile-icon" />
+        <span className="profile-label">Profile</span>
+      </Link>
+    </li>
+    <li>
+      <Link to="/login" className="sidebar-item">
+        <img src={LogoutIcon} alt="Logout" className="logout-icon" />
+        <span className="logout-label">Logout</span>
+      </Link>
+    </li>
+  </ul>
+</aside>
 
       {/* Main Content */}
-      <main className="main-content">
+      <main className="view-main-content">
         <header className="header">
           <div className="hamburger-menu" onClick={toggleSidebar}>
             <div></div>

@@ -97,7 +97,7 @@
   }
   
   /* Main Content */
-  .main-content {
+  .view-main-content {
     flex: 1;
     padding: 20px;
     background-color: #f4f4f4;
