@@ -45,18 +45,18 @@ function ViewScore() {
 </aside>
 
       {/* Main Content */}
-      <main className="view-main-content">
-        <header className="header">
-          <div className="hamburger-menu" onClick={toggleSidebar}>
+      <main className="main-content">
+        <header className="view-header">
+          <div className="view-hamburger-menu" onClick={toggleSidebar}>
             <div></div>
             <div></div>
             <div></div>
           </div>
-          <h1 className="greeting">Hello, user</h1>
-          <h2 className="title">HealthGuard Pro</h2>
+          <h1 className="view-greeting">Hello, user</h1>
+          <h2 className="view-title">HealthGuard Pro</h2>
         </header>
 
-        <section className="scoreboard">
+        <section className="view-scoreboard">
           <h3>Scoreboard</h3>
           <table>
             <thead>
@@ -76,10 +76,10 @@ function ViewScore() {
                 <td><button>View</button></td>
               </tr>
               {/* Score Details Section */}
-              <tr className="details-row">
+              <tr className="view-details-row">
                 <td colSpan="4">
-                  <section className="details">
-                    <table className="details-table">
+                  <section className="view-details">
+                    <table className="view-details-table">
                       <tbody>
                         <tr>
                           <td>Physical fitness</td>

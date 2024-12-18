@@ -1,64 +1,62 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import './LifestyleQuiz.css';
-import DashboardIcon from "../assets/dashboard.svg";
-import LeaderboardIcon from "../assets/leaderboard.svg";
-import ProfileIcon from "../assets/profile.svg";
-import LogoutIcon from "../assets/logout.svg";
+import DashboardIcon from '../assets/icons/dashboard.svg';
+import LeaderboardIcon from '../assets/icons/leaderboard.svg';
+import ProfileIcon from '../assets/icons/profile.svg';
+import LogoutIcon from '../assets/icons/logout.svg';
 import { Link } from 'react-router-dom';
-const LifestyleQuiz = () => {
+
+
+function LifestyleQuiz() {
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [answers, setAnswers] = useState(Array(10).fill(null));
+  
+
   const questions = [
-    { question: "How often do you exercise each week?", options: ["Daily", "3-4 times a week", "1-2 times a week", "Rarely or never"] },
-    { question: "How much water do you drink daily?", options: ["8+ cups", "5-7 cups", "2-4 cups", "Less than 2 cups"] },
-    { question: "How many hours do you sleep each night, on average?", options: ["8+ hours", "6-8 hours", "4-6 hours", "Less than 4 hours"] },
-    { question: "How often do you eat fruits or vegetables?", options: ["Daily", "A few times a week", "Occasionally", "Rarely or never"] },
-    { question: "Do you primarily cook at home or eat out?", options: ["Mostly cook at home", "A mix of both", "Mostly eat out", "Rarely cook at home"] },
-    { question: "How often do you spend time outdoors?", options: ["Every day", "Several times a week", "Occasionally", "Rarely or never"] },
-    { question: "Do you practice relaxation techniques (e.g., meditation, deep breathing)?", options: ["Regularly", "Occasionally", "Rarely", "Never"] },
-    { question: "How often do you socialize with family or friends?", options: ["Very often", "A few times a week", "Occasionally", "Rarely or never"] },
-    { question: "How would you rate your work-life balance?", options: ["Well balanced", "Fairly balanced", "Poorly balanced", "No balance"] },
-    { question: "How often do you engage in activities that bring you joy (e.g., hobbies, travel)?", options: ["Very often", "Occasionally", "Rarely", "Never"] },
+    { question: 'How many hours do you sleep on average daily?', options: ['< 6 hours', '6-8 hours', '> 8 hours'] },
+    { question: 'Do you smoke or consume alcohol?', options: ['Yes, frequently', 'Occasionally', 'No'] },
+    { question: 'How balanced is your diet?', options: ['Poor', 'Moderate', 'Healthy'] },
+    { question: 'How much water do you drink daily?', options: ['< 1 liter', '1-2 liters', '> 2 liters'] },
+    { question: 'Do you take time to relax or meditate?', options: ['Never', 'Sometimes', 'Regularly'] },
+    { question: 'How often do you eat junk food?', options: ['Frequently', 'Occasionally', 'Rarely'] },
+    { question: 'Do you maintain a consistent daily routine?', options: ['No', 'Somewhat', 'Yes'] },
+    { question: 'How do you rate your work-life balance?', options: ['Poor', 'Neutral', 'Good'] },
+    { question: 'Do you engage in any hobbies or leisure activities?', options: ['No', 'Sometimes', 'Regularly'] },
+    { question: 'How satisfied are you with your current lifestyle?', options: ['Not satisfied', 'Neutral', 'Very satisfied'] },
   ];
 
-  const [currentPage, setCurrentPage] = useState(0);
-  const [responses, setResponses] = useState(Array(questions.length).fill(""));
-  const [completed, setCompleted] = useState(false);
-  const [sidebarVisible, setSidebarVisible] = useState(false); // State for sidebar visibility
-
-  const handleChange = (value) => {
-    const updatedResponses = [...responses];
-    updatedResponses[currentPage] = value;
-    setResponses(updatedResponses);
+  const handleAnswer = (index) => {
+    const updatedAnswers = [...answers];
+    updatedAnswers[currentQuestion] = index;
+    setAnswers(updatedAnswers);
   };
 
   const handleNext = () => {
-    if (!responses[currentPage]) {
-      alert("Please select an answer before proceeding.");
-      return;
-    }
-    if (currentPage < questions.length - 1) {
-      setCurrentPage(currentPage + 1);
+    if (answers[currentQuestion] !== null) {
+      setCurrentQuestion((prev) => prev + 1);
     } else {
-      setCompleted(true);
+      alert('Please answer the question before proceeding.');
     }
   };
 
-  const handlePrevious = () => {
-    if (currentPage > 0) {
-      setCurrentPage(currentPage - 1);
-    }
+  const handlePrev = () => {
+    setCurrentQuestion((prev) => (prev > 0 ? prev - 1 : prev));
   };
 
-  const toggleSidebar = () => {
-    setSidebarVisible(!sidebarVisible);
-
-     
-  };
-
-  const progress = Math.round(((currentPage + 1) / questions.length) * 100);
+  const toggleSidebar = () => setSidebarOpen((prev) => !prev);
 
   return (
-    <div className={`lifestyle-quiz-container ${sidebarVisible ? "sidebar-active" : ""}`}>
-       <aside className={`sidebar ${sidebarVisible ? 'active' : ''}`}>
+    <div className="quiz-container">
+      {/* Hamburger Menu for Mobile */}
+      <div className="hamburger-menu" onClick={toggleSidebar}>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+
+      {/* Sidebar */}
+      <aside className={`sidebar ${isSidebarOpen ? 'active' : ''}`}>
   <ul>
     <li>
       <Link to="/dashboard" className="sidebar-item">
@@ -87,67 +85,45 @@ const LifestyleQuiz = () => {
   </ul>
 </aside>
 
-      {/* Hamburger Icon */}
-      <div className="hamburger" onClick={toggleSidebar}>
-        &#9776; {/* Hamburger icon */}
-      </div>
-
-      <div className="quiz-container">
-        {completed ? (
-          <div className="completion-message">
-            <h1>🎉 Thank You! 🎉</h1>
-            <p>You have successfully completed the Mental Well-Being Quiz!</p>
-            <p>Your responses have been recorded.</p>
-          </div>
-        ) : (
-          <div className="question-page">
+      {/* Main Quiz Content */}
+      <main className="quiz-content">
+        <div className="quiz-body">
+          <header className="quiz-header">
             <h1>Lifestyle Quiz</h1>
-            <div className="progress-bar">
-              <div className="progress" style={{ width: `${progress}%` }}></div>
-            </div>
-            <div className="question-container">
-              <p>
-                {currentPage + 1}. {questions[currentPage].question}
-                <span className="mandatory"> *</span>
-              </p>
-              {questions[currentPage].options.map((option, i) => (
-                <div key={i} className="option-wrapper">
-                  <label className="option-label">
-                    <input
-                      type="radio"
-                      name={`question-${currentPage}`}
-                      value={option}
-                      checked={responses[currentPage] === option}
-                      onChange={(e) => handleChange(e.target.value)}
-                    />
-                    {option}
-                  </label>
-                </div>
+          </header>
+
+          {/* Progress Bar */}
+          <div className="progress-bar">
+            <div
+              className="progress"
+              style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
+            ></div>
+          </div>
+
+          <div className="quiz-body-content">
+            <h3 className="question">{questions[currentQuestion].question}</h3>
+            <div className="options">
+              {questions[currentQuestion].options.map((option, index) => (
+                <button
+                  key={index}
+                  className={`option ${answers[currentQuestion] === index ? 'selected' : ''}`}
+                  onClick={() => handleAnswer(index)}
+                >
+                  {option}
+                </button>
               ))}
             </div>
-            <div className="navigation-buttons">
-              {currentPage > 0 && (
-                <button
-                  type="button"
-                  className="previous-btn"
-                  onClick={handlePrevious}
-                >
-                  Previous
-                </button>
-              )}
-              <button
-                type="button"
-                className="next-btn"
-                onClick={handleNext}
-              >
-                {currentPage === questions.length - 1 ? "Submit" : "Next"}
+            <div className="quiz-footer">
+              <button onClick={handlePrev} disabled={currentQuestion === 0}>Previous</button>
+              <button onClick={currentQuestion < questions.length - 1 ? handleNext : () => alert('Quiz Complete!')}>
+                {currentQuestion < questions.length - 1 ? 'Next' : 'Submit'}
               </button>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      </main>
     </div>
   );
-};
+}
 
-export default LifestyleQuiz;
+export default LifestyleQuiz
