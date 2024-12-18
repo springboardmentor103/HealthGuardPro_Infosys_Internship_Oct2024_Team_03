@@ -1,4 +1,4 @@
-import React, { useContext,useState } from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './forgotpassword.css';  
@@ -6,9 +6,9 @@ import { EmailContext } from './EmailContext';
 
 function ForgotPassword() {
   const { email,setEmail } = useContext(EmailContext);
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+//   const [password, setPassword] = useState('');
+//   const [confirmPassword, setConfirmPassword] = useState('');
+//   const [errorMessage, setErrorMessage] = useState('');
 //   const [email, setEmail] = useState('');
  // const [inputemail, setInputEmail] = useState('');
   const navigate = useNavigate();
