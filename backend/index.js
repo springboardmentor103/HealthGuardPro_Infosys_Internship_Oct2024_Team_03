@@ -27,7 +27,19 @@ const userSchema = new mongoose.Schema({
     password: String,
 });
 
+
 const User = mongoose.model('User', userSchema);
+
+const FitnessScoreSchema = new mongoose.Schema({
+    userId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "User" },
+    username: { type: String, required: true },
+    email: { type: String, required: true },
+    category: { type: String, required: true }, // New field to specify the test category
+    score: { type: Number, required: true },
+    dateTaken: { type: Date, default: Date.now },
+});
+
+const FitnessScore = mongoose.model("FitnessScore", FitnessScoreSchema);
 
 const testResultsSchema = new mongoose.Schema({
     email: { type: String, required: true },
@@ -37,6 +49,7 @@ const testResultsSchema = new mongoose.Schema({
 });
 
 const TestResults = mongoose.model('TestResults', testResultsSchema);
+
 
 const authenticateToken = (req, res, next) => {
     const token = req.headers['authorization']?.split(' ')[1];  // Extract token from 'Authorization' header
@@ -125,9 +138,11 @@ const jwtSecretKey = 'your_secret_key'; // Replace with a secure random string
                 jwtSecretKey,                        // Secret key
                 { expiresIn: '1h' }                  // Expiration
             );
+            const userId=user._id;
+            const username = user.firstName;
 
             console.log('Generated Token:', token); // Debug log for token
-            res.status(200).json({ message: 'Login successful', token });
+            res.status(200).json({ message: 'Login successful', token, userId , email ,username});
         } catch (err) {
             console.error('Error during login:', err);
             res.status(500).json({ error: 'Server error' });
@@ -302,21 +317,64 @@ app.put("/api/user/update", async (req, res) => {
             emailChanged = true;
         }
 
-        await user.save();
+            user.save();
 
         console.log("Updated user:", user); // Log the updated user for debugging
 
         if (emailChanged) {
-            return res.status(401).json({
-                message: "Email updated. Please log in again.",
-                user: { firstName: user.firstName, email: user.email },
+            return res.status(200).json({
+                //message: "Email change requested. A confirmation email has been sent to your new email address.",
+               message: "Profile updated successfully", user 
             });
         }
 
-        res.status(200).json({ message: "Profile updated successfully", user });
+        // res.status(200).json({ message: "Profile updated successfully", user });
     } catch (error) {
         console.error("Error in update:", error);
         res.status(500).json({ message: "Error updating profile", error: error.message });
+    }
+});
+
+app.post("/api/save-fitness-score", async (req, res) => {
+    const { userId, username, email, category, score } = req.body;
+
+    if (!userId || !username || !email || !category || !score) {
+        return res.status(400).json({ message: "Missing required fields." });
+    }
+
+    try {
+        const newFitnessScore = new FitnessScore({ userId, username, email, category, score });
+        await newFitnessScore.save();
+        res.status(200).json({ message: "Fitness score saved successfully!" });
+    } catch (error) {
+        console.error("Error saving fitness score:", error);
+        res.status(500).json({ message: "Failed to save fitness score." });
+    }
+});
+
+app.get("/api/get-fitness-scores/:userId/:category", async (req, res) => {
+    const { userId, category } = req.params;
+
+    if (!userId || !category) {
+        return res.status(400).json({ message: "User ID and category are required." });
+    }
+
+    try {
+        // Fetch the most recent fitness score for the given user and category
+        const score = await FitnessScore.findOne({ userId, category })
+            .sort({ dateTaken: -1 }); // Sort by most recent date
+
+        console.log("score :",score);
+
+        if (!score) {
+            return res.status(404).json({ message: "No scores found for this user and category." });
+        }
+
+        // Return the single score object
+        res.status(200).json(score);
+    } catch (error) {
+        console.error("Error retrieving fitness scores:", error);
+        res.status(500).json({ message: "Failed to retrieve scores. Please try again later." });
     }
 });
 
