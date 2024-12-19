@@ -223,7 +223,7 @@ const userSchema = new mongoose.Schema({
 });
 
 const User = mongoose.model('User', userSchema);
-
+ 
 const testResultsSchema = new mongoose.Schema({
     email: { type: String, required: true },
     category: { type: String, required: true },  // E.g., "physicalfitness"
@@ -277,6 +277,7 @@ app.post('/api/submit-marks', authenticateToken, async (req, res) => {
     }
 });
 
+ 
 // Signup route
 app.post('/api/signup', async (req, res) => {
     // console.log("hi")
