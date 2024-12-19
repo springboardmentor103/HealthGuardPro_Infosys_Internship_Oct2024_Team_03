@@ -4,7 +4,7 @@ import DashboardIcon from '../assets/icons/dashboard.svg';
 import LeaderboardIcon from '../assets/icons/leaderboard.svg';
 import ProfileIcon from '../assets/icons/profile.svg';
 import LogoutIcon from '../assets/icons/logout.svg';
-
+import { Link } from 'react-router-dom';
 function ViewScore() {
   const [isSidebarActive, setIsSidebarActive] = useState(false);
 
@@ -16,39 +16,47 @@ function ViewScore() {
     <div className="view-score-container">
       {/* Sidebar */}
       <aside className={`sidebar ${isSidebarActive ? 'active' : ''}`}>
-        <ul>
-          <li className="sidebar-item">
-            <img src={DashboardIcon} alt="Dashboard" className="dashboard-icon" />
-            <span className="dashboard-label">Dashboard</span>
-          </li>
-          <li className="sidebar-item">
-            <img src={LeaderboardIcon} alt="Leaderboard" className="leaderboard-icon" />
-            <span className="leaderboard-label">Leaderboard</span>
-          </li>
-          <li className="sidebar-item">
-            <img src={ProfileIcon} alt="Profile" className="profile-icon" />
-            <span className="profile-label">Profile</span>
-          </li>
-          <li className="sidebar-item">
-            <img src={LogoutIcon} alt="Logout" className="logout-icon" />
-            <span className="logout-label">Logout</span>
-          </li>
-        </ul>
-      </aside>
+  <ul>
+    <li>
+      <Link to="/dashboard" className="sidebar-item">
+        <img src={DashboardIcon} alt="Dashboard" className="dashboard-icon" />
+        <span className="dashboard-label">Dashboard</span>
+      </Link>
+    </li>
+    <li>
+      <Link to="/leaderboard" className="sidebar-item">
+        <img src={LeaderboardIcon} alt="Leaderboard" className="leaderboard-icon" />
+        <span className="leaderboard-label">Leaderboard</span>
+      </Link>
+    </li>
+    <li>
+      <Link to="/profile-p1" className="sidebar-item">
+        <img src={ProfileIcon} alt="Profile" className="profile-icon" />
+        <span className="profile-label">Profile</span>
+      </Link>
+    </li>
+    <li>
+      <Link to="/login" className="sidebar-item">
+        <img src={LogoutIcon} alt="Logout" className="logout-icon" />
+        <span className="logout-label">Logout</span>
+      </Link>
+    </li>
+  </ul>
+</aside>
 
       {/* Main Content */}
       <main className="main-content">
-        <header className="header">
-          <div className="hamburger-menu" onClick={toggleSidebar}>
+        <header className="view-header">
+          <div className="view-hamburger-menu" onClick={toggleSidebar}>
             <div></div>
             <div></div>
             <div></div>
           </div>
-          <h1 className="greeting">Hello, user</h1>
-          <h2 className="title">HealthGuard Pro</h2>
+          <h1 className="view-greeting">Hello, user</h1>
+          <h2 className="view-title">HealthGuard Pro</h2>
         </header>
 
-        <section className="scoreboard">
+        <section className="view-scoreboard">
           <h3>Scoreboard</h3>
           <table>
             <thead>
@@ -68,10 +76,10 @@ function ViewScore() {
                 <td><button>View</button></td>
               </tr>
               {/* Score Details Section */}
-              <tr className="details-row">
+              <tr className="view-details-row">
                 <td colSpan="4">
-                  <section className="details">
-                    <table className="details-table">
+                  <section className="view-details">
+                    <table className="view-details-table">
                       <tbody>
                         <tr>
                           <td>Physical fitness</td>

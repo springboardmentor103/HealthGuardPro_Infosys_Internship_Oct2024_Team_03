@@ -68,7 +68,7 @@ const Login = () => {
             <label>Password</label>
           </div>
 
-          <div className="options">
+          <div className="login-options">
             <label>
               <input
                 type="checkbox"

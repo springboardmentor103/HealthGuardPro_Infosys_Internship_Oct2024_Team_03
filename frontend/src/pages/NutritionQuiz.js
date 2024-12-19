@@ -1,145 +1,153 @@
-import React, { useState } from "react";
-import "./NutritionQuiz.css";
-import DashboardIcon from "../assets/dashboard.svg";
-import LeaderboardIcon from "../assets/leaderboard.svg";
-import ProfileIcon from "../assets/profile.svg";
-import LogoutIcon from "../assets/logout.svg";
+import React, { useState } from 'react';
+import './NutritionQuiz.css';
+import DashboardIcon from '../assets/icons/dashboard.svg';
+import LeaderboardIcon from '../assets/icons/leaderboard.svg';
+import ProfileIcon from '../assets/icons/profile.svg';
+import LogoutIcon from '../assets/icons/logout.svg';
+import { Link } from 'react-router-dom';
 
-const NutritionQuiz = () => {
+function NutritionQuiz() {
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [answers, setAnswers] = useState(Array(10).fill(null));
+  const [isQuizComplete, setQuizComplete] = useState(false);
+
   const questions = [
-    { question: "How often do you eat fruits and vegetables?", options: ["Daily", "A few times a week", "Rarely", "Never"] },
-    { question: "How many servings of whole grains do you consume each day?", options: ["3 or more servings", "1–2 servings", "Occasionally", "None"] },
-    // Add the rest of the questions here...
-    { question: "How many servings of whole grains (like brown rice, quinoa, oats) do you consume each day?", options: ["3 or more servings", "1–2 servings", "Occasionally", "None"] },   
-      { question: "How often do you consume processed or fast foods (e.g., chips, burgers, pizza)?", options: ["Almost every day", "A few times a week", "Rarely", "Never"] },   
-        { question: "Do you regularly drink sugary beverages (soda, energy drinks, sweetened coffee/tea)?", options: ["Yes, multiple times a day", "Occasionally, a few times a week", "Rarely", "Never"] },  
-           { question: "How often do you include protein-rich foods in your meals (e.g., meat, fish, eggs, legumes)?", options: ["Every meal", "Once or twice a day", "Only occasionally", "Rarely or never"] },   
-             { question: "How much water do you drink daily?", options: ["8 or more cups", "5–7 cups", "2–4 cups", "Less than 2 cups"] },   
-               { question: "How often do you eat snacks between meals?", options: ["Frequently (multiple times a day)", "Sometimes (a few times a week)", "Rarely", "Never"] },    
-                { question: "Do you pay attention to portion sizes during meals?", options: ["Always", "Often", "Occasionally", "Never"] },     
-    { question: "How often do you consume dairy products or dairy alternatives (milk, cheese, yogurt)?", options: ["Daily", "A few times a week", "Rarely", "Never"] }, 
-        { question: "Do you take any dietary supplements (vitamins, minerals, etc.)?", options: ["Yes, regularly", "Occasionally", "No, but I plan to", "No, I don’t take any"] },   ];
+    { question: 'How many servings of fruits and vegetables do you eat daily?', options: ['None', '1-2', '3 or more'], scores: [0, 1, 2] },
+    { question: 'Do you consume whole grains daily?', options: ['No', 'Sometimes', 'Yes'], scores: [0, 1, 2] },
+    { question: 'How often do you drink sugary beverages?', options: ['Rarely', 'Occasionally', 'Frequently'], scores: [2, 1, 0] },
+    { question: 'Do you consume dairy or dairy alternatives?', options: ['No', 'Sometimes', 'Regularly'], scores: [0, 1, 2] },
+    { question: 'How often do you include lean protein in your meals?', options: ['Rarely', 'Sometimes', 'Often'], scores: [0, 1, 2] },
+    { question: 'How mindful are you about portion sizes?', options: ['Not mindful', 'Somewhat mindful', 'Very mindful'], scores: [0, 1, 2] },
+    { question: 'Do you drink at least 8 cups of water daily?', options: ['No', 'Sometimes', 'Yes'], scores: [0, 1, 2] },
+    { question: 'Do you include healthy fats (e.g., nuts, seeds, olive oil) in your diet?', options: ['No', 'Occasionally', 'Regularly'], scores: [0, 1, 2] },
+    { question: 'How often do you eat processed or fast food?', options: ['Rarely', 'Occasionally', 'Frequently'], scores: [2, 1, 0] },
+    { question: 'Are you satisfied with your overall diet quality?', options: ['Not satisfied', 'Neutral', 'Very satisfied'], scores: [0, 1, 2] },
+  ];
 
-  const [currentPage, setCurrentPage] = useState(0);
-  const [responses, setResponses] = useState(Array(questions.length).fill(""));
-  const [completed, setCompleted] = useState(false);
-  const [sidebarVisible, setSidebarVisible] = useState(false);
-  const [error, setError] = useState("");
-
-  const toggleSidebar = () => {
-    setSidebarVisible(!sidebarVisible);
-  };
-
-  const handleChange = (value) => {
-    const updatedResponses = [...responses];
-    updatedResponses[currentPage] = value;
-    setResponses(updatedResponses);
-    setError("");
+  const handleAnswer = (index) => {
+    const updatedAnswers = [...answers];
+    updatedAnswers[currentQuestion] = index;
+    setAnswers(updatedAnswers);
   };
 
   const handleNext = () => {
-    if (!responses[currentPage]) {
-      setError("Please select an answer before proceeding.");
-      return;
-    }
-    if (currentPage < questions.length - 1) {
-      setCurrentPage(currentPage + 1);
+    if (answers[currentQuestion] !== null) {
+      if (currentQuestion < questions.length - 1) {
+        setCurrentQuestion((prev) => prev + 1);
+      } else {
+        setQuizComplete(true);
+      }
     } else {
-      setCompleted(true);
+      alert('Please answer the question before proceeding.');
     }
   };
 
-  const handlePrevious = () => {
-    if (currentPage > 0) {
-      setCurrentPage(currentPage - 1);
-    }
+  const handlePrev = () => {
+    setCurrentQuestion((prev) => (prev > 0 ? prev - 1 : prev));
   };
 
-  const progress = Math.round(((currentPage + 1) / questions.length) * 100);
+  const toggleSidebar = () => setSidebarOpen((prev) => !prev);
+
+  const calculateScore = () => {
+    return answers.reduce((total, answer, index) => {
+      if (answer !== null) {
+        return total + questions[index].scores[answer];
+      }
+      return total;
+    }, 0);
+  };
 
   return (
-    <div className="quiz-page-container">
-      {/* Sidebar */}
-      <aside className={`sidebar ${sidebarVisible ? "active" : ""}`}>
-        <ul>
-          <li>
-            <img src={DashboardIcon} alt="Dashboard" className="sidebar-icon" /> Dashboard
-          </li>
-          <li>
-            <img src={LeaderboardIcon} alt="Leaderboard" className="sidebar-icon" /> Leaderboard
-          </li>
-          <li>
-            <img src={ProfileIcon} alt="Profile" className="sidebar-icon" /> Profile
-          </li>
-          <li>
-            <img src={LogoutIcon} alt="Logout" className="sidebar-icon" /> Logout
-          </li>
-        </ul>
-      </aside>
-      
-      {/* Hamburger Icon */}
-      <div className={`hamburger ${sidebarVisible ? "active" : ""}`} onClick={toggleSidebar}>
-        &#9776; {/* Hamburger icon */}
+    <div className="quiz-container">
+      {/* Hamburger Menu for Mobile */}
+      <div className="hamburger-menu" onClick={toggleSidebar}>
+        <div></div>
+        <div></div>
+        <div></div>
       </div>
 
-      {/* Quiz Content */}
-      <div className={`quiz-content ${sidebarVisible ? "sidebar-visible" : ""}`}>
-        <div className="quiz-background">
-          {completed ? (
-            <div className="completion-message">
-              <h1>🎉 Thank You for Completing the Nutrition Quiz! 🎉</h1>
-              <p>Your responses have been recorded!</p>
-              <button className="score-btn" onClick={() => console.log(responses)}>
-                View Responses in Console
-              </button>
-              <button className="restart-btn" onClick={() => window.location.reload()}>
-                Restart Quiz
-              </button>
-            </div>
-          ) : (
-            <div className="question-page">
+      {/* Sidebar */}
+      <aside className={`sidebar ${isSidebarOpen ? 'active' : ''}`}>
+  <ul>
+    <li>
+      <Link to="/dashboard" className="sidebar-item">
+        <img src={DashboardIcon} alt="Dashboard" className="dashboard-icon" />
+        <span className="dashboard-label">Dashboard</span>
+      </Link>
+    </li>
+    <li>
+      <Link to="/leaderboard" className="sidebar-item">
+        <img src={LeaderboardIcon} alt="Leaderboard" className="leaderboard-icon" />
+        <span className="leaderboard-label">Leaderboard</span>
+      </Link>
+    </li>
+    <li>
+      <Link to="/profile-p1" className="sidebar-item">
+        <img src={ProfileIcon} alt="Profile" className="profile-icon" />
+        <span className="profile-label">Profile</span>
+      </Link>
+    </li>
+    <li>
+      <Link to="/login" className="sidebar-item">
+        <img src={LogoutIcon} alt="Logout" className="logout-icon" />
+        <span className="logout-label">Logout</span>
+      </Link>
+    </li>
+  </ul>
+</aside>
+
+      {/* Main Quiz Content */}
+      <main className="quiz-content">
+        {!isQuizComplete ? (
+          <div className="quiz-body">
+            <header className="quiz-header">
               <h1>Nutrition Quiz</h1>
-              <div className="progress-bar">
-                <div className="progress" style={{ width: `${progress}%` }}></div>
-              </div>
-              <div className="question-container">
-                <p>
-                  {currentPage + 1}. {questions[currentPage].question}
-                  <span className="mandatory"> *</span>
-                </p>
-                {questions[currentPage].options.map((option, i) => (
-                  <div key={i} className="option-wrapper">
-                    <label htmlFor={`option-${i}`} className="option-label">
-                      <input
-                        type="radio"
-                        id={`option-${i}`}
-                        name={`question-${currentPage}`}
-                        value={option}
-                        checked={responses[currentPage] === option}
-                        onChange={(e) => handleChange(e.target.value)}
-                      />
-                      {option}
-                    </label>
-                  </div>
+            </header>
+
+            {/* Progress Bar */}
+            <div className="progress-bar">
+              <div
+                className="progress"
+                style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
+              ></div>
+            </div>
+
+            <div className="quiz-body-content">
+              <h3 className="question">{questions[currentQuestion].question}</h3>
+              <div className="options">
+                {questions[currentQuestion].options.map((option, index) => (
+                  <button
+                    key={index}
+                    className={`option ${answers[currentQuestion] === index ? 'selected' : ''}`}
+                    onClick={() => handleAnswer(index)}
+                  >
+                    {option}
+                  </button>
                 ))}
               </div>
-              {error && <p className="error-message">{error}</p>}
-              <div className="navigation-buttons">
-                {currentPage > 0 && (
-                  <button className="previous-btn" onClick={handlePrevious}>
-                    Previous
-                  </button>
-                )}
-                <button className="next-btn" onClick={handleNext}>
-                  {currentPage === questions.length - 1 ? "Submit" : "Next"}
+              <div className="quiz-footer">
+                <button onClick={handlePrev} disabled={currentQuestion === 0}>Previous</button>
+                <button onClick={handleNext}>
+                  {currentQuestion < questions.length - 1 ? 'Next' : 'Submit'}
                 </button>
               </div>
             </div>
-          )}
-        </div>
-      </div>
+          </div>
+        ) : (
+          <div className="quiz-result">
+            <h1>Quiz Completed!</h1>
+            <p>Your Score: {calculateScore()} / {questions.length * 2}</p>
+            <p>
+              {calculateScore() > 15
+                ? 'Excellent! Your dietary habits are commendable!'
+                : 'Good effort! Consider improving some aspects of your diet.'}
+            </p>
+          </div>
+        )}
+      </main>
     </div>
   );
-};
+}
 
 export default NutritionQuiz;

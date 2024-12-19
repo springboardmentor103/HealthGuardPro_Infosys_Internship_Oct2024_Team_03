@@ -60,23 +60,27 @@ function Dashboard() {
           <h1 className="greeting">Hello, user</h1>
           <h2 className="title">HealthGuard Pro</h2>
         </header>
-
         <section className="cards-section">
-          {[
-            { title: 'Physical fitness', score: '95%' },
-            { title: 'Nutrition', score: '95%' },
-            { title: 'Lifestyle', score: '90%' },
-            { title: 'Mental well-being', score: '90%' },
-            { title: 'Bio-markers', score: '85%' },
-            { title: 'Overall score', score: '80%' },
-          ].map((card, index) => (
-            <div className="card" key={index}>
-              <h3>{card.title}</h3>
-              {card.title !== 'Overall score' && <button>Take test</button>}
-              <p>Your previous score was {card.score}</p>
-            </div>
-          ))}
-        </section>
+  {[
+    { title: 'Physical fitness', score: '95%', link: '/PhysicalFitnessQuiz' },
+    { title: 'Nutrition', score: '95%', link: '/NutritionQuiz' },
+    { title: 'Lifestyle', score: '90%', link: '/LifestyleQuiz' },
+    { title: 'Mental well-being', score: '90%', link: '/MentalWellBeingQuiz' },
+    { title: 'Bio-markers', score: '85%', link: '/BiomarkerQuiz' },
+    { title: 'Overall score', score: '80%' },
+  ].map((card, index) => (
+    <div className="card" key={index}>
+      <h3>{card.title}</h3>
+      {card.link && (
+        <Link to={card.link}>
+          <button>Take test</button>
+        </Link>
+      )}
+      <p>Your previous score was {card.score}</p>
+    </div>
+  ))}
+</section>
+
 
         <section className="scoreboard">
           <h3>Scoreboard</h3>
@@ -86,7 +90,9 @@ function Dashboard() {
                 <th>S.no</th>
                 <th>Time</th>
                 <th>Score</th>
-                <th>View</th>
+                <th> <Link to="/ViewScore">
+              <button>View</button>
+            </Link></th>
               </tr>
             </thead>
             <tbody>
@@ -94,7 +100,9 @@ function Dashboard() {
                 <td>1</td>
                 <td>date / time</td>
                 <td>95%</td>
-                <td><button>View</button></td>
+                <td> <Link to="/viewscore">
+                    <button>View</button>
+                  </Link></td>
               </tr>
               <tr>
                 <td>2</td>

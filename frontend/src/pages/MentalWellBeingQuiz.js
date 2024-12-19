@@ -1,169 +1,127 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import './MentalWellBeingQuiz.css';
-import DashboardIcon from "../assets/dashboard.svg";
-import LeaderboardIcon from "../assets/leaderboard.svg";
-import ProfileIcon from "../assets/profile.svg";
-import LogoutIcon from "../assets/logout.svg";
+import DashboardIcon from '../assets/icons/dashboard.svg';
+import LeaderboardIcon from '../assets/icons/leaderboard.svg';
+import ProfileIcon from '../assets/icons/profile.svg';
+import LogoutIcon from '../assets/icons/logout.svg';
+import { Link } from 'react-router-dom';
 
-const MentalWellBeingQuiz = () => {
+function MentalWellBeingQuiz() {
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [answers, setAnswers] = useState(Array(10).fill(null));
+
   const questions = [
-    {
-      question: "How often do you feel optimistic about the future?",
-      options: ["Always", "Often", "Occasionally", "Rarely", "Never"],
-    },
-    {
-      question: "In the past week, how often have you felt overwhelmed or stressed?",
-      options: ["Never", "Rarely", "Sometimes", "Often", "Always"],
-    },
-    {
-      question: "How often do you feel content with your life?",
-      options: ["Always", "Most of the time", "Sometimes", "Rarely", "Never"],
-    },
-    {
-      question: "How often do you feel lonely or disconnected from others?",
-      options: ["Never", "Rarely", "Sometimes", "Often", "Always"],
-    },
-    {
-      question: "How well do you cope with setbacks or challenges?",
-      options: ["Very well", "Well", "Sometimes", "Struggling", "Not at all"],
-    },
-    {
-      question: "How often have you felt sad or down in the past month?",
-      options: ["Never", "Rarely", "Sometimes", "Often", "Always"],
-    },
-    {
-      question: "How easily can you relax and unwind?",
-      options: ["Always", "Most of the time", "Sometimes", "Rarely", "Never"],
-    },
-    {
-      question: "Do you have a good balance between work, personal life, and rest?",
-      options: ["Yes, always", "Mostly, but could improve", "Sometimes", "Rarely", "No, it's a struggle"],
-    },
-    {
-      question: "How often do you feel anxious or worried about things you can't control?",
-      options: ["Never", "Rarely", "Sometimes", "Often", "Always"],
-    },
-    {
-      question: "How often do you feel supported by friends, family, or colleagues?",
-      options: ["Always", "Most of the time", "Sometimes", "Rarely", "Never"],
-    },
+    { question: 'How often do you feel stressed?', options: ['Rarely', 'Sometimes', 'Often'] },
+    { question: 'Do you have a strong support network of family or friends?', options: ['No', 'Somewhat', 'Yes'] },
+    { question: 'How often do you feel anxious or worried?', options: ['Rarely', 'Sometimes', 'Often'] },
+    { question: 'How well do you manage your work-life balance?', options: ['Poorly', 'Moderately', 'Well'] },
+    { question: 'How often do you practice mindfulness or meditation?', options: ['Never', 'Occasionally', 'Regularly'] },
+    { question: 'How satisfied are you with your emotional well-being?', options: ['Not satisfied', 'Neutral', 'Very satisfied'] },
+    { question: 'Do you feel optimistic about the future?', options: ['No', 'Sometimes', 'Yes'] },
+    { question: 'How often do you take breaks to relax or recharge?', options: ['Rarely', 'Sometimes', 'Frequently'] },
+    { question: 'Do you have hobbies or activities that help you relax?', options: ['No', 'A few', 'Yes, several'] },
+    { question: 'How often do you laugh or experience joy?', options: ['Rarely', 'Sometimes', 'Often'] },
   ];
 
-  const [currentPage, setCurrentPage] = useState(0);
-  const [responses, setResponses] = useState(Array(questions.length).fill(""));
-  const [completed, setCompleted] = useState(false);
-  const [sidebarVisible, setSidebarVisible] = useState(false); // State for sidebar visibility
-
-  const handleChange = (value) => {
-    const updatedResponses = [...responses];
-    updatedResponses[currentPage] = value;
-    setResponses(updatedResponses);
+  const handleAnswer = (index) => {
+    const updatedAnswers = [...answers];
+    updatedAnswers[currentQuestion] = index;
+    setAnswers(updatedAnswers);
   };
 
   const handleNext = () => {
-    if (!responses[currentPage]) {
-      alert("Please select an answer before proceeding.");
-      return;
-    }
-    if (currentPage < questions.length - 1) {
-      setCurrentPage(currentPage + 1);
+    if (answers[currentQuestion] !== null) {
+      setCurrentQuestion((prev) => prev + 1);
     } else {
-      setCompleted(true);
+      alert('Please answer the question before proceeding.');
     }
   };
 
-  const handlePrevious = () => {
-    if (currentPage > 0) {
-      setCurrentPage(currentPage - 1);
-    }
+  const handlePrev = () => {
+    setCurrentQuestion((prev) => (prev > 0 ? prev - 1 : prev));
   };
 
-  const toggleSidebar = () => {
-    setSidebarVisible(!sidebarVisible);
-  };
-
-  const progress = Math.round(((currentPage + 1) / questions.length) * 100);
+  const toggleSidebar = () => setSidebarOpen((prev) => !prev);
 
   return (
-    <div className={`mentalwellbeing-quiz-container ${sidebarVisible ? "sidebar-active" : ""}`}>
-      <aside className={`sidebar ${sidebarVisible ? "active" : ""}`}>
-        <ul>
-          <li>
-            <img src={DashboardIcon} alt="Dashboard" className="sidebar-icon" /> Dashboard
-          </li>
-          <li>
-            <img src={LeaderboardIcon} alt="Leaderboard" className="sidebar-icon" /> Leaderboard
-          </li>
-          <li>
-            <img src={ProfileIcon} alt="Profile" className="sidebar-icon" /> Profile
-          </li>
-          <li>
-            <img src={LogoutIcon} alt="Logout" className="sidebar-icon" /> Logout
-          </li>
-        </ul>
-      </aside>
-
-      {/* Hamburger Icon */}
-      <div className="hamburger" onClick={toggleSidebar}>
-        &#9776; {/* Hamburger icon */}
+    <div className="quiz-container">
+      {/* Hamburger Menu for Mobile */}
+      <div className="hamburger-menu" onClick={toggleSidebar}>
+        <div></div>
+        <div></div>
+        <div></div>
       </div>
 
-      <div className="quiz-container">
-        {completed ? (
-          <div className="completion-message">
-            <h1>🎉 Thank You! 🎉</h1>
-            <p>You have successfully completed the Mental Well-Being Quiz!</p>
-            <p>Your responses have been recorded.</p>
+      {/* Sidebar */}
+      <aside className={`sidebar ${isSidebarOpen ? 'active' : ''}`}>
+  <ul>
+    <li>
+      <Link to="/dashboard" className="sidebar-item">
+        <img src={DashboardIcon} alt="Dashboard" className="dashboard-icon" />
+        <span className="dashboard-label">Dashboard</span>
+      </Link>
+    </li>
+    <li>
+      <Link to="/leaderboard" className="sidebar-item">
+        <img src={LeaderboardIcon} alt="Leaderboard" className="leaderboard-icon" />
+        <span className="leaderboard-label">Leaderboard</span>
+      </Link>
+    </li>
+    <li>
+      <Link to="/profile-p1" className="sidebar-item">
+        <img src={ProfileIcon} alt="Profile" className="profile-icon" />
+        <span className="profile-label">Profile</span>
+      </Link>
+    </li>
+    <li>
+      <Link to="/login" className="sidebar-item">
+        <img src={LogoutIcon} alt="Logout" className="logout-icon" />
+        <span className="logout-label">Logout</span>
+      </Link>
+    </li>
+  </ul>
+</aside>
+
+      {/* Main Quiz Content */}
+      <main className="quiz-content">
+        <div className="quiz-body">
+          <header className="quiz-header">
+            <h1>Mental Wellbeing Quiz</h1>
+          </header>
+
+          {/* Progress Bar */}
+          <div className="progress-bar">
+            <div
+              className="progress"
+              style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
+            ></div>
           </div>
-        ) : (
-          <div className="question-page">
-            <h1>Mental Well-Being Quiz</h1>
-            <div className="progress-bar">
-              <div className="progress" style={{ width: `${progress}%` }}></div>
-            </div>
-            <div className="question-container">
-              <p>
-                {currentPage + 1}. {questions[currentPage].question}
-                <span className="mandatory"> *</span>
-              </p>
-              {questions[currentPage].options.map((option, i) => (
-                <div key={i} className="option-wrapper">
-                  <label className="option-label">
-                    <input
-                      type="radio"
-                      name={`question-${currentPage}`}
-                      value={option}
-                      checked={responses[currentPage] === option}
-                      onChange={(e) => handleChange(e.target.value)}
-                    />
-                    {option}
-                  </label>
-                </div>
+
+          <div className="quiz-body-content">
+            <h3 className="question">{questions[currentQuestion].question}</h3>
+            <div className="options">
+              {questions[currentQuestion].options.map((option, index) => (
+                <button
+                  key={index}
+                  className={`option ${answers[currentQuestion] === index ? 'selected' : ''}`}
+                  onClick={() => handleAnswer(index)}
+                >
+                  {option}
+                </button>
               ))}
             </div>
-            <div className="navigation-buttons">
-              {currentPage > 0 && (
-                <button
-                  type="button"
-                  className="previous-btn"
-                  onClick={handlePrevious}
-                >
-                  Previous
-                </button>
-              )}
-              <button
-                type="button"
-                className="next-btn"
-                onClick={handleNext}
-              >
-                {currentPage === questions.length - 1 ? "Submit" : "Next"}
+            <div className="quiz-footer">
+              <button onClick={handlePrev} disabled={currentQuestion === 0}>Previous</button>
+              <button onClick={currentQuestion < questions.length - 1 ? handleNext : () => alert('Quiz Complete!')}>
+                {currentQuestion < questions.length - 1 ? 'Next' : 'Submit'}
               </button>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      </main>
     </div>
   );
-};
+}
 
 export default MentalWellBeingQuiz;

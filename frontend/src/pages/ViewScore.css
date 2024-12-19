@@ -5,7 +5,7 @@
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
   
-  .sidebar {
+  .view-sidebar {
     width: 250px;
     background-color: #1F698D;
     padding-top: 50px;
@@ -14,7 +14,7 @@
   }
   
   /* Sidebar item styling */
-  .sidebar-item {
+  .view-sidebar-item {
     display: flex;
     align-items: center;
     padding: 10px 15px;
@@ -22,32 +22,32 @@
     color: white;
   }
   
-  .sidebar-item:hover {
+  .view-sidebar-item:hover {
     background-color: #0a2d46; /* Highlight on hover */
     border-radius: 5px; /* Rounded edges for hover effect */
   }
   
   /* Individual icon styling */
-  .dashboard-icon, .leaderboard-icon, .profile-icon, .logout-icon {
+  .view-dashboard-icon, .leaderboard-icon, .profile-icon, .logout-icon {
     width: 35px;
     height: 35px;
     margin-right: 10px;
   }
   
   /* Icon label styling */
-  .dashboard-label, .leaderboard-label, .profile-label, .logout-label {
+  .view-dashboard-label, .leaderboard-label, .profile-label, .logout-label {
     font-size: 18px;
     font-weight: 500;
     color: white;
   }
   
   /* Active sidebar styling */
-  .sidebar.active {
+  .view-sidebar.active {
     left: 0;
     width: 250px;
   }
   /* Sidebar */
-  .sidebar {
+  .view-sidebar {
     width: 250px;
     overflow-y: hidden;
     background-color: #1F698D;
@@ -56,31 +56,31 @@
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
   
-  .sidebar ul {
+  .view-sidebar ul {
     list-style: none;
     padding: 0;
   }
   
-  .sidebar li {
+  .view-sidebar li {
     padding: 15px 20px;
     display: flex;
     align-items: center;
     cursor: pointer;
   }
   
-  .sidebar-icon {
+  .view-sidebar-icon {
     width: 35px;
     height: 35px;
     margin-right: 15px;
   }
   
-  .sidebar li:hover {
+  .view-sidebar li:hover {
     background-color: #0a2d46;
   }
   
   
   /* Hamburger menu styles */
-  .hamburger-menu {
+  .view-hamburger-menu {
     display: none;
     flex-direction: column;
     cursor: pointer;
@@ -89,7 +89,7 @@
     left: 20px;
   }
   
-  .hamburger-menu div {
+  .view-hamburger-menu div {
     background-color: #0a2d46;
     height: 4px;
     width: 30px;
@@ -104,27 +104,27 @@
   }
   
   /* Header (Consistent with Dashboard) */
-  .header {
+  .view-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
   }
   
-  .greeting {
+  .view-greeting {
     font-size: 24px;
     font-family: 'Abril Fatface';
     font-weight: lighter;
   }
   
-  .title {
+  .view-title {
     font-size: 32px;
     font-family: 'Abril Fatface';
     color: #1f4f73;
   }
   
   /* Scoreboard */
-  .scoreboard {
+  .view-scoreboard {
     margin-top: 10px;
     background-color: #ffffff;
     padding: 20px;
@@ -132,7 +132,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
-  .scoreboard h3 {
+  .view-scoreboard h3 {
     text-align: center;
     font-size: 30px;
     font-weight: bold;
@@ -141,25 +141,25 @@
     margin-bottom: 20px;
   }
   
-  .scoreboard table {
+  .view-scoreboard table {
     width: 100%;
     border-collapse: collapse;
   }
   
-  .scoreboard th,
-  .scoreboard td {
+  .view-scoreboard th,
+  .view-scoreboard td {
     border: 2px solid #ddd;
     padding: 10px;
     text-align: center;
     font-size: larger;
   }
   
-  .scoreboard th {
+  .view-scoreboard th {
     background-color: #1F698D;
     color: white;
   }
   
-  .scoreboard button {
+  .view-scoreboard button {
     background-color: #1F698D;
     color: white;
     padding: 6px 10px;
@@ -169,12 +169,12 @@
     font-size: medium;
   }
   
-  .scoreboard button:hover {
+  .view-scoreboard button:hover {
     background-color: #0a2d46;
   }
   
   /* Details Section */
-  .details {
+  .view-details {
     background-color: #E0E8EF;
     border-radius: 10px;
     border-top-left-radius: 0px;
@@ -183,35 +183,35 @@
     box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.1), -10px 10px 8px rgba(0, 0, 0, 0.1), 0px 10px 8px rgba(0, 0, 0, 0.1);
   }
   
-  .details-table {
+  .view-details-table {
     width: 100%;
     border-collapse: collapse;
   }
   
-  .details-table td {
+  .view-details-table td {
     padding: 10px;
     border: 2px solid #ffffff;
     text-align: center;
     font-size: 17px;
   }
   
-  .details-row {
+  .view-details-row {
     background-color: #E0E8EF;
   }
   
   /* Responsive styles for details section */
   @media (max-width: 768px) {
-    .details-table {
+    .view-details-table {
       display: block;
     }
   
-    .details-table tr {
+    .view-details-table tr {
       display: flex;
       flex-direction: column;
       margin-bottom: 10px; /* Space between each line */
     }
   
-    .details-table td {
+    .view-details-table td {
       border: none; /* Remove border between rows */
       padding: 5px 0; /* Adjust padding for vertical layout */
       text-align: left;
@@ -219,11 +219,11 @@
   }
   
   /* Responsive styles for the hamburger menu and sidebar */
-    .hamburger-menu {
+    .view-hamburger-menu {
       display: flex; /* Show hamburger icon in mobile view */
     }
   
-    .sidebar {
+    .view-sidebar {
       position: fixed;
       top: 0;
       left: -100%;
@@ -234,17 +234,17 @@
       overflow-y: auto; /* Ensures the sidebar is scrollable */
     }
   
-    .sidebar.active {
+    .view-sidebar.active {
       left: 0;
       width: 300vw;
     }
   
-    .main-content {
+    .view-main-content {
       padding: 10px;
       margin-left: 0; /* Ensure main content takes full width */
     }
 
-    .hamburger-menu {
+    .view-hamburger-menu {
       position: absolute;
       font-size: 26px;
       top: 15px;
@@ -253,14 +253,14 @@
       z-index: 11;
     }
   
-    .hamburger-menu div {
+    .view-hamburger-menu div {
       
       font-size: 26px;
       background-color: #0a2d46;
       margin: 5px 0;
     }
 
-    .header {
+    .view-header {
       flex-direction: column; /* Align header items vertically */
     }
   }

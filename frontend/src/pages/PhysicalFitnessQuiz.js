@@ -1,218 +1,129 @@
-import React, { useState } from "react";
-import "./PhysicalFitnessQuiz.css";
-import DashboardIcon from "../assets/dashboard.svg";
-import LeaderboardIcon from "../assets/leaderboard.svg";
-import ProfileIcon from "../assets/profile.svg";
-import LogoutIcon from "../assets/logout.svg";
+import React, { useState } from 'react';
+import './PhysicalFitnessQuiz.css';
+import DashboardIcon from '../assets/icons/dashboard.svg';
+import LeaderboardIcon from '../assets/icons/leaderboard.svg';
+import ProfileIcon from '../assets/icons/profile.svg';
+import LogoutIcon from '../assets/icons/logout.svg';
+import { Link } from 'react-router-dom';
 
-const PhysicalFitnessQuiz = () => {
+
+function PhysicalFitnessQuiz() {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
-  const [currentPage, setCurrentPage] = useState(0);
-  const [responses, setResponses] = useState([]);
-  const [completed, setCompleted] = useState(false);
-
-  const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [answers, setAnswers] = useState(Array(10).fill(null));
 
   const questions = [
-    // Add your question objects here (truncated for brevity)
-    {
-        question: "How often do you exercise each week?",
-        options: [
-            "5 or more days",
-            "3–4 days",
-            "1–2 days",
-            "Rarely or never"
-        ]
-    },
-    // Other questions...
-    {
-        question: "How often do you exercise each week?",
-        options: [
-            "5 or more days",
-            "3–4 days",
-            "1–2 days",
-            "Rarely or never"
-        ]
-    },
-    {
-        question: "What types of exercises or activities do you usually do?",
-        options: [
-            "A mix of cardio, strength, and flexibility",
-            "Mostly cardio (e.g., running, cycling)",
-            "Mostly strength training (e.g., weights, bodyweight exercises)",
-            "Minimal structured exercise, mostly daily activities"
-        ]
-    },
-    {
-        question: "How long can you sustain moderate activity, like jogging or cycling?",
-        options: [
-            "30 minutes or more",
-            "15–30 minutes",
-            "Less than 15 minutes",
-            "I can’t sustain it without stopping"
-        ]
-    },
-    {
-        question: "How many push-ups or squats can you do in one set?",
-        options: [
-            "20 or more",
-            "10–20",
-            "Less than 10",
-            "I can’t do them at all"
-        ]
-    },
-    {
-        question: "Can you comfortably perform stretches, like touching your toes?",
-        options: [
-            "Yes, with ease",
-            "Yes, but with some difficulty",
-            "Barely, or not fully",
-            "No, I can’t reach at all"
-        ]
-    },
-    {
-        question: "Do you get breathless or tired during activities like climbing stairs?",
-        options: [
-            "Rarely or never",
-            "Occasionally, but it’s manageable",
-            "Frequently, with moderate difficulty",
-            "Always, even with minimal effort"
-        ]
-    },
-    {
-        question: "What is your resting heart rate?",
-        options: [
-            "Below 60 beats per minute (bpm)",
-            "60–80 bpm",
-            "80–100 bpm",
-            "Above 100 bpm (unsure or haven’t checked)"
-        ]
-    },
-    {
-        question: "How quickly do you recover after a workout?",
-        options: [
-            "Within a few minutes",
-            "10–15 minutes",
-            "15–30 minutes",
-            "Longer than 30 minutes or still sore the next day"
-        ]
-    },
-    {
-        question: "How would you rate your daily energy levels?",
-        options: [
-            "High, with consistent energy all day",
-            "Moderate, with occasional dips",
-            "Low, often feeling tired",
-            "Very low, struggling with fatigue most of the day"
-        ]
-    },
-    {
-        question: "Do you track your fitness, such as steps, heart rate, or workouts?",
-        options: [
-            "Yes, consistently",
-            "Occasionally, when I remember",
-            "Rarely or only during workouts",
-            "No, I don’t track it at all"
-        ]
-    }
-];
+    { question: 'What is your average daily step count?', options: ['< 5,000', '5,000 - 10,000', '> 10,000'] },
+    { question: 'How often do you exercise weekly?', options: ['Never', '1-2 times', '3+ times'] },
+    { question: 'Do you engage in strength training?', options: ['Yes', 'No'] },
+    { question: 'How long are your exercise sessions on average?', options: ['< 30 mins', '30-60 mins', '> 60 mins'] },
+    { question: 'Do you warm up before exercising?', options: ['Yes', 'No'] },
+    { question: 'How often do you stretch?', options: ['Never', 'Sometimes', 'Regularly'] },
+    { question: 'Do you track your fitness progress?', options: ['Yes', 'No'] },
+    { question: 'What is your hydration level during exercise?', options: ['Low', 'Moderate', 'High'] },
+    { question: 'Do you have a fitness goal?', options: ['Yes', 'No'] },
+    { question: 'How satisfied are you with your fitness level?', options: ['Not satisfied', 'Neutral', 'Very satisfied'] },
+  ];
 
-  const handleChange = (option) => {
-    const newResponses = [...responses];
-    newResponses[currentPage] = option;
-    setResponses(newResponses);
+  const handleAnswer = (index) => {
+    const updatedAnswers = [...answers];
+    updatedAnswers[currentQuestion] = index;
+    setAnswers(updatedAnswers);
   };
 
   const handleNext = () => {
-    if (responses[currentPage] !== undefined) {
-      if (currentPage < questions.length - 1) {
-        setCurrentPage(currentPage + 1);
-      } else {
-        setCompleted(true);
-      }
+    if (answers[currentQuestion] !== null) {
+      setCurrentQuestion((prev) => prev + 1);
     } else {
-      alert("Please select an answer before proceeding.");
+      alert('Please answer the question before proceeding.');
     }
   };
 
-  const handlePrevious = () => {
-    if (currentPage > 0) {
-      setCurrentPage(currentPage - 1);
-    }
+  const handlePrev = () => {
+    setCurrentQuestion((prev) => (prev > 0 ? prev - 1 : prev));
   };
 
-  const progress = ((currentPage + 1) / questions.length) * 100;
+  const toggleSidebar = () => setSidebarOpen((prev) => !prev);
 
   return (
-    <div className="quiz-page-container">
-      {/* Sidebar */}
-      <aside className={`sidebar ${isSidebarOpen ? "active" : ""}`}>
-        <ul>
-          <li>
-            <img src={DashboardIcon} alt="Dashboard" className="sidebar-icon" /> Dashboard
-          </li>
-          <li>
-            <img src={LeaderboardIcon} alt="Leaderboard" className="sidebar-icon" /> Leaderboard
-          </li>
-          <li>
-            <img src={ProfileIcon} alt="Profile" className="sidebar-icon" /> Profile
-          </li>
-          <li>
-            <img src={LogoutIcon} alt="Logout" className="sidebar-icon" /> Logout
-          </li>
-        </ul>
-      </aside>
-
-      {/* Hamburger Icon */}
-      <div className="hamburger" onClick={toggleSidebar}>
-        &#9776;
+    <div className="quiz-container">
+      {/* Hamburger Menu for Mobile */}
+      <div className="hamburger-menu" onClick={toggleSidebar}>
+        <div></div>
+        <div></div>
+        <div></div>
       </div>
 
-      {/* Quiz Container */}
-      <div className={`quiz-container ${isSidebarOpen ? "shifted" : ""}`}>
-        <h2 className="quiz-heading">Physical Fitness Quiz</h2>
-        <div className="progress-bar">
-          <div className="progress" style={{ width: `${progress}%` }} />
-        </div>
-        {completed ? (
-          <div className="completion-message">
-            <h2>Quiz Completed!</h2>
-            <p>Your responses have been recorded.</p>
-            <button className="score-btn">View Score</button>
+      {/* Sidebar */}
+      <aside className={`sidebar ${isSidebarOpen ? 'active' : ''}`}>
+  <ul>
+    <li>
+      <Link to="/dashboard" className="sidebar-item">
+        <img src={DashboardIcon} alt="Dashboard" className="dashboard-icon" />
+        <span className="dashboard-label">Dashboard</span>
+      </Link>
+    </li>
+    <li>
+      <Link to="/leaderboard" className="sidebar-item">
+        <img src={LeaderboardIcon} alt="Leaderboard" className="leaderboard-icon" />
+        <span className="leaderboard-label">Leaderboard</span>
+      </Link>
+    </li>
+    <li>
+      <Link to="/profile-p1" className="sidebar-item">
+        <img src={ProfileIcon} alt="Profile" className="profile-icon" />
+        <span className="profile-label">Profile</span>
+      </Link>
+    </li>
+    <li>
+      <Link to="/login" className="sidebar-item">
+        <img src={LogoutIcon} alt="Logout" className="logout-icon" />
+        <span className="logout-label">Logout</span>
+      </Link>
+    </li>
+  </ul>
+</aside>
+
+      {/* Main Quiz Content */}
+      <main className="quiz-content">
+        <div className="quiz-body">
+          <header className="quiz-header">
+            <h1>Physical Fitness Quiz</h1>
+          </header>
+          
+          {/* Progress Bar */}
+          <div className="progress-bar">
+            <div
+              className="progress"
+              style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
+            ></div>
           </div>
-        ) : (
-          <div className="question-container">
-            <h3>
-              {questions[currentPage]?.question} <span className="asterisk">*</span>
-            </h3>
-            {questions[currentPage]?.options.map((option, index) => (
-              <div className="option-wrapper" key={index}>
-                <input
-                  type="radio"
-                  id={`option-${index}`}
-                  name="quiz-option"
-                  value={option}
-                  checked={responses[currentPage] === option}
-                  onChange={() => handleChange(option)}
-                />
-                <label htmlFor={`option-${index}`}>{option}</label>
-              </div>
-            ))}
-            <div className="navigation-buttons">
-              {currentPage > 0 && (
-                <button className="previous-btn" onClick={handlePrevious}>
-                  Previous
+
+          <div className="quiz-body-content">
+            <h3 className="question">{questions[currentQuestion].question}</h3>
+            <div className="options">
+              {questions[currentQuestion].options.map((option, index) => (
+                <button
+                  key={index}
+                  className={`option ${answers[currentQuestion] === index ? 'selected' : ''}`}
+                  onClick={() => handleAnswer(index)}
+                >
+                  {option}
                 </button>
-              )}
-              <button className="next-btn" onClick={handleNext}>
-                {currentPage === questions.length - 1 ? "Submit" : "Next"}
+              ))}
+            </div>
+            <div className="quiz-footer">
+              <button onClick={handlePrev} disabled={currentQuestion === 0}>Previous</button>
+              <button onClick={currentQuestion < questions.length - 1 ? handleNext : () => alert('Quiz Complete!')}>
+                {currentQuestion < questions.length - 1 ? 'Next' : 'Submit'}
               </button>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      </main>
     </div>
   );
-};
+}
 
 export default PhysicalFitnessQuiz;
+
