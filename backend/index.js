@@ -223,9 +223,6 @@ const userSchema = new mongoose.Schema({
 });
 
 const User = mongoose.model('User', userSchema);
-<<<<<<< HEAD
-mongoose
-=======
 
 const testResultsSchema = new mongoose.Schema({
     email: { type: String, required: true },
@@ -280,7 +277,6 @@ app.post('/api/submit-marks', authenticateToken, async (req, res) => {
     }
 });
 
->>>>>>> 9dab751620052f923bfb685a7a1d8b5174b37712
 // Signup route
 app.post('/api/signup', async (req, res) => {
     // console.log("hi")
