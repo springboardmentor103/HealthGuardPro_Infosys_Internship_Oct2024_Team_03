@@ -1,28 +1,44 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './verifycode.css';
- 
+// import { Link } from 'react-router-dom'; 
+import { EmailContext } from './EmailContext';
+
 const Verifycode = () => {
+    const { email } = useContext(EmailContext);
     const navigate = useNavigate();
     const [code, setCode] = useState('');
- 
+
     const handleCodeChange = (e) => {
         setCode(e.target.value);
     };
- 
-    const handleSubmit = (e) => {
+
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if (code.trim() === '') {
-            alert('Please enter the verification code.');
-        } else {
-            navigate('/set-password');
+        try {
+            const response = await fetch('http://localhost:5000/api/verify-code', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, code }), // Include the email and code
+            });
+            const result = await response.json();
+            if (response.ok) {
+                console.log('Code verified:', result.message);
+                navigate('/Setpassword');
+            } else {
+                alert(result.message);
+            }
+        } catch (error) {
+            console.error('Error verifying code:', error);
         }
     };
- 
+
+
     const handleResend = () => {
         alert('Verification code resent!');
     };
- 
+
     return (
         <div className="verifycode-unique-body">
             <div className="verifycode-unique-container">
@@ -54,5 +70,6 @@ const Verifycode = () => {
         </div>
     );
 };
+
  
 export default Verifycode;

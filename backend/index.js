@@ -22,6 +22,7 @@ mongoose.connect('mongodb://localhost:27017/userAuth', {
 // User schema
 const userSchema = new mongoose.Schema({
     firstName: String,
+    // lastName: String,
     email: { type: String, unique: true },
     phoneNumber: String,
     password: String,
@@ -97,13 +98,13 @@ app.post('/api/submit-marks', authenticateToken, async (req, res) => {
 
 // Signup route
 app.post('/api/signup', async (req, res) => {
-    // console.log("hi")
     try {
         const { firstName, email, phoneNumber, password } = req.body;
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const newUser = new User({
             firstName,
+            // lastName,
             email,
             phoneNumber,
             password: hashedPassword,
@@ -116,7 +117,7 @@ app.post('/api/signup', async (req, res) => {
     }
 });
 
-// Login route
+
 const jwtSecretKey = 'your_secret_key'; // Replace with a secure random string
 
 
@@ -142,7 +143,11 @@ const jwtSecretKey = 'your_secret_key'; // Replace with a secure random string
             const username = user.firstName;
 
             console.log('Generated Token:', token); // Debug log for token
+<<<<<<< HEAD
             res.status(200).json({ message: 'Login successful', token, userId , email ,username});
+=======
+            res.status(200).json({ message: 'Login successful', token,  userId , email ,username});
+>>>>>>> develop
         } catch (err) {
             console.error('Error during login:', err);
             res.status(500).json({ error: 'Server error' });
@@ -285,6 +290,28 @@ app.get('/api/user', authenticateToken, async (req, res) => {
     }
 });
 
+
+// const sendConfirmationEmail = async (oldEmail, newEmail, userId) => {
+//     const transporter = nodemailer.createTransport({
+//         service: "Gmail",
+//         auth: {
+//             user: 'siva1998vel@gmail.com',
+//             pass: 'bfbh swqd buua moob',
+//         },
+//     });
+
+//     const confirmationUrl = `http://localhost:5000/api/user/confirm-email?userId=${userId}&newEmail=${encodeURIComponent(newEmail)}`;
+//     const mailOptions = {
+//         from: '"Your App Name" <your-email@gmail.com>',
+//         to: newEmail,
+//         subject: "Confirm Your Email Address",
+//         text: `You requested to change your email address. Please confirm your new email by clicking the link below:\n\n${confirmationUrl}\n\nIf you did not request this, please ignore this email.`,
+//     };
+
+//     await transporter.sendMail(mailOptions);
+//     console.log(`Confirmation email sent to ${newEmail}`);
+// };
+
 app.put("/api/user/update", async (req, res) => {
     const { firstName, email } = req.body; // Data being updated
     const token = req.headers["authorization"]?.split(" ")[1]; // Get the token from the Authorization header
@@ -313,7 +340,9 @@ app.put("/api/user/update", async (req, res) => {
             user.firstName = firstName; // Update the firstName if provided
         }
         if (email && email !== user.email) {
-            user.email = email; // Update email if it has changed
+           // await sendConfirmationEmail(user.email, email, user._id);
+            //  await sendConfirmationEmail(user.email, email, user._id); 
+            user.email = email;
             emailChanged = true;
         }
 
@@ -335,6 +364,32 @@ app.put("/api/user/update", async (req, res) => {
     }
 });
 
+<<<<<<< HEAD
+=======
+// Add a route to confirm the email change
+/* app.get("/api/user/confirm-email", async (req, res) => {
+    const { userId, newEmail } = req.query;
+
+    try {
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        user.email = newEmail;
+        await user.save();
+
+        res.status(200).json({
+            message: "Email address updated successfully! Please log in again.",
+            requireLogout: true, // Flag to indicate the user should log out
+        });
+    } catch (error) {
+        console.error("Error in email confirmation:", error);
+        res.status(500).json({ message: "Error confirming email", error: error.message });
+    }
+}); */
+
+>>>>>>> develop
 app.post("/api/save-fitness-score", async (req, res) => {
     const { userId, username, email, category, score } = req.body;
 
@@ -378,9 +433,12 @@ app.get("/api/get-fitness-scores/:userId/:category", async (req, res) => {
     }
 });
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> develop
 
 module.exports = app;
-
 
 app.listen(5000, () => console.log('Server running on port 5000'));
 
