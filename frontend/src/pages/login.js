@@ -28,6 +28,9 @@ const Login = () => {
 
       // Save the token to localStorage
       localStorage.setItem('authToken', data.token);
+      localStorage.setItem('userId', data.userId); // Store userId in localStorage
+      localStorage.setItem('email', data.email);
+      localStorage.setItem('username', data.username);
 
         alert('Login successful!');
         //window.location.href = '/dashboard'; // Redirect to a dashboard page

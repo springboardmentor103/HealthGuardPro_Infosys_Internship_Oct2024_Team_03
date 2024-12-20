@@ -16,6 +16,7 @@ function Profile() {
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
+  const username = localStorage.getItem("username");
 
   useEffect(() => { // Fetch user data
     async function fetchUserData() {
@@ -72,16 +73,15 @@ function Profile() {
         }),
       });
 
-      if (response.status === 401) {
-        // Email change detected, navigate to login
-        const data = await response.json();
-        alert(data.message); // Display message (e.g., "Email updated. Please log in again.")
-        localStorage.removeItem("authToken"); // Clear the token
-        window.location.href = "/login"; // Navigate to login page
-        return;
-      }
-
-      if (!response.ok) {
+      const data = await response.json();
+      if (response.ok) {
+     //   if (data.message.includes("confirmation email")) {
+          alert(data.message); // Email change case
+          localStorage.removeItem("authToken");
+          window.location.href = "/login";
+      //  } 
+       
+      } else {
         throw new Error("Failed to update user data");
       }
       
@@ -97,7 +97,7 @@ function Profile() {
 
     } catch (error) {
       console.error("Error saving user data:", error);
-      alert("Failed to save changes. Please try again.");
+      // alert("Failed to save changes. Please try again.");
     }
   };
 
@@ -143,7 +143,7 @@ function Profile() {
       <div className={`${styles.content} ${isSidebarOpen ? styles["content-overlay"] : ""}`}>
         {/* Header */}
         <div className={styles.header}>
-          <span className={styles.greeting}>Hello, user</span>
+          <span className={styles.greeting}>Hello, {username}</span>
           <span className={styles.title}>HealthGuard Pro</span>
         </div>
 

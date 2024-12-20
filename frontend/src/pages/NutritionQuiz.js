@@ -1,4 +1,208 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios"; // Import axios for API connectivity
+import "./NutritionQuiz.css";
+import DashboardIcon from '../assets/icons/dashboard.svg';
+import LeaderboardIcon from '../assets/icons/leaderboard.svg';
+import ProfileIcon from '../assets/icons/profile.svg';
+import LogoutIcon from '../assets/icons/logout.svg';
+
+const NutritionQuiz = () => {
+  const navigate = useNavigate();
+
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [responses, setResponses] = useState([]);
+  const [completed, setCompleted] = useState(false);
+  const [score, setScore] = useState(null);
+
+  const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
+
+  const questions = [
+    { question: "How often do you eat fruits and vegetables?", options: ["Daily", "A few times a week", "Rarely", "Never"] },
+    { question: "How many servings of whole grains do you consume each day?", options: ["3 or more servings", "1–2 servings", "Occasionally", "None"] },
+    { question: "How often do you consume processed or fast foods?", options: ["Almost every day", "A few times a week", "Rarely", "Never"] },
+    { question: "Do you regularly drink sugary beverages?", options: ["Yes, multiple times a day", "Occasionally", "Rarely", "Never"] },
+    { question: "How often do you include protein-rich foods in your meals?", options: ["Every meal", "Once or twice a day", "Only occasionally", "Rarely or never"] },
+    { question: "How much water do you drink daily?", options: ["8 or more cups", "5–7 cups", "2–4 cups", "Less than 2 cups"] },
+    { question: "How often do you eat snacks between meals?", options: ["Frequently", "Sometimes", "Rarely", "Never"] },
+    { question: "Do you pay attention to portion sizes during meals?", options: ["Always", "Often", "Occasionally", "Never"] },
+    { question: "How often do you consume dairy products or alternatives?", options: ["Daily", "A few times a week", "Rarely", "Never"] },
+    { question: "Do you take any dietary supplements?", options: ["Yes, regularly", "Occasionally", "No, but I plan to", "No, I don’t take any"] },
+  ];
+
+  const scoring = {
+    "Daily": 4,
+    "3 or more servings": 4,
+    "A few times a week": 3,
+    "1–2 servings": 3,
+    "Occasionally": 2,
+    "Rarely": 2,
+    "None": 1,
+    "Almost every day": 1,
+    "Yes, multiple times a day": 1,
+    "Sometimes": 3,
+    "Never": 4,
+    "Every meal": 4,
+    "Once or twice a day": 3,
+    "Frequently": 1,
+    "5–7 cups": 3,
+    "2–4 cups": 2,
+    "Less than 2 cups": 1,
+    "Always": 4,
+    "Often": 3,
+    "Only occasionally": 2,
+    "Rarely or never": 1,
+    "Yes, regularly": 4,
+    "Occasionally": 3,
+    "No, but I plan to": 2,
+    "No, I don’t take any": 1,
+  };
+
+  const handleGoBack = () => {
+    navigate("/dashboard");
+  };
+
+  const handleChange = (option) => {
+    const newResponses = [...responses];
+    newResponses[currentPage] = option;
+    setResponses(newResponses);
+  };
+
+  const calculateScore = () => {
+    let totalPoints = 0;
+    responses.forEach((response) => {
+      totalPoints += scoring[response] || 0; // Add score if it matches, default 0 otherwise
+    });
+    const maxPoints = questions.length * 4; // Max score (4 points per question)
+    return Math.round((totalPoints / maxPoints) * 100); // Convert to percentage
+  };
+
+  const handleSubmit = async () => {
+    if (responses.includes(undefined)) {
+      alert("Please answer all questions before submitting.");
+      return;
+    }
+    const calculatedScore = calculateScore();
+    setScore(calculatedScore);
+    setCompleted(true);
+
+    try {
+      const userId = localStorage.getItem('userId');
+      const username = localStorage.getItem('username');
+      const email = localStorage.getItem('email');
+      const category = "Nutrition"; // Example, you can use a dynamic category based on your application
+
+      if (!userId || !username || !email || !category) {
+        alert("Missing user information. Please log in.");
+        return;
+      }
+
+      await axios.post('http://localhost:5000/api/save-fitness-score', {
+        userId,
+        username,
+        email,
+        category,
+        score: calculatedScore,
+      });
+
+      alert('Score saved successfully!');
+    } catch (error) {
+      console.error("Error saving score:", error);
+      alert('Failed to save score. Please try again.');
+    }
+  };
+
+  return (
+    <div className="quiz">
+      <div className="quiz-page-container">
+        {/* Sidebar */}
+        <aside className={`sidebar ${isSidebarOpen ? "active" : ""}`}>
+          <ul>
+            <li>
+              <img src={DashboardIcon} alt="Dashboard" className="sidebar-icon" /> Dashboard
+            </li>
+            <li>
+              <img src={LeaderboardIcon} alt="Leaderboard" className="sidebar-icon" /> Leaderboard
+            </li>
+            <li>
+              <img src={ProfileIcon} alt="Profile" className="sidebar-icon" /> Profile
+            </li>
+            <li>
+              <img src={LogoutIcon} alt="Logout" className="sidebar-icon" /> Logout
+            </li>
+          </ul>
+        </aside>
+
+        {/* Hamburger Icon */}
+        <div className={`hamburger ${isSidebarOpen ? "active" : ""}`} onClick={toggleSidebar}>
+          &#9776;
+        </div>
+
+        {/* Quiz Content */}
+        <div className={`quiz-content ${isSidebarOpen ? "sidebar-visible" : ""}`}>
+          {completed ? (
+            <div className="completion-message">
+              <h1>🎉 Thank You for Completing the Nutrition Quiz! 🎉</h1>
+              <p>Your Score: {score}%</p>
+              <button className="score-btn" onClick={handleGoBack}>
+                Go Back to Dashboard
+              </button>
+            </div>
+          ) : (
+            <div className="question-page">
+              <h1>Nutrition Quiz</h1>
+              <div className="progress-bar">
+                <div className="progress" style={{ width: `${((currentPage + 1) / questions.length) * 100}%` }}></div>
+              </div>
+              <div className="question-container">
+                <p>
+                  {currentPage + 1}. {questions[currentPage].question}
+                </p>
+                {questions[currentPage].options.map((option, index) => (
+                  <div key={index} className="option-wrapper">
+                    <label>
+                      <input
+                        type="radio"
+                        name={`question-${currentPage}`}
+                        value={option}
+                        checked={responses[currentPage] === option}
+                        onChange={() => handleChange(option)}
+                      />
+                      {option}
+                    </label>
+                  </div>
+                ))}
+              </div>
+              <div className="navigation-buttons">
+                {currentPage > 0 && (
+                  <button className="previous-btn" onClick={() => setCurrentPage(currentPage - 1)}>
+                    Previous
+                  </button>
+                )}
+                {currentPage === questions.length - 1 ? (
+                  <button className="next-btn" onClick={handleSubmit}>
+                    Submit
+                  </button>
+                ) : (
+                  <button className="next-btn" onClick={() => setCurrentPage(currentPage + 1)}>
+                    Next
+                  </button>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default NutritionQuiz;
+
+
+
+/* import React, { useState } from 'react';
 import './NutritionQuiz.css';
 import DashboardIcon from '../assets/icons/dashboard.svg';
 import LeaderboardIcon from '../assets/icons/leaderboard.svg';
@@ -60,14 +264,14 @@ function NutritionQuiz() {
 
   return (
     <div className="quiz-container">
-      {/* Hamburger Menu for Mobile */}
+      
       <div className="hamburger-menu" onClick={toggleSidebar}>
         <div></div>
         <div></div>
         <div></div>
       </div>
 
-      {/* Sidebar */}
+      
       <aside className={`sidebar ${isSidebarOpen ? 'active' : ''}`}>
   <ul>
     <li>
@@ -97,7 +301,6 @@ function NutritionQuiz() {
   </ul>
 </aside>
 
-      {/* Main Quiz Content */}
       <main className="quiz-content">
         {!isQuizComplete ? (
           <div className="quiz-body">
@@ -105,7 +308,7 @@ function NutritionQuiz() {
               <h1>Nutrition Quiz</h1>
             </header>
 
-            {/* Progress Bar */}
+          
             <div className="progress-bar">
               <div
                 className="progress"
@@ -150,4 +353,4 @@ function NutritionQuiz() {
   );
 }
 
-export default NutritionQuiz;
+export default NutritionQuiz; */

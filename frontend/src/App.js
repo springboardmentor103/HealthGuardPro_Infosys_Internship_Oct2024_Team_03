@@ -10,7 +10,6 @@ import Profile from "./pages/profile-p1";
 import Profile2 from "./pages/profile-p2";
 import Dashboard from './pages/dashboard';
 import Leaderboard from './pages/leaderboard';
-
 import PhysicalFitnessQuiz from './pages/PhysicalFitnessQuiz';
 import NutritionQuiz from './pages/NutritionQuiz';
 import LifestyleQuiz from './pages/LifestyleQuiz';
@@ -31,12 +30,13 @@ function App() {
         <Route path="/profile-p2" element={<Profile2/>} />
         <Route path="/profile-p1" element={<Profile/>} />
         <Route path="/dashboard" element={<Dashboard/>} />
-        <Route path="/PhysicalFitnessQuiz" element={<PhysicalFitnessQuiz />} />
-        <Route path="/NutritionQuiz" element={<NutritionQuiz />} />
-        <Route path="/LifestyleQuiz" element={<LifestyleQuiz />} />
-        <Route path="/MentalWellBeingQuiz" element={<MentalWellBeingQuiz/>} />
-        <Route path="/BiomarkerQuiz" element={<BiomarkerQuiz />} />
-        <Route path="/ViewScore" element={<ViewScore/>} />
+          <Route path="/physical-fitness" element={<PhysicalFitnessQuiz />} />
+          <Route path="/nutrition" element={<NutritionQuiz />} />
+          <Route path="/lifestyle" element={<LifestyleQuiz />} />
+          <Route path="/mental-wellbeing" element={<MentalWellBeingQuiz />} />
+          <Route path="/biomarkers" element={<BiomarkerQuiz />} />
+          <Route path="/ViewScore" element={<ViewScore/>} />
+        
          {/* Route for Dashboard */}
          <Route path="/" element={<Dashboard />} />
         
@@ -55,3 +55,6 @@ function App() {
 }
  
 export default App;
+
+
+

@@ -8,9 +8,10 @@ import ProfileImage from "../assets/images/profile.png"; // Import the profile i
 import { Link } from 'react-router-dom';
 const Leaderboard = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false); // State for mobile sidebar toggle
+  const username=localStorage.getItem("username");
 
   const leaderboardData = [
-    { user: "Priya (you)", ranking: 90, points: 635 },
+    { user: "YOU", ranking: 90, points: 635 },
     { user: "Abhi", ranking: 1, points: 3000 },
     { user: "Ravi", ranking: 2, points: 2862 },
     { user: "Roshan", ranking: 3, points: 2597 },
@@ -64,7 +65,7 @@ const Leaderboard = () => {
       <main className="main-content">
         {/* Header */}
         <header className="header">
-          <h1 className="greeting">Hello, user</h1>
+          <h1 className="greeting">Hello, {username}</h1>
           <h2 className="title">HealthGuard Pro</h2>
         </header>
 
