@@ -1,11 +1,312 @@
-/* General Layout */
+/* General Styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  background-color: #f7f9fc;
+}
+
+/* Parent Container */
+.quiz-page-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  margin-left: 100px;
+}
+.asterisk {
+  color: red;
+  margin-left: 5px;
+  font-weight: bold;
+}
+
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background-color: #1F698D;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 20px;
+  padding-left: 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  transition: left 0.3s ease;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.sidebar li {
+  width: 100%;
+  padding: 20px 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 20px;
+  margin-top:20px;
+}
+
+.sidebar-icon {
+  width: 32px;
+  height: 32px;
+  margin-right: 15px;
+}
+
+.sidebar li:hover {
+  background-color: #0a2d46;
+}
+
+.sidebar.active {
+  left: 0; /* Show sidebar in mobile view */
+}
+
+/* Quiz Container */
+
+.quiz-container {
+  flex-grow: 1;
+  margin-left: 470px; /* Increased space to move the container farther from the sidebar */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f9fafc;
+  border-radius: 10px;
+  padding: 40px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: auto; /* Center container */
+}
+
+
+
+/* Quiz Heading */
+.quiz-heading {
+  margin-top: 30px;
+  color: #03060a;
+  font-size: 24px;
+  text-align: center;
+}
+
+/* Progress Bar */
+.progress-bar {
+  background: #ddd;
+  height: 10px;
+  border-radius: 5px;
+  margin: 20px 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+.progress {
+  background: #3498db;
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+/* Question Styles */
+.question-container {
+  margin: 10px 10px;
+  width: 100%;
+}
+
+.option-wrapper {
+  margin: 10px 0;
+}
+
+.navigation-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.previous-btn,
+.next-btn {
+  padding: 10px 20px;
+  border: none;
+  background-color: #3498db;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+
+.previous-btn:hover,
+.next-btn:hover {
+  background-color: #2980b9;
+}
+
+/* Score Button */
+.score-btn {
+  background-color: #27ae60;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.score-btn:hover {
+  background-color: #1e8449;
+}
+
+/* Hamburger Menu */
+.hamburger {
+  display: none;
+  font-size: 26px;
+  cursor: pointer;
+  z-index: 1000;
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  color: #000000;
+}
+
+/* Leaderboard Styles */
+.leaderboard-container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  transition: margin-left 0.3s ease;
+}
+
+.main-content {
+  flex: 1;
+  padding: 30px;
+  background-color: #ffffff;
+  overflow-y: auto;
+  margin-left: 250px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.greeting {
+  margin-bottom: 0%;
+  margin-top: 0%;
+  font-size: 24px;
+  font-family: 'Abril Fatface'; /* Custom font */
+  font-weight: lighter;
+}
+ 
+.title {
+  font-size: 32px;
+  font-family: 'Abril Fatface'; /* Custom font */
+  color: #1f4f73;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.profile img {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  margin-right: 20px;
+  background-color: #bebebe;
+}
+
+.leaderboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  text-align: center;
+  border: 2px solid #ddd;
+}
+
+.leaderboard-table th,
+.leaderboard-table td {
+  padding: 12px 20px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .sidebar {
+      width: 400px;
+      left: -500px; /* Initially hidden */
+  }
+
+  .quiz-container {
+      margin-left: 0px; /* Remove margin for mobile */
+      padding: 20px;
+      
+  }
+   .quiz-page-container {
+          display: flex;
+          height: 20vh;
+          width: 80vw;
+          margin-left: 40px;
+          margin-top: 100px;
+      }
+
+  .hamburger {
+      display: block;
+  }
+
+  .header,
+  .user-info {
+      flex-direction: column;
+      text-align: center;
+  }
+
+  .profile img {
+      width: 120px;
+      height: 120px;
+  }
+
+  .leaderboard-table th,
+  .leaderboard-table td {
+      padding: 10px 10px;
+      font-size: 14px;
+  }
+
+  .sidebar.active {
+      left: 0; /* Show sidebar when active */
+  }
+  @media (max-width: 768px) {
+      .header {
+          flex-direction: column;
+          text-align: center;
+          padding: 10px 0;
+      }
+  
+      .greeting, .title {
+          margin-bottom: 10px;
+      }
+  }
+  
+}
+
+
+/* General Layout 
 .quiz-container {
     display: flex;
     height: 100vh;
     font-family: Arial, sans-serif;
   }
   
-  /* Sidebar */
+  /* Sidebar 
   .sidebar {
     width: 250px;
     background-color: #1F698D;
@@ -41,22 +342,22 @@
     background-color: #0a2d46;
   }
   
-  /* Main Content */
+  /* Main Content 
   .quiz-content {
     flex: 1;
     height: 100vh;
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally 
+    align-items: center; /* Center vertically 
     background-color: #f4f4f4;
     padding: 20px;
-    margin-left: 250px; /* Ensures content doesn't overlap with the sidebar */
+    margin-left: 250px; /* Ensures content doesn't overlap with the sidebar 
     transition: margin-left 0.3s ease;
   }
   
   .quiz-body {
-    width: 400px; /* Adjust the container width */
-    height: 450px; /* Adjust the container height */
+    width: 400px; /* Adjust the container width 
+    height: 450px; /* Adjust the container height 
     padding: 20px;
     background: white;
     border-radius: 10px;
@@ -78,7 +379,7 @@
   }
   
   .progress-bar {
-    width: 100%; /* Match the progress bar width to the container */
+    width: 100%; /* Match the progress bar width to the container 
     height: 10px;
     background: #ddd;
     border-radius: 0px;
@@ -120,7 +421,7 @@
     background: #0a2d46;
   }
   
-  /* Footer Buttons */
+  /* Footer Buttons 
   .quiz-footer {
     display: flex;
     justify-content: space-between;
@@ -140,7 +441,7 @@
     background: #0a2d46;
   }
   
-  /* Hamburger Menu */
+  /* Hamburger Menu 
   .hamburger-menu {
     display: none;
     position: absolute;
@@ -157,14 +458,14 @@
     margin: 5px 0;
   }
   
-  /* Responsive styles */
+  /* Responsive styles 
   @media (max-width: 768px) {
     .quiz-container {
       flex-direction: column;
     }
   
     .quiz-content {
-      margin-left: 0; /* Ensure main content takes full width */
+      margin-left: 0; /* Ensure main content takes full width 
     }
   
     
@@ -176,7 +477,7 @@
     height: 100%;
     transition: left 0.3s ease;
     z-index: 10;
-    overflow-y: auto; /* Ensures the sidebar is scrollable */
+    overflow-y: auto; /* Ensures the sidebar is scrollable 
   }
   
     .sidebar.active {
@@ -187,4 +488,4 @@
       display: block;
     }
   }
-  
+  */
