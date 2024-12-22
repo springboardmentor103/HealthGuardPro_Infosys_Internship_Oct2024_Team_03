@@ -1,232 +1,59 @@
-/* General Styles */
-.quiz {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  font-family: Arial, sans-serif;
-  background-color: #f7f9fc;
-  display: flex;
-  overflow: hidden; /* Prevent scrolling */
-}
-
-/* Quiz Page Layout */
-.quiz-page-container {
-  display: flex;
-  height: 100vh;
-  width: 100%;
-}
-.mandatory {
-  color: red;
-  font-size: 24px;
-  margin-left: 5px;
-}
-
-
-/* Sidebar */
-.sidebar {
-  width: 250px;
-  background-color: #1F698D;
+.score-btn {
+  padding: 15px 30px;
+  font-size: 18px;
   color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding-top: 20px;
-  padding-left: 10px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  transition: left 0.3s ease;
-}
-
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  width: 100%;
-}
-
-.sidebar li {
-  width: 100%;
-  padding: 20px 20px;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  font-size: 20px;
-  margin-top:20px;
-}
-
-.sidebar-icon {
-  width: 32px;
-  height: 32px;
-  margin-right: 15px;
-}
-
-.sidebar li:hover {
-  background-color: #0a2d46;
-}
-
-.sidebar.active {
-  left: 0; /* Show sidebar in mobile view */
-}
-
-/* Hamburger Icon */
-.hamburger {
-  display: none; /* Hidden by default */
-  font-size: 30px;
-  cursor: pointer;
-  padding: 10px;
-  color: rgb(2, 0, 0);
-  border: none;
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  z-index: 1000; /* Ensure it appears above other content */
-}
-
-/* Quiz Content */
-.quiz-content {
-  flex-grow: 1;
-  margin-left: 500px; /* Adjusted space between the sidebar and the quiz container */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  transition: margin-left 0.3s ease; /* Smooth transition */
-}
-
-.quiz-content.sidebar-visible {
-  margin-left: 0; /* Remove margin when sidebar is visible */
-}
-
-/* Background Box for Quiz Part */
-.quiz-background {
-  background-color: #fff;
-  border-radius: 12px;
-  padding: 50px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  width: 70%;
-  max-width: 900px;
-}
-
-/* Progress Bar */
-.progress-bar {
-  background: #ddd;
-  height: 10px;
-  border-radius: 5px;
-  margin: 20px 0;
-  width: 100%;
-  overflow: hidden;
-}
-
-.progress {
-  background: #3498db;
-  height: 100%;
-  transition: width 0.3s ease;
-}
-
-/* Navigation Buttons */
-.navigation-buttons {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.previous-btn,
-.next-btn {
-  padding: 10px 20px;
+  background-color: #1F698D;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-left: 10px;
-  background-color: #3498db;
-  color: #fff;
-  transition: background-color 0.3s;
+  margin-top: 20px;
 }
-
-.previous-btn:hover,
-.next-btn:hover {
-  background-color: #2980b9;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .sidebar {
-    width: 400px;
-    left: -500px; /* Initially hidden */
-}
-  .quiz-content {
-    margin-left: 0; /* Remove margin for mobile */
-  }
-
-  .hamburger {
-    display: block; /* Show hamburger icon on mobile */
-  }
-
-  /* Body overflow management */
-  body.overflow-hidden {
-    overflow: hidden; /* Prevent background scroll when sidebar is open */
-  }
-  .sidebar-icon {
-    width: 32px;
-    height: 32px;
-    margin-right: 15px;
-    margin-top:30px;
-  }
-  .sidebar li {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    font-size: 24px;
-    margin-top:35px;
-  }
-}
-
-
-/* General Layout 
-.quiz-container {
+ 
+/* General Layout */
+.nutrition-quiz-container {
   display: flex;
   height: 100vh;
   font-family: Arial, sans-serif;
 }
-
-/* Sidebar 
+ 
+/* Sidebar */
 .sidebar {
   width: 250px;
   background-color: #1F698D;
   color: #ffffff;
   padding-top: 50px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   position: fixed;
   top: 0;
   left: 0;
   height: 100%;
   z-index: 10;
 }
-
+ 
 .sidebar ul {
   list-style: none;
   padding: 0;
 }
-
+ 
 .sidebar li {
   padding: 15px 20px;
   display: flex;
   align-items: center;
   cursor: pointer;
 }
-
+ 
 .sidebar-icon {
   width: 35px;
   height: 35px;
   margin-right: 15px;
 }
-
+ 
 .sidebar li:hover {
   background-color: #0a2d46;
 }
-
-/* Main Content 
-.quiz-content {
+ 
+/* Main Content */
+.nutrition-quiz-content {
   flex: 1;
   height: 100vh;
   display: flex;
@@ -237,10 +64,10 @@
   margin-left: 250px;
   transition: margin-left 0.3s ease;
 }
-
-.quiz-body {
+ 
+.nutrition-quiz-body {
   width: 400px;
-  height: 500px;
+  height: 520px;
   padding: 20px;
   background: white;
   border-radius: 10px;
@@ -250,42 +77,44 @@
   flex-direction: column;
   justify-content: space-between;
 }
-
-.quiz-header h1 {
+ 
+.nutrition-quiz-header h1 {
   color: #1f698d;
   margin-bottom: 10px;
   font-size: 24px;
 }
-
-/* Progress Bar 
-.progress-bar {
+ 
+.nutrition-quiz-body-content {
+  flex-grow: 1;
+}
+ 
+.nutrition-progress-bar {
   width: 100%;
   height: 10px;
   background: #ddd;
   border-radius: 0px;
   margin-top: 10px;
 }
-
-.progress {
+ 
+.nutrition-progress {
   height: 100%;
   background: #1f698d;
   transition: width 0.3s ease;
 }
-
-/* Question & Options 
-.question {
+ 
+.nutrition-question {
   margin-top: 50px;
   font-size: 18px;
   margin-bottom: 20px;
 }
-
-.options {
+ 
+.nutrition-options {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-
-.option {
+ 
+.nutrition-option {
   padding: 10px;
   background: #1f698d;
   color: white;
@@ -293,23 +122,23 @@
   border-radius: 20px;
   cursor: pointer;
 }
-
-.option:hover {
+ 
+.nutrition-option:hover {
   background: #0a2d46;
 }
-
-.option.selected {
+ 
+.nutrition-option.selected {
   background: #0a2d46;
 }
-
-/* Footer Buttons 
-.quiz-footer {
+ 
+/* Footer Buttons */
+.nutrition-quiz-footer {
   display: flex;
   justify-content: space-between;
   margin-top: 100px;
 }
-
-.quiz-footer button {
+ 
+.nutrition-quiz-footer button {
   padding: 8px 15px;
   background: #1f698d;
   color: white;
@@ -317,41 +146,12 @@
   border-radius: 15px;
   cursor: pointer;
 }
-
-.quiz-footer button:hover {
+ 
+.nutrition-quiz-footer button:hover {
   background: #0a2d46;
 }
-
-.quiz-footer button:disabled {
-  background: #ccc;
-  cursor: not-allowed;
-}
-
-/* Result Screen 
-.quiz-result {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  background-color: #f4f4f4;
-  height: 100vh;
-  padding: 20px;
-}
-
-.quiz-result h1 {
-  font-size: 32px;
-  color: #1f698d;
-  margin-bottom: 20px;
-}
-
-.quiz-result p {
-  font-size: 18px;
-  color: #333;
-  margin: 10px 0;
-}
-
-/* Hamburger Menu 
+ 
+/* Hamburger Menu */
 .hamburger-menu {
   display: none;
   position: absolute;
@@ -360,24 +160,24 @@
   cursor: pointer;
   z-index: 11;
 }
-
+ 
 .hamburger-menu div {
   width: 25px;
   height: 3px;
   background-color: #0a2d46;
   margin: 5px 0;
 }
-
-/* Mobile Responsiveness 
+ 
+/* Mobile Responsiveness */
 @media (max-width: 768px) {
-  .quiz-container {
+  .nutrition-quiz-container {
       flex-direction: column;
   }
-
-  .quiz-content {
+ 
+  .nutrition-quiz-content {
       margin-left: 0;
   }
-
+ 
   .sidebar {
       position: fixed;
       top: 0;
@@ -388,12 +188,12 @@
       z-index: 10;
       overflow-y: auto;
   }
-
+ 
   .sidebar.active {
       left: 0;
   }
-
+ 
   .hamburger-menu {
       display: block;
   }
-} */
+}
