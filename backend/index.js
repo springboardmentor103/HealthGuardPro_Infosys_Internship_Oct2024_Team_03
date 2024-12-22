@@ -143,11 +143,7 @@ const jwtSecretKey = 'your_secret_key'; // Replace with a secure random string
             const username = user.firstName;
 
             console.log('Generated Token:', token); // Debug log for token
-<<<<<<< HEAD
-            res.status(200).json({ message: 'Login successful', token, userId , email ,username});
-=======
             res.status(200).json({ message: 'Login successful', token,  userId , email ,username});
->>>>>>> develop
         } catch (err) {
             console.error('Error during login:', err);
             res.status(500).json({ error: 'Server error' });
@@ -364,8 +360,6 @@ app.put("/api/user/update", async (req, res) => {
     }
 });
 
-<<<<<<< HEAD
-=======
 // Add a route to confirm the email change
 /* app.get("/api/user/confirm-email", async (req, res) => {
     const { userId, newEmail } = req.query;
@@ -389,7 +383,6 @@ app.put("/api/user/update", async (req, res) => {
     }
 }); */
 
->>>>>>> develop
 app.post("/api/save-fitness-score", async (req, res) => {
     const { userId, username, email, category, score } = req.body;
 
@@ -433,10 +426,6 @@ app.get("/api/get-fitness-scores/:userId/:category", async (req, res) => {
     }
 });
 
-<<<<<<< HEAD
-=======
-
->>>>>>> develop
 
 module.exports = app;
 
