@@ -182,7 +182,7 @@ const PhysicalFitnessQuiz = () => {
    
     return (
       <div className="physical-quiz-container">
-        <aside className={`sidebar ${sidebarVisible ? "active" : ""}`}>
+        <aside className={`physical-sidebar ${sidebarVisible ? "active" : ""}`}>
           <ul>
             <li>
               <img src={DashboardIcon} alt="Dashboard" className="sidebar-icon" /> Dashboard

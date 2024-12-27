@@ -40,14 +40,13 @@ p {
   font-size: 14px;
   color: #888;
   margin-bottom: 24px;
-  
 }
 
 /* Form Group */
 .form-group {
   position: relative;
   margin-bottom: 24px;
-  width: 100%;
+  width: 93%;
 }
 
 .form-group input {
@@ -150,4 +149,76 @@ p {
 
 .signup-link:hover {
   text-decoration: underline;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  /* Adjust login container width for smaller screens */
+  .login-container {
+    width: 80%;  /* Container width increases to 80% for better mobile fit */
+    padding: 30px;
+  }
+
+  /* Make form fields full width */
+  .form-group input {
+    font-size: 16px;
+    padding: 10px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  p {
+    font-size: 12px;
+  }
+
+  .login-button {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .options label {
+    font-size: 12px;
+  }
+
+  .signup-text {
+    font-size: 12px;
+  }
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 480px) {
+  /* Increase the container size on mobile for better readability */
+  .login-container {
+    width: 100%;  /* Container width increases to 90% for better fit on very small screens */
+    padding: 20px;
+  }
+
+  .form-group input {
+    font-size: 16px;
+    padding: 8px;
+  }
+
+  h2 {
+    font-size: 24px;
+    text-align: center;
+  }
+
+  p {
+    font-size: 12px;
+  }
+
+  .login-button {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .options label {
+    font-size: 14px;
+  }
+
+  .signup-text {
+    font-size: 14px;
+  }
 }

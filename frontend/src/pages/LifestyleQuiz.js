@@ -160,7 +160,7 @@ const LifestyleQuiz = () => {
      
       return (
         <div className="lifestyle-quiz-container">
-          <aside className={`sidebar ${sidebarVisible ? "active" : ""}`}>
+          <aside className={`lifestyle-sidebar ${sidebarVisible ? "active" : ""}`}>
             <ul>
               <li>
                 <img src={DashboardIcon} alt="Dashboard" className="sidebar-icon" /> Dashboard

@@ -147,15 +147,15 @@ function Dashboard() {
         </ul>
       </aside>
 
-      <main className="main-content">
-        <header className="header">
-          <h1 className="greeting">Hello, {displayName}</h1>
-          <h2 className="title">HealthGuard Pro</h2>
+      <main className="dashboard-main-content">
+        <header className="dashboard-header">
+          <h1 className="dashboard-greeting">Hello, {displayName}</h1>
+          <h2 className="dashboard-title">HealthGuard Pro</h2>
         </header>
 
-        <section className="cards-section">
+        <section className="dashboard-cards-section">
           {Object.keys(testRoutes).map((category, index) => (
-            <div className="card" key={index}>
+            <div className="dashboard-card" key={index}>
               <h3>{category}</h3>
               <button onClick={() => handleTakeTest(testRoutes[category])}>Take test</button>
               <p>Your previous score was {scores[category] || 'Loading...'}%</p>
@@ -163,14 +163,14 @@ function Dashboard() {
           ))}
 
           {/* Overall Score Card */}
-          <div className="card overall-score">
+          <div className="dashboard-card overall-score">
             <h3>Overall Score</h3>
             <h3> {overallScore}%</h3>
           </div>
         </section>
 
 
-        <section className="scoreboard">
+        <section className="dashboard-scoreboard">
           <h3>Scoreboard</h3>
           <table>
             <thead>
@@ -205,3 +205,4 @@ function Dashboard() {
 }
 
 export default Dashboard;
+
