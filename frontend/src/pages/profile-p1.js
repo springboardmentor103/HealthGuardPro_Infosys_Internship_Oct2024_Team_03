@@ -18,10 +18,10 @@ function Profile() {
   };
   const username = localStorage.getItem("username");
 
-  useEffect(() => { // Fetch user data
+  useEffect(() => {
     async function fetchUserData() {
       try {
-        const token = localStorage.getItem("authToken"); // Ensure correct token key is used
+        const token = localStorage.getItem("authToken");
         if (!token) {
           throw new Error("No token found in localStorage");
         }
@@ -39,21 +39,26 @@ function Profile() {
         }
 
         const data = await response.json();
-        console.log(data);
+        console.log("Fetched user data:", data); // For debugging
 
         // Update userData state with the fetched data
-        if (data.firstName && data.email) {
-          setUserData({ firstName: data.firstName, email: data.email });
-          setTempData({ firstName: data.firstName, email: data.email });
-        }
+        setUserData({
+          firstName: data.username || "", // Using username from MongoDB
+          email: data.email || "",        // Using email from MongoDB
+        });
+        setTempData({
+          firstName: data.username || "",
+          email: data.email || "",
+        });
       } catch (error) {
         console.error("Error fetching user data:", error);
-        alert(error.message); // Optional: Show the error message to the user
+        alert(error.message);
       }
     }
 
     fetchUserData();
-  }, []); // Empty dependency array means it will run only once when the component mounts
+  }, []);
+
   const handleSave = async () => {
     try {
       const token = localStorage.getItem("authToken");
