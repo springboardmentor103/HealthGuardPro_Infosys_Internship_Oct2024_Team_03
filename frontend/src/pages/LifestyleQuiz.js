@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import './LifestyleQuiz.css';
-import axios from "axios";
+import api from "../utils/axiosConfig";
+import { getUserData } from '../utils/userUtils';
 import DashboardIcon from "../assets/icons/dashboard.svg";
 import LeaderboardIcon from "../assets/icons/leaderboard.svg";
 import ProfileIcon from "../assets/icons/profile.svg";
@@ -26,16 +27,37 @@ const LifestyleQuiz = () => {
       ];
  
       const scoring = {
-        "Daily": 4, "3-4 times a week": 3, "1-2 times a week": 2, "Rarely or never": 1,
-    "8+ cups": 4, "5-7 cups": 3, "2-4 cups": 2, "Less than 2 cups": 1,
-    "8+ hours": 4, "6-8 hours": 3, "4-6 hours": 2, "Less than 4 hours": 1,
-    "Mostly cook at home": 4, "A mix of both": 3, "Mostly eat out": 2, "Rarely cook at home": 1,
-    "Every day": 4, "Several times a week": 3, "Occasionally": 2, "Rarely or never": 1,
-    "Regularly": 4, "Occasionally": 3, "Rarely": 2, "Never": 1,
-    "Very often": 4, "A few times a week": 3, "Occasionally": 2, "Rarely or never": 1,
-    "Well balanced": 4, "Fairly balanced": 3, "Poorly balanced": 2, "No balance": 1,
-    "Very often": 4, "Occasionally": 3, "Rarely": 2, "Never": 1,
- 
+        "Daily": 4,
+        "3-4 times a week": 3,
+        "1-2 times a week": 2,
+        "Rarely or never": 1,
+        "8+ cups": 4,
+        "5-7 cups": 3,
+        "2-4 cups": 2,
+        "Less than 2 cups": 1,
+        "8+ hours": 4,
+        "6-8 hours": 3,
+        "4-6 hours": 2,
+        "Less than 4 hours": 1,
+        "Mostly cook at home": 4,
+        "A mix of both": 3,
+        "Mostly eat out": 2,
+        "Rarely cook at home": 1,
+        "Every day": 4,
+        "Several times a week": 3,
+        "Sometimes": 2,
+        "Rarely": 1,
+        "Regularly": 4,
+        "Occasionally": 3,
+        "Never": 1,
+        "Very often": 4,
+        "A few times a week": 3,
+        "Seldom": 2,
+        "Almost never": 1,
+        "Well balanced": 4,
+        "Fairly balanced": 3,
+        "Poorly balanced": 2,
+        "No balance": 1
       };
 
       const [currentPage, setCurrentPage] = useState(0);
@@ -73,39 +95,44 @@ const LifestyleQuiz = () => {
       };
 
       const handleSubmit = async () => {
-
-        if (responses.includes(undefined)) {
-          alert("Please answer all questions before submitting.");
-          return;
+        if (responses.length < questions.length) {
+            alert("Please answer all questions before submitting.");
+            return;
         }
 
-        const calculatedScore = calculateScore();
-        setScore(calculatedScore);
-        setCompleted(true);
-     
         try {
-          const userId = localStorage.getItem("userId");
-          const username = localStorage.getItem("username");
-          const email = localStorage.getItem("email");
-          const category = "Lifestyle";
-     
-          if (!userId || !username || !email) {
-            alert("Missing user information. Please log in.");
-            return;
-          }
-     
-          await axios.post("http://localhost:5000/api/save-fitness-score", {
-            userId,
-            username,
-            email,
-            category,
-            score: calculatedScore,
-          });
-     
-          alert("Score saved successfully!");
+            const calculatedScore = calculateScore();
+            const userData = getUserData();
+
+            console.log('Submitting lifestyle score:', {
+                userId: userData.userId,
+                category: "Lifestyle",
+                score: calculatedScore
+            });
+
+            const response = await api.post('/fitness/save-score', {
+                userId: userData.userId,
+                username: userData.username,
+                email: userData.email,
+                category: "Lifestyle",
+                score: calculatedScore
+            });
+
+            if (response.data.success) {
+                setScore(calculatedScore);
+                setCompleted(true);
+                alert('Score saved successfully!');
+            } else {
+                throw new Error(response.data.message || 'Failed to save score');
+            }
         } catch (error) {
-          console.error("Error saving score:", error);
-          alert("Failed to save score. Please try again.");
+            console.error('Error saving score:', error);
+            if (error.message === 'User data missing. Please log in again.') {
+                alert('Please log in again to continue');
+                navigate('/login');
+                return;
+            }
+            alert(error.response?.data?.message || 'Failed to save score. Please try again.');
         }
       };
      

@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './MentalWellBeingQuiz.css';
-import axios from "axios";
+import api from "../utils/axiosConfig";
+import { getUserData } from '../utils/userUtils';
 import DashboardIcon from "../assets/icons/dashboard.svg";
 import LeaderboardIcon from "../assets/icons/leaderboard.svg";
 import ProfileIcon from "../assets/icons/profile.svg";
 import LogoutIcon from "../assets/icons/logout.svg";
- 
+
 const MentalWellBeingQuiz = () => {
  
       // const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -72,33 +73,44 @@ const MentalWellBeingQuiz = () => {
         };
        
         const handleSubmit = async () => {
-          const calculatedScore = calculateScore();
-          setScore(calculatedScore);
-          setCompleted(true);
-       
+          if (responses.length < questions.length) {
+            alert("Please answer all questions before submitting.");
+            return;
+          }
+
           try {
-            const userId = localStorage.getItem("userId");
-            const username = localStorage.getItem("username");
-            const email = localStorage.getItem("email");
-            const category = "Mental Well-being";
-       
-            if (!userId || !username || !email) {
-              alert("Missing user information. Please log in.");
+            const calculatedScore = calculateScore();
+            const userData = getUserData();
+
+            console.log('Submitting mental well-being score:', {
+              userId: userData.userId,
+              category: "Mental Well-being",
+              score: calculatedScore
+            });
+
+            const response = await api.post('/fitness/save-score', {
+              userId: userData.userId,
+              username: userData.username,
+              email: userData.email,
+              category: "Mental Well-being",
+              score: calculatedScore
+            });
+
+            if (response.data.success) {
+              setScore(calculatedScore);
+              setCompleted(true);
+              alert('Score saved successfully!');
+            } else {
+              throw new Error(response.data.message || 'Failed to save score');
+            }
+          } catch (error) {
+            console.error('Error saving score:', error);
+            if (error.message === 'User data missing. Please log in again.') {
+              alert('Please log in again to continue');
+              navigate('/login');
               return;
             }
-       
-            await axios.post("http://localhost:5000/api/save-fitness-score", {
-              userId,
-              username,
-              email,
-              category,
-              score: calculatedScore,
-            });
-       
-            alert("Score saved successfully!");
-          } catch (error) {
-            console.error("Error saving score:", error);
-            alert("Failed to save score. Please try again.");
+            alert(error.response?.data?.message || 'Failed to save score. Please try again.');
           }
         };
 

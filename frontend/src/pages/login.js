@@ -1,202 +1,128 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import './login.css';
-
-
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    // Check if user is already logged in
+    const token = localStorage.getItem('authToken');
+    const rememberMeEnabled = localStorage.getItem('rememberMe');
+    
+    if (token && rememberMeEnabled) {
+      navigate('/dashboard');
+    }
+  }, [navigate]);
+
   const handleLogin = async (e) => {
     e.preventDefault();
+    setError('');
+    setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:5000/api/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      });
+        const response = await fetch('http://localhost:5000/api/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: email.trim(),
+                password: password
+            })
+        });
 
-      const data = await response.json();
-      if (response.ok) {
+        const data = await response.json();
+        
+        if (!response.ok || !data.success) {
+            throw new Error(data.message || 'Login failed');
+        }
 
-      // Save the token to localStorage
-      localStorage.setItem('authToken', data.token);
-      localStorage.setItem('userId', data.userId); // Store userId in localStorage
-      localStorage.setItem('email', data.email);
-      localStorage.setItem('username', data.username);
+        // Save auth data
+        localStorage.setItem('authToken', data.token);
+        localStorage.setItem('userId', data.user.userId);
+        localStorage.setItem('username', data.user.username);
+        localStorage.setItem('email', data.user.email);
 
-        alert('Login successful!');
-        //window.location.href = '/dashboard'; // Redirect to a dashboard page
+        if (rememberMe) {
+            localStorage.setItem('rememberMe', 'true');
+        }
+
         navigate('/dashboard');
-      } else {
-        alert(data.error || 'Login failed');
-      }
     } catch (error) {
-      console.error('Error during login:', error);
-      alert('An unexpected error occurred. Please try again.');
+        console.error('Login error:', error);
+        setError(error.message || 'Login failed. Please try again.');
+    } finally {
+        setLoading(false);
     }
   };
 
   return (
-    <div className = "body-login">
-    <div className="login"> {/* Added a wrapper with class "login" */}
-      <div className="login-container">
-        <h2>Login</h2>
-        <p>Login to access your travelwise account</p>
-        <form onSubmit={handleLogin}>
-          <div className="form-group">
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <label>Email</label>
-          </div>
-
-          <div className="form-group">
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            <label>Password</label>
-          </div>
-
-          <div className="login-options">
-            <label>
+    <div className="body-login">
+      <div className="login">
+        <div className="login-container">
+          <h2>Login</h2>
+          <p>Login to access your account</p>
+          {error && <div className="error-message">{error}</div>}
+          <form onSubmit={handleLogin}>
+            <div className="form-group">
               <input
-                type="checkbox"
-                checked={rememberMe}
-                onChange={() => setRememberMe(!rememberMe)}
-              /> Remember me
-            </label>
-            <Link to="/forgotpassword" className="forgot-password">Forgot Password?</Link>
-          </div>
-
-          <button type ="submit" className="login-button">Login</button>
-          <p className="signup-text">
-            Don’t have an account?{' '}
-            <Link to="/signup" className="signup-link">Sign up</Link>
-          </p>
-        </form>
-      </div>
-    </div>
-    </div>
-  );
-}
-
-export default Login;
-
-
-
-/* import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';  
-import './login.css'; // Ensure this file path is correct
-
- const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [rememberMe, setRememberMe] = useState(false);
-
-  const navigate = useNavigate();
-
-  const handleLogin = async (e) => {
-    e.preventDefault();
-
-    try {
-      const response = await fetch('http://localhost:5000/api/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      });
-
-      const data = await response.json();
-      if (response.ok) {
-        alert('Login successful!');
-        //window.location.href = '/dashboard'; // Redirect to a dashboard page
-        navigate('/dashboard');
-      } else {
-        alert(data.error || 'Login failed');
-      }
-    } catch (error) {
-      console.error('Error during login:', error);
-    }
-  };
-  // const handleEmailChange = (e) => setEmail(e.target.value);
-  // const handlePasswordChange = (e) => setPassword(e.target.value);
-  // const handleRememberMeChange = () => setRememberMe(!rememberMe);
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  // Handle form submission here
-
-  return (
-    <div className="login-page">
-      <div className="login-container">
-        < h2>Login</h2>
-        <p>Login to access your travelwise account</p>
-        <form onSubmit={handleLogin}>
-          <div className="input-field">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              placeholder="Enter your Email      "
-              
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          <div className="input-field">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              placeholder="************"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          <div className="options">
-             
-            <div className="remember-me">
-              <input
-                type="checkbox"
-                id="rememberMe"
-                checked={rememberMe}
-                onChange={() => setRememberMe(!rememberMe)}
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                autoComplete="email"
               />
-              <label htmlFor="rememberMe">Remember me</label>
+              <label>Email</label>
             </div>
 
-            // { "Forgot Password" aligned on the same line }
-            <div className="forgot-password-container">
-              <Link to="/forgotpassword" className="forgot-password">
-                Forgot Password
+            <div className="form-group">
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                autoComplete="current-password"
+              />
+              <label>Password</label>
+            </div>
+
+            <div className="options">
+              <label className="remember-me">
+                <input
+                  type="checkbox"
+                  checked={rememberMe}
+                  onChange={() => setRememberMe(!rememberMe)}
+                /> Remember me
+              </label>
+              <Link to="/forgot-password" className="forgot-password">
+                Forgot Password?
               </Link>
             </div>
-          </div>
-          <button type="submit" className="login-button">Login</button>
-          <p className="sign-up">
-            Don’t have an account?{' '}
+
+            <button 
+              type="submit" 
+              className="login-button"
+              disabled={loading}
+            >
+              {loading ? 'Logging in...' : 'Login'}
+            </button>
             
-            <Link to="/signup" className="sign-up-link">Sign up</Link>
-          </p>
-        </form>
+            <p className="signup-text">
+              Don't have an account?{' '}
+              <Link to="/signup" className="signup-link">Sign up</Link>
+            </p>
+          </form>
+        </div>
       </div>
     </div>
   );
 };
 
-export default Login;  */
+export default Login;
