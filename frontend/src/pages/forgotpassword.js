@@ -5,40 +5,35 @@ import './forgotpassword.css';
 import { EmailContext } from './EmailContext';
 
 function ForgotPassword() {
-  const { email,setEmail } = useContext(EmailContext);
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-//   const [email, setEmail] = useState('');
- // const [inputemail, setInputEmail] = useState('');
+  const { setEmail } = useContext(EmailContext);
+  const [inputEmail, setInputEmail] = useState('');
   const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
-     // setEmail(e.target.value);
-      setEmail(e.target.value);
+    setInputEmail(e.target.value);
   };
 
-
   const handleSubmit = async (e) => {
-      e.preventDefault();
-      setEmail(email);
-      try {
-          const response = await fetch('http://localhost:5000/api/send-code', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ email }),
-          });
-          const result = await response.json();
-          if (response.ok) {
-              console.log('Verification code sent:', result.message);
-              navigate('/verifycode');
-          } else {
-              console.error('Error:', result.message);
-              alert(result.message);
-          }
-      } catch (error) {
-          console.error('Error sending code:', error);
+    e.preventDefault();
+    try {
+      const response = await fetch('http://localhost:5000/api/send-code', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: inputEmail }),
+      });
+      const result = await response.json();
+      if (response.ok) {
+        setEmail(inputEmail); // Save email to context after successful API call
+        console.log('Verification code sent:', result.message);
+        navigate('/verifycode');
+      } else {
+        console.error('Error:', result.message);
+        alert(result.message);
       }
+    } catch (error) {
+      console.error('Error sending code:', error);
+      alert('Failed to send verification code. Please try again.');
+    }
   };
 
   return (
@@ -54,10 +49,10 @@ function ForgotPassword() {
                     <input
                         type="email"
                         id="email"
-                        value={email}
+                        value={inputEmail}
                         onChange={handleEmailChange}
                         required
-                        className={email ? 'forgotpassword-filled' : ''}
+                        className={inputEmail ? 'forgotpassword-filled' : ''}
                     />
                     <label htmlFor="email" className="forgotpassword-label">Email</label>
                 </div>
@@ -71,3 +66,5 @@ function ForgotPassword() {
 }
 
 export default ForgotPassword;
+
+ 

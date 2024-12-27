@@ -19,28 +19,60 @@ const handleConfirmPasswordChange = (e) => {
     setConfirmPassword(e.target.value);
 };
 
+const validatePassword = (password) => {
+    const minLength = 8;
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasNumbers = /\d/.test(password);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+    if (password.length < minLength) {
+        return 'Password must be at least 8 characters long';
+    }
+    if (!hasUpperCase || !hasLowerCase) {
+        return 'Password must contain both uppercase and lowercase letters';
+    }
+    if (!hasNumbers) {
+        return 'Password must contain at least one number';
+    }
+    if (!hasSpecialChar) {
+        return 'Password must contain at least one special character';
+    }
+    return '';
+};
 
 const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    const validationError = validatePassword(password);
+    if (validationError) {
+        setErrorMessage(validationError);
+        return;
+    }
+
     if (password !== confirmPassword) {
         setErrorMessage('Passwords do not match!');
         return;
     }
+
     try {
         const response = await fetch('http://localhost:5000/api/set-password', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password }), // Include email and new password
+            body: JSON.stringify({ email, password }),
         });
         const result = await response.json();
+        
         if (response.ok) {
             console.log('Password updated:', result.message);
+            alert('Password successfully updated!');
             navigate('/login');
         } else {
-            alert(result.message);
+            setErrorMessage(result.message || 'Failed to update password');
         }
     } catch (error) {
         console.error('Error updating password:', error);
+        setErrorMessage('Failed to update password. Please try again.');
     }
 };
 

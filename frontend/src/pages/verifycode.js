@@ -8,35 +8,57 @@ const Verifycode = () => {
     const { email } = useContext(EmailContext);
     const navigate = useNavigate();
     const [code, setCode] = useState('');
+    const [error, setError] = useState('');
 
     const handleCodeChange = (e) => {
         setCode(e.target.value);
+        setError(''); // Clear error when user types
     };
-
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!code.trim()) {
+            setError('Please enter the verification code');
+            return;
+        }
+
         try {
             const response = await fetch('http://localhost:5000/api/verify-code', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, code }), // Include the email and code
+                body: JSON.stringify({ email, code }),
             });
             const result = await response.json();
+            
             if (response.ok) {
                 console.log('Code verified:', result.message);
                 navigate('/Setpassword');
             } else {
-                alert(result.message);
+                setError(result.message || 'Invalid verification code');
             }
         } catch (error) {
             console.error('Error verifying code:', error);
+            setError('Failed to verify code. Please try again.');
         }
     };
 
-
-    const handleResend = () => {
-        alert('Verification code resent!');
+    const handleResend = async () => {
+        try {
+            const response = await fetch('http://localhost:5000/api/send-code', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email }),
+            });
+            const result = await response.json();
+            if (response.ok) {
+                alert('New verification code has been sent!');
+            } else {
+                alert(result.message || 'Failed to resend code');
+            }
+        } catch (error) {
+            console.error('Error resending code:', error);
+            alert('Failed to resend code. Please try again.');
+        }
     };
 
     return (
@@ -59,6 +81,7 @@ const Verifycode = () => {
                             />
                             <label className="verifycode-unique-label" htmlFor="verificationCode">Enter Code</label>
                         </div>
+                        {error && <p className="verifycode-unique-error">{error}</p>}
                         <p className="verifycode-unique-resend-text">
                             Didn’t receive a code?{' '}
                             <span onClick={handleResend} className="verifycode-unique-resend-link">Resend</span>

@@ -101,7 +101,7 @@ const Login = () => {
                   onChange={() => setRememberMe(!rememberMe)}
                 /> Remember me
               </label>
-              <Link to="/forgot-password" className="forgot-password">
+              <Link to="/forgotpassword" className="forgot-password">
                 Forgot Password?
               </Link>
             </div>
