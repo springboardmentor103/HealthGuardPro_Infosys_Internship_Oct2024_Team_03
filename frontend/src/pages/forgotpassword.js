@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext,useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './forgotpassword.css';  
@@ -6,9 +6,9 @@ import { EmailContext } from './EmailContext';
 
 function ForgotPassword() {
   const { email,setEmail } = useContext(EmailContext);
-//   const [password, setPassword] = useState('');
-//   const [confirmPassword, setConfirmPassword] = useState('');
-//   const [errorMessage, setErrorMessage] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 //   const [email, setEmail] = useState('');
  // const [inputemail, setInputEmail] = useState('');
   const navigate = useNavigate();
@@ -71,36 +71,3 @@ function ForgotPassword() {
 }
 
 export default ForgotPassword;
-
- 
-//   return (
-//     <div className ="forgot-password-page">
-//     <div className="container">
-//       <h2>Forgot your password?</h2>
-//       <p>Don't worry, it happens to everyone. Enter your email below to recover your password.</p>
-//       <form onSubmit={handleSubmit}>
-//         <label htmlFor="email">Email</label>
-//         <input
-//           type="email"
-//           id="email"
-//           name="email"
-//           placeholder="Enter your Email"
-//           value={email}
-//           onChange={(e) => setEmail(e.target.value)}
-//           required
-//         />
-//          <Link to="/verifycode" className="submit-link">
-//   <button type="button">Submit</button>
-// </Link>
- 
-         
-//       </form>
-      
-//       <a href="/login" className="back-link">Back to login</a>
-   
-//     </div>
-//     </div>
-//   );
-// }
- 
-// export default ForgotPassword;

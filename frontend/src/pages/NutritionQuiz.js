@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./NutritionQuiz.css";
-import axios from "axios";
+import api from "../utils/axiosConfig";
+import { getUserData } from '../utils/userUtils';
 import DashboardIcon from "../assets/icons/dashboard.svg";
 import LeaderboardIcon from "../assets/icons/leaderboard.svg";
 import ProfileIcon from "../assets/icons/profile.svg";
@@ -38,31 +39,37 @@ const NutritionQuiz = () => {
         ];
  
         const scoring = {
+          // Frequency
           "Daily": 4,
           "3 or more servings": 4,
           "A few times a week": 3,
           "1–2 servings": 3,
-          "Occasionally": 2,
-          "Rarely": 2,
+          "Sometimes": 2,
+          "Rarely": 1,
           "None": 1,
+          
+          // Meal habits
           "Almost every day": 1,
           "Yes, multiple times a day": 1,
-          "Sometimes": 3,
           "Never": 4,
           "Every meal": 4,
           "Once or twice a day": 3,
           "Frequently": 1,
+          
+          // Water intake
           "5–7 cups": 3,
           "2–4 cups": 2,
           "Less than 2 cups": 1,
+          
+          // Attention to diet
           "Always": 4,
           "Often": 3,
           "Only occasionally": 2,
-          "Rarely or never": 1,
+          
+          // Supplements
           "Yes, regularly": 4,
-          "Occasionally": 3,
           "No, but I plan to": 2,
-          "No, I don’t take any": 1,
+          "No, I don't take any": 1
         };
 
         const handleGoBack = () => {
@@ -105,39 +112,44 @@ const NutritionQuiz = () => {
         };
        
         const handleSubmit = async () => {
-
-          if (responses.includes(undefined)) {
+          if (responses.length < questions.length) {
             alert("Please answer all questions before submitting.");
             return;
           }
 
-          const calculatedScore = calculateScore();
-          setScore(calculatedScore);
-          setCompleted(true);
-       
           try {
-            const userId = localStorage.getItem("userId");
-            const username = localStorage.getItem("username");
-            const email = localStorage.getItem("email");
-            const category = "Nutrition";
-       
-            if (!userId || !username || !email) {
-              alert("Missing user information. Please log in.");
+            const calculatedScore = calculateScore();
+            const userData = getUserData();
+
+            console.log('Submitting nutrition score:', {
+              userId: userData.userId,
+              category: "Nutrition",
+              score: calculatedScore
+            });
+
+            const response = await api.post('/fitness/save-score', {
+              userId: userData.userId,
+              username: userData.username,
+              email: userData.email,
+              category: "Nutrition",
+              score: calculatedScore
+            });
+
+            if (response.data.success) {
+              setScore(calculatedScore);
+              setCompleted(true);
+              alert('Score saved successfully!');
+            } else {
+              throw new Error(response.data.message || 'Failed to save score');
+            }
+          } catch (error) {
+            console.error('Error saving score:', error);
+            if (error.message === 'User data missing. Please log in again.') {
+              alert('Please log in again to continue');
+              navigate('/login');
               return;
             }
-       
-            await axios.post("http://localhost:5000/api/save-fitness-score", {
-              userId,
-              username,
-              email,
-              category,
-              score: calculatedScore,
-            });
-       
-            alert("Score saved successfully!");
-          } catch (error) {
-            console.error("Error saving score:", error);
-            alert("Failed to save score. Please try again.");
+            alert(error.response?.data?.message || 'Failed to save score. Please try again.');
           }
         };
        

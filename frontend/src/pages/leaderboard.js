@@ -11,7 +11,7 @@ const Leaderboard = () => {
   const username=localStorage.getItem("username");
 
   const leaderboardData = [
-    { user: "YOU", ranking: 90, points: 635 },
+    { user: "You", ranking: 90, points: 635 },
     { user: "Abhi", ranking: 1, points: 3000 },
     { user: "Ravi", ranking: 2, points: 2862 },
     { user: "Roshan", ranking: 3, points: 2597 },
@@ -78,7 +78,7 @@ const Leaderboard = () => {
               className="profile-picture"
             />
             <div>
-              <h2>Priya</h2>
+              <h2>{username}</h2>
               <p>#097654</p>
             </div>
           </div>

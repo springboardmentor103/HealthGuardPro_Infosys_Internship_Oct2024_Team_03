@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import "./PhysicalFitnessQuiz.css";
-import axios from "axios";
+import api from '../utils/axiosConfig';
 import DashboardIcon from "../assets/icons/dashboard.svg";
 import LeaderboardIcon from "../assets/icons/leaderboard.svg";
 import ProfileIcon from "../assets/icons/profile.svg";
 import LogoutIcon from "../assets/icons/logout.svg";
- 
+import { getUserData } from '../utils/userUtils';
+
 const PhysicalFitnessQuiz = () => {
  
   // const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -87,11 +88,17 @@ const PhysicalFitnessQuiz = () => {
  
     const calculateScore = () => {
       let totalPoints = 0;
-      responses.forEach((response) => {
-        totalPoints += scoring[response] || 0;
+      let answeredQuestions = 0;
+
+      responses.forEach((response, index) => {
+        if (response && scoring[response]) {
+          totalPoints += scoring[response];
+          answeredQuestions++;
+        }
       });
-      const maxPoints = questions.length * 4;
-      return Math.round((totalPoints / maxPoints) * 100);
+
+      if (answeredQuestions === 0) return 0;
+      return Math.round((totalPoints / (answeredQuestions * 4)) * 100);
     };
    
     const handleChange = (value) => {
@@ -121,33 +128,53 @@ const PhysicalFitnessQuiz = () => {
     };
    
     const handleSubmit = async () => {
-      const calculatedScore = calculateScore();
-      setScore(calculatedScore);
-      setCompleted(true);
-   
+      if (responses.length < questions.length) {
+        alert("Please answer all questions before submitting.");
+        return;
+      }
+
       try {
-        const userId = localStorage.getItem("userId");
-        const username = localStorage.getItem("username");
-        const email = localStorage.getItem("email");
-        const category = "Physical Fitness"; 
-   
-        if (!userId || !username || !email) {
-          alert("Missing user information. Please log in.");
+        const calculatedScore = calculateScore();
+        const token = localStorage.getItem('authToken');
+        const userId = localStorage.getItem('userId');
+
+        if (!token || !userId) {
+          alert('Please log in to submit your score');
+          navigate('/login');
           return;
         }
-   
-        await axios.post("http://localhost:5000/api/save-fitness-score", {
+
+        console.log('Attempting to save score:', {
           userId,
-          username,
-          email,
-          category,
-          score: calculatedScore,
+          category: "Physical Fitness",
+          score: calculatedScore
         });
-   
-        alert("Score saved successfully!");
+
+        const response = await api.post('/fitness/save-score', {
+          userId,
+          category: "Physical Fitness",
+          score: calculatedScore
+        });
+
+        if (response.data.success) {
+          setScore(calculatedScore);
+          setCompleted(true);
+          alert('Score saved successfully!');
+        } else {
+          throw new Error(response.data.message || 'Failed to save score');
+        }
       } catch (error) {
-        console.error("Error saving score:", error);
-        alert("Failed to save score. Please try again.");
+        console.error('Error saving score:', error.response?.data || error);
+        
+        if (error.response?.status === 401 || error.response?.status === 403) {
+          alert('Your session has expired. Please log in again.');
+          localStorage.removeItem('authToken');
+          localStorage.removeItem('userId');
+          navigate('/login');
+          return;
+        }
+        
+        alert(error.response?.data?.message || 'Failed to save score. Please try again.');
       }
     };
    
