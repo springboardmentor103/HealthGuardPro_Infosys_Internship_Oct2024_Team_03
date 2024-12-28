@@ -1,5 +1,5 @@
- /* General Dashboard Styles */
- .dashboard-container {
+/* General Dashboard Styles */
+.dashboard-container {
   display: flex;
   height: 100vh;
   overflow: hidden;
@@ -18,7 +18,7 @@
   align-items: center;
   padding: 10px 15px;
   text-decoration: none;
-  color: white;
+  color: rgb(255, 255, 255);
 }
 
 .sidebar-item:hover {
@@ -37,7 +37,7 @@
 .dashboard-label, .leaderboard-label, .profile-label, .logout-label {
   font-size: 18px;
   font-weight: 500;
-  color: white;
+  color: rgb(255, 255, 255);
 }
 
 /* Active sidebar styling */
@@ -77,19 +77,32 @@
   background-color: #0a2d46;
 }
 
-
-
+/* Hamburger Button */
+.hamburger {
+  display: none;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+   
+  
+  border: none;
+  font-size: 26px;
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 1000;
+  cursor: pointer;
+}
 
 
 /* Main Content */
-.main-content {
+.dashboard-main-content {
   flex: 1;
   overflow: hidden;
   padding: 10px;
   background-color: #f4f4f4;
 }
 
-.header {
+.dashboard-header {
   display: flex;
   justify-content: space-between; /* Align header items left and right */
   align-items: center;
@@ -97,7 +110,7 @@
   margin-top: 0%;
 }
 
-.greeting {
+.dashboard-greeting {
   margin-bottom: 0%;
   margin-top: 0%;
   font-size: 24px;
@@ -105,21 +118,23 @@
   font-weight: lighter;
 }
 
-.title {
+.dashboard-title {
   font-size: 32px;
   font-family: 'Abril Fatface'; /* Custom font */
   color: #1f4f73;
+  padding-bottom: 20px;
+  font-weight: lighter;
 }
 
 /* Health Cards */
-.cards-section {
+.dashboard-cards-section {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   justify-content: center;
 }
 
-.card {
+.dashboard-card {
   background-color: #E0E8EF;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -127,20 +142,20 @@
   text-align: center;
 }
 
-.card h3 {
+.dashboard-card h3 {
   font-size: 30px;
   font-family: 'Mongolian Baiti', serif; /* Custom font */
   font-weight: 500;
   margin-bottom: 20px;
 }
 
-.card p {
+.dashboard-card p {
   font-size: 20px;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   color: #1f0606;
 }
 
-.card button {
+.dashboard-card button {
   background-color: #1F698D;
   color: white;
   border: none;
@@ -151,20 +166,20 @@
   font-size: 15px;
 }
 
-.card button:hover {
+.dashboard-card button:hover {
   background-color: #0a2d46;
 }
 
 /* Scoreboard */
-.scoreboard {
-  margin-top: 10px;
+.dashboard-scoreboard {
+  margin-top: 70px;
   background-color: #ffffff;
-  padding: 0px;
+  padding: 10px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.scoreboard h3 {
+.dashboard-scoreboard h3 {
   text-align: center;
   font-size: 30px;
   font-weight: bold;
@@ -173,25 +188,25 @@
   margin-bottom: 20px;
 }
 
-.scoreboard table {
+.dashboard-scoreboard table {
   width: 100%;
   border-collapse: collapse;
 }
 
-.scoreboard th,
-.scoreboard td {
+.dashboard-scoreboard th,
+.dashboard-scoreboard td {
   border: 2px solid #ddd;
   padding: 10px;
   text-align: center;
   font-size: larger;
 }
 
-.scoreboard th {
+.dashboard-scoreboard th {
   background-color: #1F698D;
   color: white;
 }
 
-.scoreboard button {
+.dashboard-scoreboard button {
   background-color: #1F698D;
   color: white;
   padding: 6px 10px;
@@ -202,7 +217,7 @@
   font-size: medium;
 }
 
-.scoreboard button:hover {
+.dashboard-scoreboard button:hover {
   background-color: #0a2d46;
 }
 
@@ -210,6 +225,7 @@
 @media (max-width: 768px) {
   .dashboard-container {
     flex-direction: column;
+    height: 100%;
   }
 
   .sidebar {
@@ -228,33 +244,48 @@
     width : 300vw;
   }
 
-  .main-content {
+  .dashboard-main-content {
     padding: 10px;
     margin-left: 0; /* Ensure main content takes full width */
   }
 
-  .hamburger-menu {
-    position: absolute;
-    font-size: 26px;
-    top: 15px;
-    left: 20px;
-    cursor: pointer;
-    z-index: 11;
-  }
+ /* Hamburger */
 
-  .hamburger-menu div {
-    
-    font-size: 26px;
-    background-color: #0a2d46;
-    margin: 5px 0;
-  }
+.hamburger {
+  display: flex;
+  background-color: transparent; /* No background color */
+  border: none; /* Remove button border */
+  color: black; /* Set text color to black */
+   /* Adjust font size as needed */
+  cursor: pointer; /* Show pointer cursor on hover */
+}
+
+.hamburger:focus {
+  outline: none; /* Remove outline when focused */
+}
+
+.content-overlay {
+  margin-left: 0; /* Remove space from sidebar when open */
+}
+
+.hamburger-menu div {
+  width: 25px;
+  height: 3px;
+  background-color: #0a2d46;
+  margin: 5px 0;
+}
   
   /* Adjust card grid layout */
-  .cards-section {
+  .dashboard-cards-section {
     grid-template-columns: 1fr; /* Single column for smaller screens */
   }
 
-  .header {
+  .dashboard-header {
     flex-direction: column; /* Align header items vertically */
   }
+
+  .hamburger {
+    z-index: 1001;
+  }
 }
+

@@ -22,7 +22,7 @@ const Leaderboard = () => {
   };
 
   return (
-    <div classNames = "body-leaderboard">
+    <div classNames = "leaderboard-body">
     <div className="leaderboard-container">
       {/* Sidebar */}
       <aside className={`sidebar ${isSidebarOpen ? 'active' : ''}`}>
@@ -62,27 +62,27 @@ const Leaderboard = () => {
       </div>
 
       {/* Main Content */}
-      <main className="main-content">
+      <main className="leaderboard-main-content">
         {/* Header */}
-        <header className="header">
-          <h1 className="greeting">Hello, {username}</h1>
-          <h2 className="title">HealthGuard Pro</h2>
+        <header className="leaderboard-header">
+          <h1 className="leaderboard-greeting">Hello, {username}</h1>
+          <h2 className="leaderboard-title">HealthGuard Pro</h2>
         </header>
 
         {/* User Info Section (Centered on Mobile) */}
-        <section className="user-info">
-          <div className="profile">
+        <section className="leaderboard-user-info">
+          <div className="leaderboard-profile">
             <img
               src={ProfileImage} // Profile image added here
-              alt="User Profile"
-              className="profile-picture"
+              alt="leaderboard-User Profile"
+              className="leaderboard-profile-picture"
             />
             <div>
               <h2>{username}</h2>
               <p>#097654</p>
             </div>
           </div>
-          <div className="points">
+          <div className="leaderboard-points">
             <h2>Points: 635</h2>
           </div>
         </section>
@@ -94,7 +94,7 @@ const Leaderboard = () => {
               <tr className="leaderboard-title">
                 <th colSpan="3">Leaderboard</th> {/* Spans all columns */}
               </tr>
-              <tr className="table-header">
+              <tr className="leaderboard-table-header">
                 <th>User</th>
                 <th>Ranking</th>
                 <th>Points</th>

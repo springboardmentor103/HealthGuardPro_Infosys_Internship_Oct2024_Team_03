@@ -157,7 +157,7 @@ const NutritionQuiz = () => {
        
         return (
           <div className="nutrition-quiz-container">
-            <aside className={`sidebar ${sidebarVisible ? "active" : ""}`}>
+            <aside className={`nutrition-sidebar ${sidebarVisible ? "active" : ""}`}>
               <ul>
                 <li>
                   <img src={DashboardIcon} alt="Dashboard" className="sidebar-icon" /> Dashboard
