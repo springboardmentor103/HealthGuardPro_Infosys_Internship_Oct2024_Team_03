@@ -36,18 +36,12 @@ function App() {
           <Route path="/mental-wellbeing" element={<MentalWellBeingQuiz />} />
           <Route path="/biomarkers" element={<BiomarkerQuiz />} />
           <Route path="/ViewScore" element={<ViewScore/>} />
-        
-         {/* Route for Dashboard */}
-         <Route path="/" element={<Dashboard />} />
+      
         
         {/* Route for Leaderboard Page */}
         <Route path="/leaderboard" element={<Leaderboard />} />
         
-        {/* Route for Profile Page */}
-        <Route path="/profile-p1" element={<Profile />} />
-        
-        {/* Route for Login Page */}
-        <Route path="/login" element={<Login />} />
+      
       </Routes>
     </Router>
     </EmailProvider>

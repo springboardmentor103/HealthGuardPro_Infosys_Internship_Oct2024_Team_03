@@ -17,7 +17,7 @@ const Login = () => {
     const rememberMeEnabled = localStorage.getItem('rememberMe');
     
     if (token && rememberMeEnabled) {
-      navigate('/dashboard');
+      navigate('/login');
     }
   }, [navigate]);
 
