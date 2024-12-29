@@ -118,7 +118,7 @@ function Dashboard() {
         <div></div>
       </div>
 
-      <aside className={`sidebar ${isSidebarOpen ? 'active' : ''}`}>
+      <aside className={`dashboard-sidebar ${isSidebarOpen ? 'active' : ''}`}>
         <ul>
           <li>
             <Link to="/dashboard" className="sidebar-item">
@@ -169,35 +169,35 @@ function Dashboard() {
           </div>
         </section>
 
+        {/* Updated Score History Section */}
+        <section className="dashboard-score-history">
+          <div className="score-history-box">
+            <p>View your score history and track your progress over time.</p>
+            <Link to="/ViewScore">
+              <button className="view-button">View</button>
+            </Link>
+          </div>
+        </section>
 
-        <section className="dashboard-scoreboard">
-          <h3>Scoreboard</h3>
-          <table>
-            <thead>
-              <tr>
-                <th>S.no</th>
-                <th>Time</th>
-                <th>Score</th>
-                <th>View</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>date / time</td>
-                <td>95%</td>
-                <td> <Link to="/ViewScore">
-              <button>View</button>
-            </Link></td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>date / time</td>
-                <td>90%</td>
-                <td><button>View</button></td>
-              </tr>
-            </tbody>
-          </table>
+        {/* Helpful Tips Section */}
+        <section className="dashboard-tips-section">
+          <h3>Helpful Tips for Your Health Journey</h3>
+          <div className="tips-container">
+            {[
+              "Stay hydrated throughout the day to keep your body functioning properly.",
+              "Eat a balanced diet with a variety of fruits, vegetables, and whole grains.",
+              "Exercise regularly to improve cardiovascular health and strength.",
+              "Get at least 7-8 hours of sleep to help your body recover and recharge.",
+              "Manage stress through mindfulness practices like meditation or yoga."
+            ].map((tip, index) => (
+              <div
+                className={`tip-box ${index === 0 || index === 2 || index === 4 ? 'blue' : ''}`}
+                key={index}
+              >
+                <p>{tip}</p>
+              </div>
+            ))}
+          </div>
         </section>
       </main>
     </div>
@@ -205,4 +205,3 @@ function Dashboard() {
 }
 
 export default Dashboard;
-
