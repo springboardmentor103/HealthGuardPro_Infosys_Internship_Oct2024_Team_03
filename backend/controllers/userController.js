@@ -22,14 +22,14 @@ exports.getUser = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
     try {
-        const { firstName, email } = req.body;
+        const { username, email } = req.body;
         const user = await User.findOne({ email: req.user.email });
         
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        if (firstName) user.firstName = firstName;
+        if (username) user.username = username;
         if (email) user.email = email;
 
         await user.save();
