@@ -1,19 +1,20 @@
 /* General Dashboard Styles */
 .dashboard-container {
   display: flex;
-  height: 100vh;
+  height: 100%;
   overflow: hidden;
 }
-.sidebar {
+.dashboard-sidebar {
   width: 250px;
   background-color: #1F698D;
   padding-top: 50px;
   position: relative;
   transition: left 0.3s ease-in-out;
+  height: 100vh;
 }
 
 /* Sidebar item styling */
-.sidebar-item {
+.dashboard-sidebar-item {
   display: flex;
   align-items: center;
   padding: 10px 15px;
@@ -21,7 +22,7 @@
   color: rgb(255, 255, 255);
 }
 
-.sidebar-item:hover {
+.dashboard-sidebar-item:hover {
   background-color: #0a2d46; /* Highlight on hover */
   border-radius: 5px; /* Rounded edges for hover effect */
 }
@@ -41,12 +42,11 @@
 }
 
 /* Active sidebar styling */
-.sidebar.active {
+.dashboard-sidebar.active {
   left: 0;
   width: 250px;
 }
-/* Sidebar */
-.sidebar {
+.dashboard-sidebar {
   width: 250px;
   overflow-y: hidden;
   background-color: #1F698D;
@@ -55,25 +55,25 @@
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-.sidebar ul {
+.dashboard-sidebar ul {
   list-style: none;
   padding: 0;
 }
 
-.sidebar li {
+.dashboard-sidebar li {
   padding: 15px 20px;
   display: flex;
   align-items: center;
   cursor: pointer;
 }
 
-.sidebar-icon {
+.dashboard-sidebar-icon {
   width: 35px;
   height: 35px;
   margin-right: 15px;
 }
 
-.sidebar li:hover {
+.dashboard-sidebar li:hover {
   background-color: #0a2d46;
 }
 
@@ -83,8 +83,6 @@
   position: fixed;
   top: 15px;
   left: 15px;
-   
-  
   border: none;
   font-size: 26px;
   padding: 10px;
@@ -92,7 +90,6 @@
   z-index: 1000;
   cursor: pointer;
 }
-
 
 /* Main Content */
 .dashboard-main-content {
@@ -170,55 +167,137 @@
   background-color: #0a2d46;
 }
 
-/* Scoreboard */
-.dashboard-scoreboard {
-  margin-top: 70px;
+/* Score History Section */
+.dashboard-score-history {
+  margin-top: 30px;
   background-color: #ffffff;
-  padding: 10px;
+  padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.dashboard-scoreboard h3 {
-  text-align: center;
-  font-size: 30px;
+.score-history-box {
+  background-color: #1F698D; /* Blue background */
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 24px;
+  padding-top: 10px;
+}
+
+.score-history-box p {
+  margin: 0;
+  font-weight: normal;
+  font-size: 24px;
+  color: #ffffff;
+  padding-left: 30px;
+}
+
+.view-button {
+  background-color: #ffffff;
+  color: #1F698D;
+  padding: 8px 16px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
   font-weight: bold;
-  font-family: 'Abril Fatface'; /* Custom font */
-  color: #072842;
+}
+
+.view-button:hover {
+  background-color: #0a2d46;
+  color: white;
+}
+
+/* Tip Box Styling */
+.dashboard-tips-section {
+  margin-top: 20px;
+  padding: 45px;
+  padding-top: 3px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-tips-section h3 {
+  font-size: 28px;
+  font-family: 'Abril Fatface';
+  text-align: center;
   margin-bottom: 20px;
 }
 
-.dashboard-scoreboard table {
-  width: 100%;
-  border-collapse: collapse;
+.tips-container {
+  display: flex;
+  gap: 20px;
+  overflow: hidden; /* Prevent scrolling */
+  justify-content: center; /* Center the items */
+  flex-wrap: wrap; /* Allow wrapping of items if the container is small */
 }
 
-.dashboard-scoreboard th,
-.dashboard-scoreboard td {
-  border: 2px solid #ddd;
-  padding: 10px;
+.tip-box {
+  flex: 0 0 auto;
+  width: 250px;
+  height: auto;
+  background-color: #e0e8ef;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-align: center;
-  font-size: larger;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.dashboard-scoreboard th {
+.tip-box h4 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #000000;
+}
+
+.tip-box p {
+  font-size: 18px;
+  color: #1f0606;
+  margin-top: 10px; /* Added margin to ensure proper spacing */
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.tip-box:hover {
+  transform: translateY(-10px); /* Lift the box on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Blue tip boxes */
+.tip-box.blue {
   background-color: #1F698D;
   color: white;
 }
 
-.dashboard-scoreboard button {
-  background-color: #1F698D;
+.tip-box.blue h4 {
   color: white;
-  padding: 6px 10px;
-  border-radius: 7px;
-  border: none;
-  cursor: pointer;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-size: medium;
 }
 
-.dashboard-scoreboard button:hover {
-  background-color: #0a2d46;
+.tip-box.blue p {
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .tips-container {
+    gap: 10px;
+  }
+
+  .tip-box {
+    width: 200px;
+    height: 100px; /* Allow box height to adjust based on content */
+    border-radius: px;
+  }
+
+  .dashboard-tips-section h3 {
+    font-size: 24px;
+  }
 }
 
 /* Responsive styles */
@@ -228,7 +307,7 @@
     height: 100%;
   }
 
-  .sidebar {
+  .dashboard-sidebar {
     position: fixed;
     top: 0;
     left: -100%;
@@ -239,7 +318,7 @@
     overflow-y: auto; /* Ensures the sidebar is scrollable */
   }
 
-  .sidebar.active {
+  .dashboard-sidebar.active {
     left: 0;
     width : 300vw;
   }
@@ -249,32 +328,30 @@
     margin-left: 0; /* Ensure main content takes full width */
   }
 
- /* Hamburger */
+  /* Hamburger */
+  .hamburger {
+    display: flex;
+    background-color: transparent; /* No background color */
+    border: none; /* Remove button border */
+    color: black; /* Set text color to black */
+    cursor: pointer; /* Show pointer cursor on hover */
+  }
 
-.hamburger {
-  display: flex;
-  background-color: transparent; /* No background color */
-  border: none; /* Remove button border */
-  color: black; /* Set text color to black */
-   /* Adjust font size as needed */
-  cursor: pointer; /* Show pointer cursor on hover */
-}
+  .hamburger:focus {
+    outline: none; /* Remove outline when focused */
+  }
 
-.hamburger:focus {
-  outline: none; /* Remove outline when focused */
-}
+  .content-overlay {
+    margin-left: 0; /* Remove space from sidebar when open */
+  }
 
-.content-overlay {
-  margin-left: 0; /* Remove space from sidebar when open */
-}
+  .hamburger-menu div {
+    width: 25px;
+    height: 3px;
+    background-color: #0a2d46;
+    margin: 5px 0;
+  }
 
-.hamburger-menu div {
-  width: 25px;
-  height: 3px;
-  background-color: #0a2d46;
-  margin: 5px 0;
-}
-  
   /* Adjust card grid layout */
   .dashboard-cards-section {
     grid-template-columns: 1fr; /* Single column for smaller screens */
@@ -287,5 +364,8 @@
   .hamburger {
     z-index: 1001;
   }
-}
 
+  .score-history-box p {
+    font-size: 18px;
+  }
+}
