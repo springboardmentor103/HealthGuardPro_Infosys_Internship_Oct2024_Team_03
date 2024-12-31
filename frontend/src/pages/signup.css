@@ -9,7 +9,7 @@
     background-color: #edeff4;
     /* Dark blue background */
 }
-
+ 
 /* Signup container box */
 .signup-container {
     width: 100%;
@@ -21,7 +21,7 @@
     /* Stronger shadow for depth */
     text-align: center;
 }
-
+ 
 /* Heading style */
 .signup-container h2 {
     font-size: 28px;
@@ -29,23 +29,23 @@
     color: #333;
     font-weight: bold;
 }
-
+ 
 /* Description under heading */
 .signup-container p {
     font-size: 14px;
     color: #666;
     margin-bottom: 24px;
 }
-
+ 
 /* Input fields container */
 .input-container {
     position: relative;
     margin-bottom: 20px;
 }
-
+ 
 /* Input field styles */
 .input-container input {
-    width: 90%;
+    width: 93%;
     padding: 14px 14px 14px 14px;
     /* Ensure label doesn't overlap */
     border: 1px solid #fffefe;
@@ -55,7 +55,25 @@
     outline: none;
     transition: border-color 0.3s;
 }
-
+.input-container1 {
+    position: relative;
+    margin-bottom: 20px;
+}
+ 
+/* Input field styles */
+.input-container1 input {
+    width: 100%;
+    padding: 14px 14px 14px 14px;
+    /* Ensure label doesn't overlap */
+    border: 1px solid #fffefe;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: #f7f7f7;
+    outline: none;
+    transition: border-color 0.3s;
+}
+ 
+ 
 /* Label styles - floating effect */
 .input-container label {
     position: absolute;
@@ -68,14 +86,19 @@
     background-color: white;
     padding: 0 4px;
 }
-
+ 
 /* Floating label effect on focus or text entry */
 .input-container input:focus,
 .input-container input:not(:placeholder-shown) {
     background-color: white;
     border-color: #7c7979;;
 }
-
+.input-container1 input:focus,
+.input-container1 input:not(:placeholder-shown) {
+    background-color: white;
+    border-color: #7c7979;;
+}
+ 
 .input-container input:focus+label,
 .input-container input:not(:placeholder-shown)+label {
     top: -10px;
@@ -83,7 +106,7 @@
     font-size: 12px;
     color:black;
 }
-
+ 
 /* Checkbox and terms */
 .checkbox-group {
     display: flex;
@@ -93,9 +116,9 @@
     justify-content: space-between;
     margin-bottom: 20px;
 }
-
+ 
 /* Link colors for terms and forgot password */
-
+ 
 .login-link{
     text-align: center;
 }
@@ -104,12 +127,12 @@
     color: #ff6b6b;
     text-decoration: none;
 }
-
+ 
 .checkbox-group a:hover,
 .login-link a:hover {
     text-decoration: underline;
 }
-
+ 
 /* Create account button */
 .create-account-button {
     width: 100%;
@@ -123,15 +146,17 @@
     cursor: pointer;
     transition: background-color 0.3s;
 }
-
+ 
 .create-account-button:hover {
     background-color: #3b4cb5;
 }
-
+ 
 /* Already have an account link */
 .login-link {
     font-size: 14px;
     color: #666;
     margin-top: 20px;
 }
-
+ 
+ 
+ 

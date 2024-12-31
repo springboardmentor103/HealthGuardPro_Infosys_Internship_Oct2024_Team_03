@@ -40,7 +40,7 @@
   padding: 15px 20px;
   display: flex;
   align-items: center;
-  cursor: pointer;
+  
 }
 
 .biomarker-sidebar-icon {
@@ -49,9 +49,7 @@
   margin-right: 15px;
 }
 
-.biomarker-sidebar li:hover {
-  background-color: #0a2d46;
-}
+
 
 /* Main Content */
 .biomarker-quiz-content {

@@ -20,7 +20,7 @@
   width: 250px;
   background-color: #1f698d;
   color: #ffffff;
-  padding-top: 50px;
+  padding-top: 40px;
   position: fixed;
   top: 0;
   left: 0; /* Sidebar should always be open in desktop view */
@@ -47,16 +47,7 @@
   margin-right: 15px;
 }
 
-.sidebar li:hover {
-  background-color: #0a2d46;
-}
 
-
-
- 
-
- 
- 
  
 /* Content area */
 .content {
