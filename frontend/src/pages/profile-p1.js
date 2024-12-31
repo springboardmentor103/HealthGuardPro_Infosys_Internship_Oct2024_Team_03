@@ -12,6 +12,8 @@ function Profile() {
   const [userData, setUserData] = useState({ firstName: "", email: "" });
   const [editMode, setEditMode] = useState(false);
   const [tempData, setTempData] = useState({ firstName: "", email: "" });
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -21,7 +23,10 @@ function Profile() {
   useEffect(() => {
     async function fetchUserData() {
       try {
+        setIsLoading(true);
+        setError(null);
         const token = localStorage.getItem("authToken");
+
         if (!token) {
           throw new Error("No token found in localStorage");
         }
@@ -39,20 +44,24 @@ function Profile() {
         }
 
         const data = await response.json();
-        console.log("Fetched user data:", data); // For debugging
 
-        // Update userData state with the fetched data
         setUserData({
-          firstName: data.username || "", // Using username from MongoDB
-          email: data.email || "",        // Using email from MongoDB
+          firstName: data.username,
+          email: data.email,
+          rank: data.rank,
+          points: data.points,
+          totalUsers: data.totalUsers
         });
+
         setTempData({
-          firstName: data.username || "",
-          email: data.email || "",
+          firstName: data.username,
+          email: data.email,
         });
       } catch (error) {
         console.error("Error fetching user data:", error);
-        alert(error.message);
+        setError(error.message);
+      } finally {
+        setIsLoading(false);
       }
     }
 
@@ -80,16 +89,16 @@ function Profile() {
 
       const data = await response.json();
       if (response.ok) {
-     //   if (data.message.includes("confirmation email")) {
-          alert(data.message); // Email change case
-          localStorage.removeItem("authToken");
-          window.location.href = "/login";
-      //  } 
-       
+        //   if (data.message.includes("confirmation email")) {
+        alert(data.message); // Email change case
+        localStorage.removeItem("authToken");
+        window.location.href = "/login";
+        //  } 
+
       } else {
         throw new Error("Failed to update user data");
       }
-      
+
 
       const updatedData = await response.json();
       setUserData(updatedData); // Update userData state
@@ -110,52 +119,47 @@ function Profile() {
     <div className={styles["main-container"]}>  {/* Correct class reference */}
       {/* Sidebar */}
       <aside className={`${styles.sidebar} ${isSidebarOpen ? styles.open : ""}`}>
-  <ul>
-    <li>
-      <Link to="/dashboard" className={styles["sidebar-item"]}>
-        <img src={DashboardIcon} alt="Dashboard" className={styles["slidebar-icon"]} />
-        <span className={styles["icon-label"]}>Dashboard</span>
-      </Link>
-    </li>
-    <li>
-      <Link to="/leaderboard" className={styles["sidebar-item"]}>
-        <img src={LeaderboardIcon} alt="Leaderboard" className={styles["slidebar-icon"]} />
-        <span className={styles["icon-label"]}>Leaderboard</span>
-      </Link>
-    </li>
-    <li>
-      <Link to="/profile-p1" className={styles["sidebar-item"]}>
-        <img src={ProfileIcon} alt="Profile" className={styles["slidebar-icon"]} />
-        <span className={styles["icon-label"]}>Profile</span>
-      </Link>
-    </li>
-    <li>
-      <Link to="/login" className={styles["sidebar-item"]}>
-        <img src={LogoutIcon} alt="Logout" className={styles["slidebar-icon"]} />
-        <span className={styles["icon-label"]}>Logout</span>
-      </Link>
-    </li>
-  </ul>
-</aside>
+        <ul>
+          <li>
+            <Link to="/dashboard" className={styles["sidebar-item"]}>
+              <img src={DashboardIcon} alt="Dashboard" className={styles["slidebar-icon"]} />
+              <span className={styles["icon-label"]}>Dashboard</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/leaderboard" className={styles["sidebar-item"]}>
+              <img src={LeaderboardIcon} alt="Leaderboard" className={styles["slidebar-icon"]} />
+              <span className={styles["icon-label"]}>Leaderboard</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/profile-p1" className={styles["sidebar-item"]}>
+              <img src={ProfileIcon} alt="Profile" className={styles["slidebar-icon"]} />
+              <span className={styles["icon-label"]}>Profile</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/login" className={styles["sidebar-item"]}>
+              <img src={LogoutIcon} alt="Logout" className={styles["slidebar-icon"]} />
+              <span className={styles["icon-label"]}>Logout</span>
+            </Link>
+          </li>
+        </ul>
+      </aside>
 
 
-      {/* Hamburger Button */}
       <button className={styles.hamburger} onClick={toggleSidebar}>
         ☰
       </button>
 
-      {/* Main Content */}
       <div className={`${styles.content} ${isSidebarOpen ? styles["content-overlay"] : ""}`}>
-        {/* Header */}
         <div className={styles.header}>
           <span className={styles.greeting}>Hello, {username}</span>
           <span className={styles.title}>HealthGuard Pro</span>
         </div>
 
-        {/* Profile Card */}
         <div className={styles["profile-container"]}>
           <div className={styles["profile-card"]}>
-            {/* Circular Profile Icon */}
             <div className={styles["profile-image-container"]}>
               <img src={ProfileIconi} alt="Profile Icon" className={styles["profile-icon"]} />
             </div>
@@ -166,9 +170,7 @@ function Profile() {
                   <input
                     type="text"
                     value={tempData.firstName}
-                    onChange={(e) =>
-                      setTempData({ ...tempData, firstName: e.target.value })
-                    }
+                    onChange={(e) => setTempData({ ...tempData, firstName: e.target.value })}
                     className={styles.input}
                   />
                 ) : (
@@ -181,9 +183,7 @@ function Profile() {
                   <input
                     type="email"
                     value={tempData.email}
-                    onChange={(e) =>
-                      setTempData({ ...tempData, email: e.target.value })
-                    }
+                    onChange={(e) => setTempData({ ...tempData, email: e.target.value })}
                     className={styles.input}
                   />
                 ) : (
@@ -192,11 +192,15 @@ function Profile() {
               </div>
               <div className={styles["profile-row"]}>
                 <span className={styles.label}>Rank</span>
-                <span className={styles.value}>1234th</span>
+                <span className={`${styles.value} ${styles.highlight}`}>
+                  {userData.rank} of {userData.totalUsers}
+                </span>
               </div>
               <div className={styles["profile-row"]}>
                 <span className={styles.label}>Points</span>
-                <span className={styles.value}>635</span>
+                <span className={`${styles.value} ${styles.highlight}`}>
+                  {userData.points}
+                </span>
               </div>
             </div>
             {editMode ? (
@@ -204,10 +208,7 @@ function Profile() {
                 Save
               </button>
             ) : (
-              <button
-                onClick={() => setEditMode(true)}
-                className={styles["edit-button"]}
-              >
+              <button onClick={() => setEditMode(true)} className={styles["edit-button"]}>
                 Edit
               </button>
             )}
