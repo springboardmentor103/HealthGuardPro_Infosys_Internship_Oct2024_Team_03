@@ -121,25 +121,25 @@ function Dashboard() {
       <aside className={`dashboard-sidebar ${isSidebarOpen ? 'active' : ''}`}>
         <ul>
           <li>
-            <Link to="/dashboard" className="sidebar-item">
+            <Link to="/dashboard" className="dashboard-sidebar-item">
               <img src={DashboardIcon} alt="Dashboard" className="dashboard-icon" />
               <span className="dashboard-label">Dashboard</span>
             </Link>
           </li>
           <li>
-            <Link to="/leaderboard" className="sidebar-item">
+            <Link to="/leaderboard" className="dashboard-sidebar-item">
               <img src={LeaderboardIcon} alt="Leaderboard" className="leaderboard-icon" />
               <span className="leaderboard-label">Leaderboard</span>
             </Link>
           </li>
           <li>
-            <Link to="/profile-p1" className="sidebar-item">
+            <Link to="/profile-p1" className="dashboard-sidebar-item">
               <img src={ProfileIcon} alt="Profile" className="profile-icon" />
               <span className="profile-label">Profile</span>
             </Link>
           </li>
           <li>
-            <Link to="/login" className="sidebar-item">
+            <Link to="/login" className="dashboard-sidebar-item">
               <img src={LogoutIcon} alt="Logout" className="logout-icon" />
               <span className="logout-label">Logout</span>
             </Link>

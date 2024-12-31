@@ -95,28 +95,28 @@ function ViewScore() {
 
   return (
     <div className="view-score-container">
-      <aside className={`sidebar ${isSidebarActive ? 'active' : ''}`}>
+      <aside className={`view-sidebar ${isSidebarActive ? 'active' : ''}`}>
         <ul>
           <li>
-            <Link to="/dashboard" className="sidebar-item">
+            <Link to="/dashboard" className="view-sidebar-item">
               <img src={DashboardIcon} alt="Dashboard" className="dashboard-icon" />
               <span className="dashboard-label">Dashboard</span>
             </Link>
           </li>
           <li>
-            <Link to="/leaderboard" className="sidebar-item">
+            <Link to="/leaderboard" className="view-sidebar-item">
               <img src={LeaderboardIcon} alt="Leaderboard" className="leaderboard-icon" />
               <span className="leaderboard-label">Leaderboard</span>
             </Link>
           </li>
           <li>
-            <Link to="/profile-p1" className="sidebar-item">
+            <Link to="/profile-p1" className="view-sidebar-item">
               <img src={ProfileIcon} alt="Profile" className="profile-icon" />
               <span className="profile-label">Profile</span>
             </Link>
           </li>
           <li>
-            <Link to="/login" className="sidebar-item">
+            <Link to="/login" className="view-sidebar-item">
               <img src={LogoutIcon} alt="Logout" className="logout-icon" />
               <span className="logout-label">Logout</span>
             </Link>
@@ -126,7 +126,7 @@ function ViewScore() {
 
       <main className="main-content">
         <header className="view-header">
-          <div className="view-hamburger-menu" onClick={toggleSidebar}>
+          <div className="hamburger-menu" onClick={toggleSidebar}>
             <div></div>
             <div></div>
             <div></div>
