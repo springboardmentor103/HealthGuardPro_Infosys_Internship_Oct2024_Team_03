@@ -12,7 +12,7 @@ function SignupPage() {
     });
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-
+ 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({
@@ -21,26 +21,26 @@ function SignupPage() {
         });
         setError(''); // Clear error when user types
     };
-
+ 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
         setLoading(true);
-
+ 
         // Validate passwords match
         if (formData.password !== formData.confirmPassword) {
             setError('Passwords do not match');
             setLoading(false);
             return;
         }
-
+ 
         // Validate password length
         if (formData.password.length < 6) {
             setError('Password must be at least 6 characters long');
             setLoading(false);
             return;
         }
-
+ 
         try {
             const response = await fetch('http://localhost:5000/api/auth/signup', {
                 method: 'POST',
@@ -51,16 +51,16 @@ function SignupPage() {
                     password: formData.password
                 }),
             });
-
+ 
             const data = await response.json();
-            
+           
             if (response.ok && data.success) {
                 // Store the token and user data
                 localStorage.setItem('authToken', data.token);
                 localStorage.setItem('userId', data.user.userId);
                 localStorage.setItem('email', data.user.email);
                 localStorage.setItem('username', data.user.username);
-                
+               
                 // Redirect to dashboard
                 navigate('/dashboard');
             } else {
@@ -73,7 +73,7 @@ function SignupPage() {
             setLoading(false);
         }
     };
-
+ 
     return (
         <div className="signup">
             <div className="signup-container">
@@ -82,7 +82,7 @@ function SignupPage() {
                 {error && <div className="error-message">{error}</div>}
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <div className="input-container">
+                        <div className="input-container1">
                             <input
                                 type="text"
                                 name="username"
@@ -96,7 +96,7 @@ function SignupPage() {
                         </div>
                     </div>
                     <div className="form-group">
-                        <div className="input-container">
+                        <div className="input-container1">
                             <input
                                 type="email"
                                 name="email"
@@ -131,9 +131,9 @@ function SignupPage() {
                         />
                         <label htmlFor="confirmPassword">Confirm Password</label>
                     </div>
-                    
-                    <button 
-                        type="submit" 
+                   
+                    <button
+                        type="submit"
                         className="create-account-button"
                         disabled={loading}
                     >
@@ -147,5 +147,6 @@ function SignupPage() {
         </div>
     );
 }
-
+ 
 export default SignupPage;
+ 

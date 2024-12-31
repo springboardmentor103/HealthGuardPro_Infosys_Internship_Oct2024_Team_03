@@ -40,7 +40,6 @@
   padding: 15px 20px;
   display: flex;
   align-items: center;
-  cursor: pointer;
 }
 
 .nutrition-sidebar-icon {
@@ -49,9 +48,7 @@
   margin-right: 15px;
 }
 
-.nutrition-sidebar li:hover {
-  background-color: #0a2d46;
-}
+
 
 /* Main Content */
 .nutrition-quiz-content {
