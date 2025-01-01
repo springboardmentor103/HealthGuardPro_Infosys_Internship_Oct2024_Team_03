@@ -6,7 +6,7 @@ const saveFitnessScore = async (req, res) => {
     try {
         console.log('Received save score request:', req.body);
         const { userId, category, score } = req.body;
-        
+
         // Validate inputs
         if (!userId || !category || score === undefined) {
             console.log('Missing required fields:', { userId, category, score });
@@ -69,7 +69,7 @@ const saveFitnessScore = async (req, res) => {
             stack: error.stack,
             name: error.name
         });
-        
+
         // Check for specific MongoDB errors
         if (error.code === 11000) {
             return res.status(400).json({
@@ -105,7 +105,7 @@ const saveFitnessScore = async (req, res) => {
 const getFitnessScores = async (req, res) => {
     try {
         const { userId } = req.params;
-        
+
         if (!userId) {
             return res.status(400).json({
                 success: false,
@@ -115,7 +115,7 @@ const getFitnessScores = async (req, res) => {
 
         const scores = await FitnessScore.find({ userId })
             .sort({ timestamp: -1 });
-        
+
         res.json({
             success: true,
             data: scores
@@ -133,7 +133,7 @@ const getFitnessScores = async (req, res) => {
 const getUserAllScores = async (req, res) => {
     try {
         const { userId } = req.params;
-        
+
         if (!userId) {
             return res.status(400).json({
                 success: false,
@@ -160,6 +160,14 @@ const getUserAllScores = async (req, res) => {
             ? Math.round(validScores.reduce((sum, score) => sum + score.latestScore, 0) / validScores.length)
             : 0;
 
+
+        const updatedUser = await User.findByIdAndUpdate(
+            userId,
+            { overallScore: overallScore },
+            { new: true, runValidators: true }
+        );
+        console.log("Updated user:", updatedUser);
+        
         res.json({
             success: true,
             data: {

@@ -14,12 +14,6 @@ const Leaderboard = () => {
   const [leaderboardData, setLeaderboardData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [currentUserDummyIndex, setCurrentUserDummyScore] = useState(0)
-
-  const [dummyZeroScores, setDummyZeroScore] = useState([])
-
-  const dummyScore = [15, 20, 25]
-
   const currentUsername = localStorage.getItem("username");
 
   useEffect(() => {
@@ -31,23 +25,6 @@ const Leaderboard = () => {
       setIsLoading(true);
       const { data } = await api.get('/user/leaderboard');
       console.log(data);
-
-      const tempUsers = data.data;
-      const counts = tempUsers.reduce((count, user) => {
-        return count + (user.overallScore === 0 ? 1 : 0);
-      }, 0);
-
-
-      let tempScores = []
-
-      for (let i = 0; i < counts; i++) {
-        const randomScore = dummyScore[Math.round(Math.random() * 2)]
-        tempScores.push(randomScore)
-      }
-
-      tempScores = tempScores.sort((a, b) => (b - a))
-
-      setDummyZeroScore(tempScores)
 
       setLeaderboardData(data.data);
       setError(null);
@@ -64,8 +41,6 @@ const Leaderboard = () => {
   };
 
   const currentUserData = leaderboardData.find(user => user.username === currentUsername);
-
-  let dummyScoreIndex = 0
 
   return (
     <div className="leaderboard-container">
@@ -129,7 +104,7 @@ const Leaderboard = () => {
                 </div>
                 <div className="leaderboard-user-score">
                   <p className="leaderboard-score-label">Overall Score</p>
-                  <p className="leaderboard-score-value">{currentUserData.overallScore === 0 ? 15 : currentUserData.overallScore}</p>
+                  <p className="leaderboard-score-value">{currentUserData.overallScore}</p>
                 </div>
               </div>
             </div>
@@ -167,14 +142,10 @@ const Leaderboard = () => {
                           <span className="leaderboard-current-user-tag">(You)</span>
                         )}
                       </td>
-                      <td className="leaderboard-td">{currentUserData.overallScore === 0 ? 15 : currentUserData.overallScore}</td>
+                      <td className="leaderboard-td">{currentUserData.overallScore}</td>
                     </tr>
 
                     {leaderboardData.map((user) => {
-                      if (user.overallScore === 0) {
-                        dummyScoreIndex += 1
-                      }
-
                       if (user.username === currentUsername) {
                         return null;
                       }
@@ -191,7 +162,7 @@ const Leaderboard = () => {
                             <span className="leaderboard-current-user-tag">(You)</span>
                           )}
                         </td>
-                        <td className="leaderboard-td">{user.overallScore === 0 ? dummyZeroScores[dummyScoreIndex] : user.overallScore}</td>
+                        <td className="leaderboard-td">{user.overallScore}</td>
                       </tr>)
                     })}
                   </tbody>
