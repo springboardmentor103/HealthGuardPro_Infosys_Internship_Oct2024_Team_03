@@ -11,7 +11,7 @@ function Dashboard() {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const [scores, setScores] = useState({});
   const [overallScore, setOverallScore] = useState("0");
-  
+
   const userId = localStorage.getItem("userId");
   const displayName = localStorage.getItem("firstName") || localStorage.getItem("username") || "User";
   const navigate = useNavigate();
@@ -40,14 +40,14 @@ function Dashboard() {
       }
 
       const response = await api.get(`/fitness/scores/${userId}`);
-      
+  
       if (response.data?.success) {
         // Filter scores by category and get the latest one
         const categoryScores = response.data.data.filter(score => score.category === category);
         const latestScore = categoryScores.length > 0 ? categoryScores[0].score : 0;
         return latestScore;
       }
-      
+  
       return 0;
     } catch (error) {
       console.error(`Error fetching scores for ${category}:`, error);
@@ -64,7 +64,7 @@ function Dashboard() {
   // Fetch all scores and calculate overall score
   useEffect(() => {
     const categories = ['Physical Fitness', 'Nutrition', 'Lifestyle', 'Mental Well-being', 'Bio-markers'];
-    
+  
     const fetchAllScores = async () => {
       try {
         const authToken = localStorage.getItem('authToken');
@@ -75,17 +75,17 @@ function Dashboard() {
 
         // Use the user-scores endpoint to get all scores at once
         const response = await api.get(`/fitness/user-scores/${userId}`);
-        
+  
         if (response.data?.success) {
           const { categoryScores, overallScore } = response.data.data;
-          
+  
           // Update scores state
           const scoreObj = {};
           categoryScores.forEach(score => {
             scoreObj[score._id] = score.latestScore;
           });
           setScores(scoreObj);
-          
+  
           // Update overall score
           setOverallScore(overallScore.toString());
         }
@@ -108,6 +108,14 @@ function Dashboard() {
     'Lifestyle': '/lifestyle',
     'Mental Well-being': '/mental-wellbeing',
     'Bio-markers': '/biomarkers',
+  };
+
+  const handleLogout = () => {
+    if (window.confirm("Are you sure you want to logout?")) {
+      localStorage.removeItem('authToken');
+      localStorage.removeItem('userId');
+      navigate('/login');
+    }
   };
 
   return (
@@ -139,7 +147,7 @@ function Dashboard() {
             </Link>
           </li>
           <li>
-            <Link to="/login" className="sidebar-item">
+            <Link to="#" onClick={handleLogout} className="sidebar-item"> 
               <img src={LogoutIcon} alt="Logout" className="logout-icon" />
               <span className="logout-label">Logout</span>
             </Link>
@@ -169,7 +177,6 @@ function Dashboard() {
           </div>
         </section>
 
-
         <section className="dashboard-scoreboard">
           <h3>Scoreboard</h3>
           <table>
@@ -187,8 +194,8 @@ function Dashboard() {
                 <td>date / time</td>
                 <td>95%</td>
                 <td> <Link to="/ViewScore">
-              <button>View</button>
-            </Link></td>
+                  <button>View</button>
+                </Link></td>
               </tr>
               <tr>
                 <td>2</td>
@@ -205,4 +212,3 @@ function Dashboard() {
 }
 
 export default Dashboard;
-

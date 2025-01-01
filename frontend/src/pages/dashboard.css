@@ -4,6 +4,7 @@
   min-height: 100vh;
   overflow: hidden;
 }
+
 .sidebar {
   width: 250px;
   background-color: #1F698D;
@@ -45,14 +46,15 @@
   left: 0;
   width: 250px;
 }
-/* Sidebar */
+
+/* Sidebar (Minor improvements for readability) */
 .sidebar {
   width: 250px;
-  overflow-y: hidden;
+  overflow-y: auto; /* Enable vertical scrolling for better user experience */
   background-color: #1F698D;
   color: #ffffff;
   padding-top: 50px;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; 
 }
 
 .sidebar ul {
@@ -77,22 +79,24 @@
   background-color: #0a2d46;
 }
 
-/* Hamburger Button */
-.hamburger {
-  display: none;
+/* Hamburger Button (Added for responsiveness) */
+.hamburger-menu {
+  display: none; 
   position: fixed;
   top: 15px;
   left: 15px;
-   
-  
-  border: none;
-  font-size: 26px;
   padding: 10px;
   border-radius: 5px;
   z-index: 1000;
   cursor: pointer;
 }
 
+.hamburger-menu div {
+  width: 25px;
+  height: 3px;
+  background-color: #0a2d46;
+  margin: 5px 0;
+}
 
 /* Main Content */
 .dashboard-main-content {
@@ -138,19 +142,19 @@
   background-color: #E0E8EF;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 0px;
+  padding: 20px; /* Added padding for better spacing */
   text-align: center;
 }
 
 .dashboard-card h3 {
-  font-size: 30px;
+  font-size: 24px; /* Slightly reduced font size */
   font-family: 'Mongolian Baiti', serif; /* Custom font */
   font-weight: 500;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .dashboard-card p {
-  font-size: 20px;
+  font-size: 18px;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   color: #1f0606;
 }
@@ -241,40 +245,41 @@
 
   .sidebar.active {
     left: 0;
-    width : 300vw;
+    width: 300vw;
   }
 
   .dashboard-main-content {
     padding: 10px;
-    margin-left: 0; /* Ensure main content takes full width */
+    margin-left:0;
   }
 
- /* Hamburger */
-
-.hamburger {
-  display: flex;
-  background-color: transparent; /* No background color */
-  border: none; /* Remove button border */
-  color: black; /* Set text color to black */
-   /* Adjust font size as needed */
-  cursor: pointer; /* Show pointer cursor on hover */
-}
-
-.hamburger:focus {
-  outline: none; /* Remove outline when focused */
-}
-
-.content-overlay {
-  margin-left: 0; /* Remove space from sidebar when open */
-}
-
-.hamburger-menu div {
-  width: 25px;
-  height: 3px;
-  background-color: #0a2d46;
-  margin: 5px 0;
-}
   
+  /* Hamburger */
+
+  .hamburger {
+    display: flex;
+    background-color: transparent; /* No background color */
+    border: none; /* Remove button border */
+    color: black; /* Set text color to black */
+    /* Adjust font size as needed */
+    cursor: pointer; /* Show pointer cursor on hover */
+  }
+
+  .hamburger:focus {
+    outline: none; /* Remove outline when focused */
+  }
+
+  .content-overlay {
+    margin-left: 0; /* Remove space from sidebar when open */
+  }
+
+  .hamburger-menu div {
+    width: 25px;
+    height: 3px;
+    background-color: #0a2d46;
+    margin: 5px 0;
+  }
+
   /* Adjust card grid layout */
   .dashboard-cards-section {
     grid-template-columns: 1fr; /* Single column for smaller screens */
@@ -288,4 +293,3 @@
     z-index: 1001;
   }
 }
-
