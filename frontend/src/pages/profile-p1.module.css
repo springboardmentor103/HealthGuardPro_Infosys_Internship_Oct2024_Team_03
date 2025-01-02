@@ -303,10 +303,11 @@
   }
  
   .profile-container {
-    min-height: calc(100vh - 100px); /* Center profile card */
+    min-height: 350px; /* Center profile card */
     display: flex;
     justify-content: center;
     align-items: center;
+    width:280px;
   }
  
   .edit-button {
@@ -331,4 +332,9 @@
   .hamburger {
     z-index: 1001;
   }
+  .profile-details {
+    font-size: 13px;
+   
+  }
+  
 }
