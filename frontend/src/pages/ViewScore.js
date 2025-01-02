@@ -166,19 +166,19 @@ function ViewScore() {
                           <tbody>
                             <tr>
                               <td>Physical Fitness</td>
-                              <td>{entry.scores['Physical Fitness'] || 'N/A'}%</td>
+                              <td>{entry.scores['Physical Fitness'] || '0'}%</td>
                               <td>Mental Well-being</td>
-                              <td>{entry.scores['Mental Well-being'] || 'N/A'}%</td>
+                              <td>{entry.scores['Mental Well-being'] || '0'}%</td>
                             </tr>
                             <tr>
                               <td>Nutrition</td>
-                              <td>{entry.scores['Nutrition'] || 'N/A'}%</td>
+                              <td>{entry.scores['Nutrition'] || '0'}%</td>
                               <td>Bio-markers</td>
-                              <td>{entry.scores['Bio-markers'] || 'N/A'}%</td>
+                              <td>{entry.scores['Bio-markers'] || '0'}%</td>
                             </tr>
                             <tr>
                               <td>Lifestyle</td>
-                              <td>{entry.scores['Lifestyle'] || 'N/A'}%</td>
+                              <td>{entry.scores['Lifestyle'] || '0'}%</td>
                               <td>Overall Score</td>
                               <td>{entry.overallScore}%</td>
                             </tr>

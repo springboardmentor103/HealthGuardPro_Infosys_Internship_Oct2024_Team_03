@@ -20,6 +20,8 @@
   position: relative;
   transition: left 0.3s ease-in-out;
   overflow-y: hidden;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
 }
  
 .sidebar ul {
@@ -53,7 +55,7 @@
 
 .sidebar-item:hover {
   background-color: #0a2d46; /* Highlight on hover */
-  border-radius: 5px; /* Rounded edges for hover effect */
+  border-radius: 30px; /* Rounded edges for hover effect */
   padding: 10px;
   width: 100%;
 }
