@@ -44,7 +44,6 @@ const Leaderboard = () => {
 
   return (
     <div className="leaderboard-container">
-<<<<<<< HEAD
       <div className="leaderboard-flex">
         <aside className={`sidebar ${isSidebarOpen ? 'active' : ''}`}>
           <ul>
@@ -74,37 +73,6 @@ const Leaderboard = () => {
             </li>
           </ul>
         </aside>
-=======
-      {/* Sidebar */}
-      <aside className={`leaderboard-sidebar ${isSidebarOpen ? 'active' : ''}`}>
-  <ul>
-    <li>
-      <Link to="/dashboard" className="leaderboard-sidebar-item">
-        <img src={DashboardIcon} alt="Dashboard" className="dashboard-icon" />
-        <span className="dashboard-label">Dashboard</span>
-      </Link>
-    </li>
-    <li>
-      <Link to="/leaderboard" className="leaderboard-sidebar-item">
-        <img src={LeaderboardIcon} alt="Leaderboard" className="leaderboard-icon" />
-        <span className="leaderboard-label">Leaderboard</span>
-      </Link>
-    </li>
-    <li>
-      <Link to="/profile-p1" className="leaderboard-sidebar-item">
-        <img src={ProfileIcon} alt="Profile" className="profile-icon" />
-        <span className="profile-label">Profile</span>
-      </Link>
-    </li>
-    <li>
-      <Link to="/login" className="leaderboard-sidebar-item">
-        <img src={LogoutIcon} alt="Logout" className="logout-icon" />
-        <span className="logout-label">Logout</span>
-      </Link>
-    </li>
-  </ul>
-</aside>
->>>>>>> develop
 
         <main className="leaderboard-main">
           <button
