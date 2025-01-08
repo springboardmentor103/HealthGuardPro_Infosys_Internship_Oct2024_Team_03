@@ -121,7 +121,7 @@ const LifestyleQuiz = () => {
       if (response.data.success) {
         setScore(calculatedScore);
         setCompleted(true);
-        alert('Score saved successfully!');
+        // alert('Score saved successfully!');
       } else {
         throw new Error(response.data.message || 'Failed to save score');
       }
