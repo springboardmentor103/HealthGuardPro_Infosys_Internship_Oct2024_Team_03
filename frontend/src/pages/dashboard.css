@@ -3,6 +3,7 @@
   display: flex;
   min-height: 100vh;
   overflow: hidden;
+  background-color: #f4f4f4;
 }
 
 .sidebar {
@@ -11,6 +12,11 @@
   padding-top: 50px;
   position: relative;
   transition: left 0.3s ease-in-out;
+
+  overflow-y: hidden;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+
 }
 
 /* Sidebar item styling */
@@ -22,9 +28,16 @@
   color: rgb(255, 255, 255);
 }
 
+
 .sidebar-item:hover {
   background-color: #0a2d46; /* Highlight on hover */
   border-radius: 5px; /* Rounded edges for hover effect */
+
+.dashboard-sidebar-item:hover {
+  background-color: #0a2d46;
+  border-radius: 30px;
+  padding: 10px;
+
 }
 
 /* Individual icon styling */
