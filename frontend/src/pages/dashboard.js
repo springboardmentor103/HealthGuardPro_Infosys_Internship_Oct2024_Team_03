@@ -102,6 +102,14 @@ function Dashboard() {
     }
   }, [userId, navigate]);
 
+  const handleLogout = () => {
+    if (window.confirm("Are you sure you want to logout?")) {
+      localStorage.removeItem('authToken');
+      localStorage.removeItem('userId');
+      navigate('/login');
+    }
+  };
+
   const testRoutes = {
     'Physical Fitness': '/physical-fitness',
     'Nutrition': '/nutrition',
@@ -139,7 +147,7 @@ function Dashboard() {
             </Link>
           </li>
           <li>
-            <Link to="/login" className="dashboard-sidebar-item">
+            <Link onClick={handleLogout} className="dashboard-sidebar-item">
               <img src={LogoutIcon} alt="Logout" className="logout-icon" />
               <span className="logout-label">Logout</span>
             </Link>

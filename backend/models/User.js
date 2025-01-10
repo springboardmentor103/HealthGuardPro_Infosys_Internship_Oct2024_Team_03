@@ -29,10 +29,6 @@ const userSchema = new mongoose.Schema({
     overallScore: {
         type: Number,
         default: 0
-    },
-    lastScoreUpdate: {
-        type: Date,
-        default: Date.now
     }
 });
 
