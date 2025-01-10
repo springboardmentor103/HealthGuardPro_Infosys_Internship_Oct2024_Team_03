@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./profile-p1.module.css";  // Importing the CSS module
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import DashboardIcon from "../assets/icons/dashboard.svg";
 import LeaderboardIcon from "../assets/icons/leaderboard.svg";
 import ProfileIcon from "../assets/icons/profile.svg";
@@ -20,6 +20,14 @@ function Profile() {
     setIsSidebarOpen(!isSidebarOpen);
   };
   const username = localStorage.getItem("username");
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    if (window.confirm("Are you sure you want to logout?")) {
+      localStorage.removeItem('authToken');
+      localStorage.removeItem('userId');
+      navigate('/login');
+    }
+  };
 
   useEffect(() => {
     async function fetchUserData() {
@@ -146,7 +154,7 @@ function Profile() {
             </Link>
           </li>
           <li>
-            <Link to="/login" className="dashboard-sidebar-item">
+            <Link onClick={handleLogout} className="dashboard-sidebar-item">
               <img src={LogoutIcon} alt="Logout" className="logout-icon" />
               <span className="logout-label">Logout</span>
             </Link>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import api from "../utils/axiosConfig";
 import DashboardIcon from '../assets/icons/dashboard.svg';
 import LeaderboardIcon from '../assets/icons/leaderboard.svg';
@@ -15,6 +15,7 @@ const Leaderboard = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const currentUsername = localStorage.getItem("username");
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchLeaderboardData();
@@ -41,6 +42,14 @@ const Leaderboard = () => {
   };
 
   const currentUserData = leaderboardData.find(user => user.username === currentUsername);
+
+  const handleLogout = () => {
+    if (window.confirm("Are you sure you want to logout?")) {
+      localStorage.removeItem('authToken');
+      localStorage.removeItem('userId');
+      navigate('/login');
+    }
+  };
 
   return (
     <div className="leaderboard-container">
@@ -72,7 +81,7 @@ const Leaderboard = () => {
               </Link>
             </li>
             <li>
-              <Link to="/login" className="dashboard-sidebar-item">
+              <Link onClick={handleLogout} className="dashboard-sidebar-item">
                 <img src={LogoutIcon} alt="Logout" className="logout-icon" />
                 <span className="logout-label">Logout</span>
               </Link>
